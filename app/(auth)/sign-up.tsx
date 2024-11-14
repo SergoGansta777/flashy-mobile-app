@@ -9,8 +9,6 @@ import React, { useState } from 'react'
 import { Image, ScrollView, StatusBar, Text, View } from 'react-native'
 
 const SignUp = () => {
-	const [showSuccessModal, setShowSuccessModal] = useState(false)
-
 	const [form, setForm] = useState({
 		name: '',
 		email: '',
@@ -28,23 +26,26 @@ const SignUp = () => {
 					</H1>
 				</View>
 				<View className='p-5 flex flex-col gap-5'>
-					<View className='flex flex-col gap-4 mb-10'>
+					<View className='flex flex-col gap-3 mb-10'>
 						<FormField
 							label='Name'
 							value={form.name}
 							placeholder='Enter name'
+							icon='user'
 							onChangeText={value => setForm({ ...form, name: value })}
 						/>
 						<FormField
 							label='Email'
 							value={form.email}
 							placeholder='Enter email'
+							icon='mail'
 							onChangeText={value => setForm({ ...form, email: value })}
 						/>
 						<FormField
 							label='Password'
 							value={form.password}
 							placeholder='Enter password'
+							icon='lock'
 							onChangeText={value => setForm({ ...form, password: value })}
 						/>
 					</View>
@@ -67,7 +68,7 @@ const SignUp = () => {
 
 					<Link
 						href='/sign-in'
-						className='text-lg text-center text-general-200 mt-10'
+						className='text-lg text-center text-general-200 mt-4'
 					>
 						Already have an account?{' '}
 						<P className='text-gray-500 text-lg'>Log In</P>
