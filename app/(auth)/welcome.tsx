@@ -2,7 +2,13 @@ import { Button } from "@/components/ui/button";
 import { onboarding } from "@/constants";
 import { router } from "expo-router";
 import React, { useMemo, useRef, useState } from "react";
-import { SafeAreaView, Text, TouchableOpacity, View } from "react-native";
+import {
+	Image,
+	SafeAreaView,
+	Text,
+	TouchableOpacity,
+	View,
+} from "react-native";
 import Swiper from "react-native-swiper";
 
 const Welcome = () => {
@@ -21,7 +27,7 @@ const Welcome = () => {
 				}}
 				className="w-full flex justify-end items-end p-5"
 			>
-				<Text className="text-black text-md font-JakartaBold">Skip</Text>
+				<Text className="text-black text-md ">Skip</Text>
 			</TouchableOpacity>
 
 			<Swiper
@@ -37,17 +43,17 @@ const Welcome = () => {
 			>
 				{onboarding.map((item) => (
 					<View key={item.id} className="flex items-center justify-center p-5">
-						{/* <Image
+						<Image
 							source={item.image}
-							className="w-full h-[300px]"
+							className="w-full h-[350px]"
 							resizeMode="contain"
-						/> */}
+						/>
 						<View className="flex flex-row items-center justify-center w-full mt-10">
 							<Text className="text-black text-3xl font-bold mx-10 text-center">
 								{item.title}
 							</Text>
 						</View>
-						<Text className="text-md font-JakartaSemiBold text-center text-slate-500 mx-10 mt-3">
+						<Text className="text-md text-center text-slate-500 mx-10 mt-3">
 							{item.description}
 						</Text>
 					</View>
