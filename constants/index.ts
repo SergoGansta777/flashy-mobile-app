@@ -1,11 +1,13 @@
 import onboarding1 from '@/assets/images/idea1.png'
 import onboarding2 from '@/assets/images/idea2.png'
 import onboarding3 from '@/assets/images/idea3.png'
+import logupHeader from '@/assets/images/logup.png'
 
 export const images = {
 	onboarding1,
 	onboarding2,
 	onboarding3,
+	logupHeader,
 }
 
 export const onboarding = [
