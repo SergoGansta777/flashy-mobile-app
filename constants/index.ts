@@ -1,8 +1,8 @@
-import onboarding1 from '@/assets/images/idea1.png'
-import onboarding2 from '@/assets/images/idea2.png'
-import onboarding3 from '@/assets/images/idea3.png'
 import loginHeader from '@/assets/images/login.png'
 import logupHeader from '@/assets/images/logup.png'
+import onboarding1 from '@/assets/images/onboarding1.png'
+import onboarding2 from '@/assets/images/onboarding2.png'
+import onboarding3 from '@/assets/images/onboarding3.png'
 
 export const images = {
 	onboarding1,
