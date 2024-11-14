@@ -17,7 +17,7 @@ const SignIn = () => {
 
 	return (
 		<ScrollView className='flex-1 h-full'>
-			<StatusBar style='light' />
+			<StatusBar />
 			<View className='flex-1 h-full'>
 				<View className='relative w-full h-[250px]'>
 					<Image source={images.loginHeader} className='z-0 w-full h-[250px]' />
@@ -61,13 +61,12 @@ const SignIn = () => {
 							</View>
 						</Button>
 
-						<Link
-							href='/sign-up'
-							className='text-lg text-center text-general-200 mt-4'
-						>
+						<P className='text-lg text-center text-general-200 mt-4'>
 							Don't have an account?{' '}
-							<P className='text-gray-500 text-lg'>Sign Up</P>
-						</Link>
+							<Link href='/sign-up'>
+								<P className='text-gray-500 text-lg'>Sign Up</P>
+							</Link>
+						</P>
 					</View>
 				</View>
 			</View>
