@@ -56,7 +56,7 @@ const GroupCard: React.FC<GroupCardProps> = ({
 							<CardDescription>Terms: {group.cardsCount}</CardDescription>
 						</CardHeader>
 						<CardContent>
-							<Small className='text-primary/40'>
+							<Small className='text-muted-foreground'>
 								Created at {group.createdAt.toLocaleDateString()}
 							</Small>
 						</CardContent>

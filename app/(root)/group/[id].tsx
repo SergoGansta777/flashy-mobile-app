@@ -1,5 +1,5 @@
+import FlippableCard from '@/components/flip-card'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
-import { H1 } from '@/components/ui/typography'
 import { cardGroupsContents } from '@/constants'
 import { useLocalSearchParams } from 'expo-router'
 import React, { useRef } from 'react'
@@ -20,18 +20,22 @@ const GroupScreen = () => {
 					ref={ref}
 					data={groupContent?.cards}
 					renderCard={item => {
-						return (
-							<Card className='w-[350px] h-[600px]'>
-								<CardHeader />
-								<CardContent className='flex flex-col items-center justify-center my-auto'>
-									<H1 className='flex font-medium text-6xl flex-col items-center justify-center'>
-										{item.term}
-									</H1>
-								</CardContent>
-								<CardFooter />
-							</Card>
-						)
+						return <FlippableCard item={item} />
 					}}
+					OverlayLabelRight={() => (
+						<Card className='w-[350px] h-[600px] border-solid border-green-500 bg-green-500/5'>
+							<CardHeader />
+							<CardContent className='flex flex-col items-center justify-center my-auto' />
+							<CardFooter />
+						</Card>
+					)}
+					OverlayLabelLeft={() => (
+						<Card className='w-[350px] h-[600px] border-solid border-red-500 bg-red-500/5'>
+							<CardHeader />
+							<CardContent className='flex flex-col items-center justify-center my-auto' />
+							<CardFooter />
+						</Card>
+					)}
 				/>
 			</GestureHandlerRootView>
 		</SafeAreaView>
