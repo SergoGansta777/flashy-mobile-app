@@ -1,11 +1,11 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { SafeAreaView, Text } from 'react-native'
 
 const NewCard = () => {
 	return (
-		<View>
+		<SafeAreaView>
 			<Text>NewCard</Text>
-		</View>
+		</SafeAreaView>
 	)
 }
 
