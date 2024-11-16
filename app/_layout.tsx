@@ -1,4 +1,6 @@
+import { PortalHost } from '@rn-primitives/portal'
 import { Stack } from 'expo-router'
+import React from 'react'
 import '../global.css'
 
 export const RootLayout = () => {
@@ -10,6 +12,7 @@ export const RootLayout = () => {
 				<Stack.Screen name='(root)' options={{ headerShown: false }} />
 				<Stack.Screen name='+not-found' />
 			</Stack>
+			<PortalHost />
 		</>
 	)
 }

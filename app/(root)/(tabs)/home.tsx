@@ -1,9 +1,8 @@
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
-import { H1, H4, Small } from '@/components/ui/typography'
+import GroupCard from '@/components/cards-group-card'
+import { H1 } from '@/components/ui/typography'
 import { appName, initialCardsGroups } from '@/constants'
-import AntDesign from '@expo/vector-icons/AntDesign'
 import React, { useState } from 'react'
-import { FlatList, SafeAreaView, TouchableOpacity, View } from 'react-native'
+import { FlatList, SafeAreaView, View } from 'react-native'
 
 const Home = () => {
 	const [cardGroups, setCardGroups] = useState(initialCardsGroups)
@@ -24,31 +23,12 @@ const Home = () => {
 				<FlatList
 					data={cardGroups}
 					className='mb-20'
-					renderItem={({ item: group }) => {
+					renderItem={({ item }) => {
 						return (
-							<Card className='mt-3 mx-6'>
-								<CardHeader className='flex flex-row items-start justify-between'>
-									<H4 className='font-medium'>{group.name}</H4>
-									<TouchableOpacity
-										key={group.id}
-										onPress={() => handleToggleFavorite(group.id)}
-									>
-										<AntDesign
-											name={group.isFavorite ? 'star' : 'staro'}
-											size={20}
-											color='black'
-										/>
-									</TouchableOpacity>
-								</CardHeader>
-								<CardContent>
-									<Small className='text-primary/40'>
-										Terms: {group.cardsCount}
-									</Small>
-									<Small className='text-primary/40 pt-3'>
-										Created at {group.createdAt.toLocaleDateString()}
-									</Small>
-								</CardContent>
-							</Card>
+							<GroupCard
+								group={item}
+								onPress={() => handleToggleFavorite(item.id)}
+							/>
 						)
 					}}
 				/>
