@@ -1,32 +1,6 @@
+import NavBarIconWrapper from '@/components/nav-bar-icon-wrapper'
 import AntDesign from '@expo/vector-icons/AntDesign'
 import { Tabs } from 'expo-router'
-import type { PropsWithChildren } from 'react'
-import { View } from 'react-native'
-
-type NavBarIconWrapperProps = PropsWithChildren & {
-	focused: boolean
-}
-
-const NavBarIconWrapper: React.FC<NavBarIconWrapperProps> = ({
-	focused,
-	children,
-}) => {
-	return (
-		<View
-			className={`flex flex-row justify-center items-center rounded-full ${
-				focused ? 'bg-general-300' : ''
-			}`}
-		>
-			<View
-				className={`rounded-full w-16 h-16  items-center justify-center ${
-					focused ? 'bg-secondary' : ''
-				}`}
-			>
-				{children}
-			</View>
-		</View>
-	)
-}
 
 export default function Layout() {
 	return (
@@ -35,7 +9,7 @@ export default function Layout() {
 			screenOptions={{
 				tabBarActiveTintColor: 'white',
 				tabBarInactiveTintColor: 'black',
-				tabBarShowLabel: true,
+				tabBarShowLabel: false,
 				tabBarStyle: {
 					backgroundColor: '#333333',
 					borderRadius: 50,
