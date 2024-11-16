@@ -130,3 +130,85 @@ export const initialCardsGroups = [
 		isFavorite: false,
 	},
 ]
+
+export const cardGroupsContents = [
+	{
+		groupId: 1,
+		cards: [
+			{
+				term: 'Newton’s First Law',
+				answer:
+					'An object in motion stays in motion unless acted upon by an external force.',
+			},
+			{
+				term: 'Photosynthesis',
+				answer:
+					'The process by which green plants use sunlight to synthesize foods from carbon dioxide and water.',
+			},
+			{
+				term: 'Pythagorean Theorem',
+				answer:
+					'In a right triangle, the square of the hypotenuse is equal to the sum of the squares of the other two sides.',
+			},
+		],
+	},
+	{
+		groupId: 2,
+		cards: [
+			{
+				term: 'Mitochondria',
+				answer:
+					'The powerhouse of the cell, generating most of the cell’s supply of ATP.',
+			},
+			{
+				term: 'DNA',
+				answer:
+					'Deoxyribonucleic acid, the molecule that carries genetic information in living organisms.',
+			},
+			{
+				term: 'Genotype',
+				answer: 'The genetic constitution of an individual organism.',
+			},
+		],
+	},
+	{
+		groupId: 3,
+		cards: [
+			{
+				term: 'The Great Wall of China',
+				answer:
+					'A series of fortifications made of stone, brick, and other materials built to protect China from invasions.',
+			},
+			{
+				term: 'Renaissance',
+				answer:
+					'A period in European history marking the transition from the Middle Ages to modernity.',
+			},
+			{
+				term: 'Industrial Revolution',
+				answer:
+					'The period of rapid industrial growth that began in the late 18th century.',
+			},
+		],
+	},
+	{
+		groupId: 4,
+		cards: [
+			{
+				term: 'Algorithm',
+				answer:
+					'A step-by-step procedure for solving a problem or performing a task.',
+			},
+			{
+				term: 'Binary Search',
+				answer:
+					'An efficient algorithm for finding an item in a sorted list by repeatedly dividing the search interval in half.',
+			},
+			{
+				term: 'Recursion',
+				answer:
+					'A method where the solution to a problem depends on solutions to smaller instances of the same problem.',
+			},
+		],
+	},
+]

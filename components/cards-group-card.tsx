@@ -1,5 +1,6 @@
 import type { CardGroup } from '@/types'
 import AntDesign from '@expo/vector-icons/AntDesign'
+import { Link } from 'expo-router'
 import type React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -14,10 +15,13 @@ import { H4, Small } from './ui/typography'
 
 type GroupCardProps = {
 	group: CardGroup
-	onPress: () => void
+	handleToggleFavorite: () => void
 }
 
-const GroupCard: React.FC<GroupCardProps> = ({ group, onPress }) => {
+const GroupCard: React.FC<GroupCardProps> = ({
+	group,
+	handleToggleFavorite,
+}) => {
 	const insets = useSafeAreaInsets()
 	const contentInsets = {
 		top: insets.top,
@@ -28,29 +32,37 @@ const GroupCard: React.FC<GroupCardProps> = ({ group, onPress }) => {
 
 	return (
 		<ContextMenu>
-			<ContextMenuTrigger>
-				<Card className='mt-3 mx-6'>
-					<CardHeader>
-						<View className='flex flex-row items-start justify-between'>
-							<H4 className='font-medium'>{group.name}</H4>
-							<TouchableOpacity key={group.id} onPress={onPress}>
-								<AntDesign
-									name={group.isFavorite ? 'star' : 'staro'}
-									size={20}
-									color='black'
-								/>
-							</TouchableOpacity>
-						</View>
+			<Link
+				asChild
+				href={{
+					pathname: '/group/[id]',
+					params: { id: group.id },
+				}}
+			>
+				<ContextMenuTrigger>
+					<Card className='mt-3 mx-6'>
+						<CardHeader>
+							<View className='flex flex-row items-start justify-between'>
+								<H4 className='font-medium'>{group.name}</H4>
+								<TouchableOpacity key={group.id} onPress={handleToggleFavorite}>
+									<AntDesign
+										name={group.isFavorite ? 'star' : 'staro'}
+										size={20}
+										color='black'
+									/>
+								</TouchableOpacity>
+							</View>
 
-						<CardDescription>Terms: {group.cardsCount}</CardDescription>
-					</CardHeader>
-					<CardContent>
-						<Small className='text-primary/40'>
-							Created at {group.createdAt.toLocaleDateString()}
-						</Small>
-					</CardContent>
-				</Card>
-			</ContextMenuTrigger>
+							<CardDescription>Terms: {group.cardsCount}</CardDescription>
+						</CardHeader>
+						<CardContent>
+							<Small className='text-primary/40'>
+								Created at {group.createdAt.toLocaleDateString()}
+							</Small>
+						</CardContent>
+					</Card>
+				</ContextMenuTrigger>
+			</Link>
 
 			<ContextMenuContent
 				align='start'

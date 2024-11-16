@@ -4,7 +4,7 @@ import { Separator } from '@/components/ui/separator'
 import { H1, Large, P } from '@/components/ui/typography'
 import { images } from '@/constants'
 import AntDesign from '@expo/vector-icons/AntDesign'
-import { Link } from 'expo-router'
+import { Link, Redirect } from 'expo-router'
 import React, { useState } from 'react'
 import { Image, ScrollView, StatusBar, Text, View } from 'react-native'
 
@@ -14,6 +14,9 @@ const SignIn = () => {
 		email: '',
 		password: '',
 	})
+	const [isSignedIn, setIsSignedIn] = useState(false)
+
+	if (isSignedIn) return <Redirect href='/(root)/(tabs)/home' />
 
 	return (
 		<ScrollView className='flex-1 h-full'>
@@ -54,7 +57,11 @@ const SignIn = () => {
 							<Separator />
 						</View>
 
-						<Button variant='outline' size='lg'>
+						<Button
+							variant='outline'
+							size='lg'
+							onPress={() => setIsSignedIn(true)}
+						>
 							<View className='flex flex-row items-center'>
 								<AntDesign name='google' size={24} color='bg-primary' />
 								<Large className='text-primary'> Log in with Google</Large>

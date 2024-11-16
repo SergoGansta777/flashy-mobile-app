@@ -27,7 +27,7 @@ const Home = () => {
 						return (
 							<GroupCard
 								group={item}
-								onPress={() => handleToggleFavorite(item.id)}
+								handleToggleFavorite={() => handleToggleFavorite(item.id)}
 							/>
 						)
 					}}
