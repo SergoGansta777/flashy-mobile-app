@@ -23,9 +23,15 @@ const TopBar = ({
         color="#6B7990"
       />
     </Button>
-    <P className="text-center align-bottom font-semibold text-muted-foreground">
-      {totalSwiped} / {totalCards}
-    </P>
+    {totalCards === 0 ? (
+      <P className="text-center align-bottom font-semibold text-muted-foreground">
+        It's empty
+      </P>
+    ) : (
+      <P className="text-center align-bottom font-semibold text-muted-foreground">
+        {totalSwiped} / {totalCards}
+      </P>
+    )}
     <Button variant="ghost" className="flex items-center justify-center">
       <MaterialCommunityIcons
         name="dots-horizontal"
