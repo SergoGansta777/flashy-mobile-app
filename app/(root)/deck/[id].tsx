@@ -1,3 +1,4 @@
+import TopBar from "@/components/deck-card-top-bar";
 import EmptyDeck from "@/components/empty-deck";
 import LearnCards from "@/components/learn-cards";
 import { cardDeck } from "@/constants";
@@ -18,6 +19,8 @@ const DeckDetail = () => {
 
   return (
     <SafeAreaView className="flex flex-1 flex-col items-center px-4">
+      <TopBar totalSwiped={totalSwiped} totalCards={totalCards} />
+
       {totalCards > 0 ? (
         <LearnCards
           cards={deckContent?.cards || []}

@@ -1,7 +1,6 @@
 import type { FlashCard } from "@/types";
 import type React from "react";
 import CompletedDeck from "./completed-deck";
-import TopBar from "./deck-card-top-bar";
 import ProgressBar from "./progress-bar";
 import SwipeCounterBar from "./swipe-counter-bar";
 import SwippableDeck from "./swippable-deck";
@@ -27,8 +26,6 @@ const LearnCards: React.FC<LearnCardsProps> = ({
 }) => {
   return (
     <>
-      <TopBar totalSwiped={totalSwiped} totalCards={totalCards} />
-
       {totalSwiped !== totalCards ? (
         <>
           <ProgressBar value={totalSwiped} total={totalCards} />
