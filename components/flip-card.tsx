@@ -8,7 +8,7 @@ import Animated, {
 	withTiming,
 } from 'react-native-reanimated'
 import { Card, CardContent, CardFooter, CardHeader } from './ui/card'
-import { H1, Small } from './ui/typography'
+import { H1, P, Small } from './ui/typography'
 
 type FlippableCardProps = {
 	card: FlashCard
@@ -58,7 +58,7 @@ const FlippableCard: React.FC<FlippableCardProps> = ({ card }) => {
 						<Small className='text-muted-foreground'>What is that?</Small>
 					</CardHeader>
 					<CardContent className='flex flex-col items-center justify-center my-auto'>
-						<H1 className='flex font-medium text-4xl flex-col items-center justify-center'>
+						<H1 className='flex font-semibold text-4xl flex-col items-center justify-center'>
 							{card.term}
 						</H1>
 					</CardContent>
@@ -73,9 +73,9 @@ const FlippableCard: React.FC<FlippableCardProps> = ({ card }) => {
 						<Small className='text-muted-foreground'>Correct answer is</Small>
 					</CardHeader>
 					<CardContent className='flex flex-col items-center justify-center my-auto'>
-						<H1 className='flex font-medium text-3xl flex-col items-center justify-center'>
+						<P className='flex font-medium text-3xl flex-col items-center justify-center w-11/12'>
 							{card.answer}
-						</H1>
+						</P>
 					</CardContent>
 					<CardFooter />
 				</Card>

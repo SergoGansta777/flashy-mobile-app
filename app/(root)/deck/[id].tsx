@@ -1,19 +1,13 @@
 import TopBar from '@/components/deck-card-top-bar'
-import FlippableCard from '@/components/flip-card'
 import ProgressBar from '@/components/progress-bar'
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
-import { P } from '@/components/ui/typography'
+import SwipeCounterBar from '@/components/swipe-counter-bar'
+import SwippableDeck from '@/components/swippable-deck'
 import { cardDeck } from '@/constants'
-import { FlashCard } from '@/types'
 import { useLocalSearchParams } from 'expo-router'
-import React, { useCallback, useMemo, useRef, useState } from 'react'
-import { SafeAreaView, View } from 'react-native'
-import { GestureHandlerRootView } from 'react-native-gesture-handler'
-import { runOnJS } from 'react-native-reanimated'
-import { Swiper, type SwiperCardRefType } from 'rn-swiper-list'
+import React, { useState } from 'react'
+import { SafeAreaView } from 'react-native'
 
 const DeckDetail = () => {
-	const ref = useRef<SwiperCardRefType>()
 	const { id } = useLocalSearchParams()
 	const deckId = Number(id)
 	const deckContent = cardDeck.find(item => item.deckId === deckId)
@@ -24,75 +18,23 @@ const DeckDetail = () => {
 	const totalCards = deckContent?.cards.length ?? 0
 	const totalSwiped = rightSwipedIds.length + leftSwipedIds.length
 
-	const renderCard = useCallback(
-		(card: FlashCard) => <FlippableCard card={card} />,
-		[]
-	)
-
-	const OverlayLabelRight = useMemo(
-		() => (
-			<Card className='w-[350px] h-[600px] border-solid border-green-500 bg-green-500/5'>
-				<CardHeader />
-				<CardContent className='flex flex-col items-center justify-center my-auto' />
-				<CardFooter />
-			</Card>
-		),
-		[]
-	)
-
-	const OverlayLabelLeft = useMemo(
-		() => (
-			<Card className='w-[350px] h-[600px] border-solid border-red-500 bg-red-500/5'>
-				<CardHeader />
-				<CardContent className='flex flex-col items-center justify-center my-auto' />
-				<CardFooter />
-			</Card>
-		),
-		[]
-	)
-
-	const handleSwipe = useCallback(
-		(index: number, direction: 'left' | 'right') => {
-			runOnJS(() => {
-				if (direction === 'left') {
-					setLeftSwipedIds(prev => [...prev, index])
-				} else {
-					setRightSwipedIds(prev => [...prev, index])
-				}
-			})()
-		},
-		[]
-	)
-
 	return (
 		<SafeAreaView className='h-full w-full px-4 flex flex-col items-center'>
 			<TopBar totalSwiped={totalSwiped} totalCards={totalCards} />
 			<ProgressBar value={totalSwiped} total={totalCards} />
-			<View className='w-full flex flex-row items-center justify-between mt-2'>
-				<View className='border-solid border border-l-0 border-red-500/80 rounded-r-full bg-red-500/4'>
-					<P className='p-2 pl-3 pr-4 text-red-500/80 text-lg ml-1 mr-2'>
-						{leftSwipedIds.length}
-					</P>
-				</View>
-				<View className='border-solid border border-r-0 border-green-500/80 rounded-l-full bg-green-500/4'>
-					<P className='p-2 pl-4 pr-3 text-green-500/80 text-lg ml-2 mr-1'>
-						{rightSwipedIds.length}
-					</P>
-				</View>
-			</View>
-
-			<GestureHandlerRootView className='w-full h-full flex items-center justify-center'>
-				<Swiper
-					ref={ref}
-					data={deckContent?.cards || []}
-					renderCard={renderCard}
-					disableTopSwipe={true}
-					OverlayLabelRight={() => OverlayLabelRight}
-					OverlayLabelLeft={() => OverlayLabelLeft}
-					onSwipeLeft={index => handleSwipe(index, 'left')}
-					onSwipeRight={index => handleSwipe(index, 'right')}
-				/>
-			</GestureHandlerRootView>
+			<SwipeCounterBar
+				leftCounter={leftSwipedIds.length}
+				rightCounter={rightSwipedIds.length}
+			/>
+			<SwippableDeck
+				cards={deckContent?.cards || []}
+				handleSwipeToLeft={(index: number) =>
+					setLeftSwipedIds(prev => [...prev, index])
+				}
+				handleSwipeToRight={(index: number) =>
+					setRightSwipedIds(prev => [...prev, index])
+				}
+			/>
 		</SafeAreaView>
 	)
 }
