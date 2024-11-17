@@ -1,12 +1,12 @@
-import React from 'react'
-import { SafeAreaView, Text } from 'react-native'
+import React from "react";
+import { SafeAreaView, Text } from "react-native";
 
 const NewCard = () => {
-	return (
-		<SafeAreaView>
-			<Text>NewCard</Text>
-		</SafeAreaView>
-	)
-}
+  return (
+    <SafeAreaView>
+      <Text>NewCard</Text>
+    </SafeAreaView>
+  );
+};
 
-export default NewCard
+export default NewCard;

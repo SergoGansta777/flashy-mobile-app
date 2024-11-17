@@ -1,11 +1,11 @@
-import { Redirect } from 'expo-router'
+import { Redirect } from "expo-router";
 
 const Page = () => {
-	const isSignedIn = true
+  const isSignedIn = true;
 
-	if (isSignedIn) return <Redirect href='/(root)/(tabs)/home' />
+  if (isSignedIn) return <Redirect href="/(root)/(tabs)/home" />;
 
-	return <Redirect href='/(auth)/welcome' />
-}
+  return <Redirect href="/(auth)/welcome" />;
+};
 
-export default Page
+export default Page;
