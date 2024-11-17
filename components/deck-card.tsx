@@ -1,4 +1,4 @@
-import type { CardGroup } from '@/types'
+import type { CardDeckMetadata } from '@/types'
 import AntDesign from '@expo/vector-icons/AntDesign'
 import { Link } from 'expo-router'
 import type React from 'react'
@@ -13,13 +13,13 @@ import {
 } from './ui/context-menu'
 import { H4, Small } from './ui/typography'
 
-type GroupCardProps = {
-	group: CardGroup
+type DeckCardProps = {
+	deckMetadata: CardDeckMetadata
 	handleToggleFavorite: () => void
 }
 
-const GroupCard: React.FC<GroupCardProps> = ({
-	group,
+const DeckCard: React.FC<DeckCardProps> = ({
+	deckMetadata,
 	handleToggleFavorite,
 }) => {
 	const insets = useSafeAreaInsets()
@@ -35,29 +35,34 @@ const GroupCard: React.FC<GroupCardProps> = ({
 			<Link
 				asChild
 				href={{
-					pathname: '/group/[id]',
-					params: { id: group.id },
+					pathname: '/deck/[id]',
+					params: { id: deckMetadata.id },
 				}}
 			>
 				<ContextMenuTrigger>
 					<Card className='mt-3 mx-6'>
 						<CardHeader>
 							<View className='flex flex-row items-start justify-between'>
-								<H4 className='font-medium'>{group.name}</H4>
-								<TouchableOpacity key={group.id} onPress={handleToggleFavorite}>
+								<H4 className='font-medium'>{deckMetadata.name}</H4>
+								<TouchableOpacity
+									key={deckMetadata.id}
+									onPress={handleToggleFavorite}
+								>
 									<AntDesign
-										name={group.isFavorite ? 'star' : 'staro'}
+										name={deckMetadata.isFavorite ? 'star' : 'staro'}
 										size={20}
 										color='black'
 									/>
 								</TouchableOpacity>
 							</View>
 
-							<CardDescription>Terms: {group.cardsCount}</CardDescription>
+							<CardDescription>
+								Terms: {deckMetadata.cardsCount}
+							</CardDescription>
 						</CardHeader>
 						<CardContent>
 							<Small className='text-muted-foreground'>
-								Created at {group.createdAt.toLocaleDateString()}
+								Created at {deckMetadata.createdAt.toLocaleDateString()}
 							</Small>
 						</CardContent>
 					</Card>
@@ -83,4 +88,4 @@ const GroupCard: React.FC<GroupCardProps> = ({
 	)
 }
 
-export default GroupCard
+export default DeckCard

@@ -38,7 +38,7 @@ export const onboarding = [
 	},
 ]
 
-export const initialCardsGroups = [
+export const initialCardDecks = [
 	{
 		id: 1,
 		name: 'Physics',
@@ -131,9 +131,9 @@ export const initialCardsGroups = [
 	},
 ]
 
-export const cardGroupsContents = [
+export const cardDeck = [
 	{
-		groupId: 1,
+		deckId: 1,
 		cards: [
 			{
 				term: 'Newton’s First Law',
@@ -153,7 +153,7 @@ export const cardGroupsContents = [
 		],
 	},
 	{
-		groupId: 2,
+		deckId: 2,
 		cards: [
 			{
 				term: 'Mitochondria',
@@ -172,7 +172,7 @@ export const cardGroupsContents = [
 		],
 	},
 	{
-		groupId: 3,
+		deckId: 3,
 		cards: [
 			{
 				term: 'The Great Wall of China',
@@ -192,7 +192,7 @@ export const cardGroupsContents = [
 		],
 	},
 	{
-		groupId: 4,
+		deckId: 4,
 		cards: [
 			{
 				term: 'Algorithm',

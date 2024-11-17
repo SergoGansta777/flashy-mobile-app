@@ -1,36 +1,32 @@
+import TopBar from '@/components/deck-card-top-bar'
 import FlippableCard from '@/components/flip-card'
-import { Button } from '@/components/ui/button'
+import ProgressBar from '@/components/progress-bar'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
-import { Progress } from '@/components/ui/progress'
-import { H4 } from '@/components/ui/typography'
-import { cardGroupsContents } from '@/constants'
-import AntDesign from '@expo/vector-icons/AntDesign'
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
-import { router, useLocalSearchParams } from 'expo-router'
+import { P } from '@/components/ui/typography'
+import { cardDeck } from '@/constants'
+import { useLocalSearchParams } from 'expo-router'
 import React, { useCallback, useMemo, useRef, useState } from 'react'
 import { SafeAreaView, View } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { Swiper, type SwiperCardRefType } from 'rn-swiper-list'
 
-const GroupScreen = () => {
+const DeckDetail = () => {
 	const ref = useRef<SwiperCardRefType>()
 	const { id } = useLocalSearchParams()
-	const groupId = Number(id)
-	const groupContent = cardGroupsContents.find(item => item.groupId === groupId)
+	const deckId = Number(id)
+	const deckContent = cardDeck.find(item => item.deckId === deckId)
 
 	const [rightSwipedIds, setRightSwipedIds] = useState<number[]>([])
 	const [leftSwipedIds, setLeftSwipedIds] = useState<number[]>([])
 
-	const totalCards = groupContent?.cards.length ?? 0
+	const totalCards = deckContent?.cards.length ?? 0
 	const totalSwiped = rightSwipedIds.length + leftSwipedIds.length
 
-	// Memoize the renderCard function to avoid unnecessary re-renders
 	const renderCard = useCallback(
 		(item: any) => <FlippableCard item={item} />,
 		[]
 	)
 
-	// Overlay components for swipe directions
 	const OverlayLabelRight = useMemo(
 		() => (
 			<Card className='w-[350px] h-[600px] border-solid border-green-500 bg-green-500/5'>
@@ -53,7 +49,6 @@ const GroupScreen = () => {
 		[]
 	)
 
-	// Handler to track swipes
 	const handleSwipe = useCallback(
 		(index: number, direction: 'left' | 'right') => {
 			if (direction === 'left') {
@@ -66,14 +61,26 @@ const GroupScreen = () => {
 	)
 
 	return (
-		<SafeAreaView className='h-full w-full px-4 flex items-center'>
+		<SafeAreaView className='h-full w-full px-4 flex flex-col items-center'>
 			<TopBar totalSwiped={totalSwiped} totalCards={totalCards} />
 			<ProgressBar progress={(totalSwiped / totalCards) * 100} />
+			<View className='w-full flex flex-row items-center justify-between mt-2'>
+				<View className='border-solid border border-l-0 border-red-500 rounded-r-full bg-red-500/4'>
+					<P className='p-2 pl-3 pr-4 text-red-500 text-lg ml-1 mr-2'>
+						{leftSwipedIds.length}
+					</P>
+				</View>
+				<View className='border-solid border border-r-0 border-green-500 rounded-l-full bg-green-500/4'>
+					<P className='p-2 pl-4 pr-3 text-green-500 text-lg ml-2 mr-1'>
+						{rightSwipedIds.length}
+					</P>
+				</View>
+			</View>
 
 			<GestureHandlerRootView className='w-full h-full flex items-center justify-center'>
 				<Swiper
 					ref={ref}
-					data={groupContent?.cards}
+					data={deckContent?.cards}
 					renderCard={renderCard}
 					OverlayLabelRight={() => OverlayLabelRight}
 					OverlayLabelLeft={() => OverlayLabelLeft}
@@ -85,32 +92,4 @@ const GroupScreen = () => {
 	)
 }
 
-export default GroupScreen
-
-// Extracted TopBar component
-const TopBar = ({
-	totalSwiped,
-	totalCards,
-}: {
-	totalSwiped: number
-	totalCards: number
-}) => (
-	<View className='flex flex-row items-center justify-between w-full'>
-		<Button variant='ghost' onPress={() => router.back()}>
-			<AntDesign name='back' size={24} color='black' />
-		</Button>
-		<H4>
-			{totalSwiped} / {totalCards}
-		</H4>
-		<View className='pr-5'>
-			<MaterialCommunityIcons name='dots-vertical' size={24} color='black' />
-		</View>
-	</View>
-)
-
-// Extracted ProgressBar component
-const ProgressBar = ({ progress }: { progress: number }) => (
-	<View className='w-full'>
-		<Progress className='rounded-none h-2' value={progress} />
-	</View>
-)
+export default DeckDetail

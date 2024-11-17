@@ -1,15 +1,15 @@
-import GroupCard from '@/components/cards-group-card'
+import DeckCard from '@/components/deck-card'
 import { H1 } from '@/components/ui/typography'
-import { appName, initialCardsGroups } from '@/constants'
+import { appName, initialCardDecks } from '@/constants'
 import React, { useState } from 'react'
 import { FlatList, SafeAreaView, View } from 'react-native'
 
 const Home = () => {
-	const [cardGroups, setCardGroups] = useState(initialCardsGroups)
+	const [cardDecks, setCardDecks] = useState(initialCardDecks)
 	const handleToggleFavorite = (id: number) => {
-		setCardGroups(prevGroups =>
-			prevGroups.map(group =>
-				group.id === id ? { ...group, isFavorite: !group.isFavorite } : group
+		setCardDecks(prev =>
+			prev.map(deck =>
+				deck.id === id ? { ...deck, isFavorite: !deck.isFavorite } : deck
 			)
 		)
 	}
@@ -21,12 +21,12 @@ const Home = () => {
 			</View>
 			<View>
 				<FlatList
-					data={cardGroups}
+					data={cardDecks}
 					className='mb-20'
 					renderItem={({ item }) => {
 						return (
-							<GroupCard
-								group={item}
+							<DeckCard
+								deckMetadata={item}
 								handleToggleFavorite={() => handleToggleFavorite(item.id)}
 							/>
 						)
