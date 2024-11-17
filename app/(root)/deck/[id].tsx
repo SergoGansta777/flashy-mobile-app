@@ -5,7 +5,7 @@ import SwippableDeck from '@/components/swippable-deck'
 import { cardDeck } from '@/constants'
 import { useLocalSearchParams } from 'expo-router'
 import React, { useState } from 'react'
-import { SafeAreaView } from 'react-native'
+import { SafeAreaView, Text, View } from 'react-native'
 
 const DeckDetail = () => {
 	const { id } = useLocalSearchParams()
@@ -22,19 +22,28 @@ const DeckDetail = () => {
 		<SafeAreaView className='h-full w-full px-4 flex flex-col items-center'>
 			<TopBar totalSwiped={totalSwiped} totalCards={totalCards} />
 			<ProgressBar value={totalSwiped} total={totalCards} />
-			<SwipeCounterBar
-				leftCounter={leftSwipedIds.length}
-				rightCounter={rightSwipedIds.length}
-			/>
-			<SwippableDeck
-				cards={deckContent?.cards || []}
-				handleSwipeToLeft={(index: number) =>
-					setLeftSwipedIds(prev => [...prev, index])
-				}
-				handleSwipeToRight={(index: number) =>
-					setRightSwipedIds(prev => [...prev, index])
-				}
-			/>
+
+			{totalSwiped !== totalCards ? (
+				<>
+					<SwipeCounterBar
+						leftCounter={leftSwipedIds.length}
+						rightCounter={rightSwipedIds.length}
+					/>
+					<SwippableDeck
+						cards={deckContent?.cards || []}
+						handleSwipeToLeft={(index: number) =>
+							setLeftSwipedIds(prev => [...prev, index])
+						}
+						handleSwipeToRight={(index: number) =>
+							setRightSwipedIds(prev => [...prev, index])
+						}
+					/>
+				</>
+			) : (
+				<View className='flex items-center justify-center h-full'>
+					<Text>Hello</Text>
+				</View>
+			)}
 		</SafeAreaView>
 	)
 }

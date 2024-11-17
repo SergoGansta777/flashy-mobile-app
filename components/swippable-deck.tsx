@@ -1,9 +1,11 @@
 import type { FlashCard } from '@/types'
-import React, { useCallback, useMemo, useRef } from 'react'
+import type React from 'react'
+import { useCallback, useMemo, useRef } from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { runOnJS } from 'react-native-reanimated'
 import { Swiper, type SwiperCardRefType } from 'rn-swiper-list'
 import FlippableCard from './flip-card'
+import SwipeInstructions from './swipe-instructions'
 import { Card, CardContent, CardFooter, CardHeader } from './ui/card'
 
 export type SwippableDeckProps = {
@@ -59,18 +61,21 @@ const SwippableDeck: React.FC<SwippableDeckProps> = ({
 		[handleSwipeToLeft, handleSwipeToRight]
 	)
 	return (
-		<GestureHandlerRootView className='w-full h-full flex items-center justify-center'>
-			<Swiper
-				ref={ref}
-				data={cards}
-				renderCard={renderCard}
-				disableTopSwipe={true}
-				OverlayLabelRight={() => OverlayLabelRight}
-				OverlayLabelLeft={() => OverlayLabelLeft}
-				onSwipeLeft={index => handleSwipe(index, 'left')}
-				onSwipeRight={index => handleSwipe(index, 'right')}
-			/>
-		</GestureHandlerRootView>
+		<>
+			<GestureHandlerRootView className='w-full h-full flex items-center justify-center'>
+				<Swiper
+					ref={ref}
+					data={cards}
+					renderCard={renderCard}
+					disableTopSwipe={true}
+					OverlayLabelRight={() => OverlayLabelRight}
+					OverlayLabelLeft={() => OverlayLabelLeft}
+					onSwipeLeft={index => handleSwipe(index, 'left')}
+					onSwipeRight={index => handleSwipe(index, 'right')}
+				/>
+			</GestureHandlerRootView>
+			<SwipeInstructions />
+		</>
 	)
 }
 
