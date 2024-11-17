@@ -26,11 +26,7 @@ const TopBar = ({
     <P className="text-center align-bottom font-semibold text-muted-foreground">
       {totalSwiped} / {totalCards}
     </P>
-    <Button
-      variant="ghost"
-      className="flex items-center justify-center"
-      onPress={() => router.back()}
-    >
+    <Button variant="ghost" className="flex items-center justify-center">
       <MaterialCommunityIcons
         name="dots-horizontal"
         size={28}
