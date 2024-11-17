@@ -1,4 +1,5 @@
 import type { FlashCard } from '@/types'
+import * as Haptics from 'expo-haptics'
 import type React from 'react'
 import { useCallback, useMemo, useRef } from 'react'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
@@ -56,6 +57,7 @@ const SwippableDeck: React.FC<SwippableDeckProps> = ({
 				} else {
 					handleSwipeToRight(index)
 				}
+				Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft)
 			})()
 		},
 		[handleSwipeToLeft, handleSwipeToRight]

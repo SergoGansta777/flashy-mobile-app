@@ -1,6 +1,7 @@
 import DeckCard from '@/components/deck-card'
 import { H1 } from '@/components/ui/typography'
 import { appName, initialCardDecks } from '@/constants'
+import * as Haptics from 'expo-haptics'
 import React, { useState } from 'react'
 import { FlatList, SafeAreaView, View } from 'react-native'
 
@@ -12,6 +13,7 @@ const Home = () => {
 				deck.id === id ? { ...deck, isFavorite: !deck.isFavorite } : deck
 			)
 		)
+		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
 	}
 
 	return (
