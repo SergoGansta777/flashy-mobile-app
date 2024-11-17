@@ -1,19 +1,22 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { P } from "@/components/ui/typography";
+import { H4, Large, P } from "@/components/ui/typography";
 import React from "react";
-import { SafeAreaView, Text, View } from "react-native";
+import { SafeAreaView, View } from "react-native";
 
 const Profile = () => {
+  const user = {
+    name: "Sergey",
+    lastName: "Nechoroshev",
+    avatarUrl: "",
+  };
   return (
-    <SafeAreaView className="flex flex-col items-center justify-start bg-background">
-      <View className="flex items-center">
-        <Avatar alt="user avatar">
-          <AvatarImage source={{ uri: "" }} />
-          <AvatarFallback>
-            <Text>SN</Text>
-          </AvatarFallback>
-        </Avatar>
-        <P>You name will be here</P>
+    <SafeAreaView className="flex h-full w-full flex-col items-center justify-start bg-background">
+      <View className="mt-8 flex items-center">
+        <View className="flex size-24 items-center justify-center rounded-full bg-secondary">
+          <Large className="flex text-center text-3xl">SN</Large>
+        </View>
+        <H4 className="mt-6">
+          {user.name} {user.lastName}
+        </H4>
       </View>
       <View className="mt-10">
         <P>Hello, there will be information about your profile!</P>
