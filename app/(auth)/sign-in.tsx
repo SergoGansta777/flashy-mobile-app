@@ -6,7 +6,7 @@ import { images } from "@/constants";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Link, Redirect } from "expo-router";
 import React, { useState } from "react";
-import { Image, ScrollView, StatusBar, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 
 const SignIn = () => {
   const [form, setForm] = useState({
@@ -20,7 +20,6 @@ const SignIn = () => {
 
   return (
     <ScrollView className="h-full flex-1">
-      <StatusBar />
       <View className="h-full flex-1">
         <View className="relative h-[250px] w-full">
           <Image source={images.loginHeader} className="z-0 h-[250px] w-full" />

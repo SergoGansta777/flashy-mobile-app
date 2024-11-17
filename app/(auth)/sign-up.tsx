@@ -6,7 +6,7 @@ import { images } from "@/constants";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Link } from "expo-router";
 import React, { useState } from "react";
-import { Image, ScrollView, StatusBar, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 
 const SignUp = () => {
   const [form, setForm] = useState({
@@ -17,7 +17,6 @@ const SignUp = () => {
 
   return (
     <ScrollView className="flex-1">
-      <StatusBar />
       <View className="flex-1">
         <View className="relative h-[250px] w-full">
           <Image source={images.logupHeader} className="z-0 h-[250px] w-full" />
