@@ -14,16 +14,23 @@ const StatsSection: React.FC<StatsProps> = ({
   remaining,
 }) => (
   <View className="flex w-3/5 flex-col items-center justify-center gap-3 pr-2">
-    <StatItem label="Known" value={known} color="text-green-600/80" />
+    <StatItem
+      label="Known"
+      value={known}
+      valueColor="text-green-500/80"
+      labelColor="text-primary"
+    />
     <StatItem
       label="Still learning"
       value={stillLearning}
-      color="text-red-600/80"
+      valueColor="text-red-500/80"
+      labelColor="text-primary/70"
     />
     <StatItem
       label="Terms remaining"
       value={remaining}
-      color="text-muted-foreground/80"
+      valueColor="text-muted-foreground/80"
+      labelColor="text-primary/50"
     />
   </View>
 );

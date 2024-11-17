@@ -30,11 +30,10 @@ const CompletedDeck: React.FC<CompletedDeckProps> = ({
 
   const pieChartData = useMemo(
     () => [
-      { value: known, color: "#44B56E" },
-      { value: stillLearning, color: "#E45858" },
-      { value: total - totalSwiped, color: "#8290A2" },
+      { value: known, color: "#000" },
+      { value: stillLearning, color: "#FFF" },
     ],
-    [known, stillLearning, total, totalSwiped],
+    [known, stillLearning],
   );
 
   return (
@@ -59,8 +58,11 @@ const CompletedDeck: React.FC<CompletedDeckProps> = ({
             radius={52}
             innerRadius={36}
             showGradient
+            shadow={true}
             centerLabelComponent={() => (
-              <Lead className="text-center align-middle">
+              <Lead
+                className={`text-center align-middle ${completionPercentage === 100 ? "text-bold font-primary" : ""}`}
+              >
                 {completionPercentage}%
               </Lead>
             )}

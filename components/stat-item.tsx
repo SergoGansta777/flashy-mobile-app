@@ -5,13 +5,19 @@ import { H4 } from "./ui/typography";
 type StatItemProps = {
   label: string;
   value: number;
-  color: string;
+  labelColor: string;
+  valueColor: string;
 };
 
-const StatItem: React.FC<StatItemProps> = ({ label, value, color }) => (
+const StatItem: React.FC<StatItemProps> = ({
+  label,
+  value,
+  labelColor,
+  valueColor,
+}) => (
   <View className="flex w-full flex-row items-start justify-between">
-    <H4 className={`${color} text-left font-bold`}>{label}</H4>
-    <H4 className={`${color} text-right`}> {value}</H4>
+    <H4 className={`${labelColor} text-left font-semibold`}>{label}</H4>
+    <H4 className={`${valueColor} text-right`}> {value}</H4>
   </View>
 );
 
