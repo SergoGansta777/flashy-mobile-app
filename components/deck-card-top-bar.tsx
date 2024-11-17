@@ -23,7 +23,7 @@ const TopBar = ({
 				color='#6B7990'
 			/>
 		</Button>
-		<P className='text-muted-foreground font-semibold'>
+		<P className='text-muted-foreground font-semibold text-center align-bottom'>
 			{totalSwiped} / {totalCards}
 		</P>
 		<Button
