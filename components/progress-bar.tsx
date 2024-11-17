@@ -1,9 +1,12 @@
 import { View } from 'react-native'
 import { Progress } from './ui/progress'
 
-const ProgressBar = ({ progress }: { progress: number }) => (
-	<View className='w-full'>
-		<Progress className='rounded-none h-1' value={progress} />
+const ProgressBar = ({ value, total }: { value: number; total: number }) => (
+	<View className='w-full my-1'>
+		<Progress
+			className='rounded-none h-1 bg-transparent'
+			value={(value / total) * 100}
+		/>
 	</View>
 )
 

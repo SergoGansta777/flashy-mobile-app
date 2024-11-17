@@ -20,6 +20,7 @@ const DeckDetail = () => {
 
 	const [rightSwipedIds, setRightSwipedIds] = useState<number[]>([])
 	const [leftSwipedIds, setLeftSwipedIds] = useState<number[]>([])
+	const [swipeActive, setSwipeActive] = useState<boolean>(false)
 
 	const totalCards = deckContent?.cards.length ?? 0
 	const totalSwiped = rightSwipedIds.length + leftSwipedIds.length
@@ -67,16 +68,16 @@ const DeckDetail = () => {
 	return (
 		<SafeAreaView className='h-full w-full px-4 flex flex-col items-center'>
 			<TopBar totalSwiped={totalSwiped} totalCards={totalCards} />
-			<ProgressBar progress={(totalSwiped / totalCards) * 100} />
+			<ProgressBar value={totalSwiped} total={totalCards} />
 			<View className='w-full flex flex-row items-center justify-between mt-2'>
-				<View className='border-solid border border-l-0 border-red-500 rounded-r-full bg-red-500/4'>
-					<P className='p-2 pl-3 pr-4 text-red-500 text-lg ml-1 mr-2'>
-						{leftSwipedIds.length}
+				<View className='border-solid border border-l-0 border-red-500/80 rounded-r-full bg-red-500/4'>
+					<P className='p-2 pl-3 pr-4 text-red-500/80 text-lg ml-1 mr-2'>
+						{swipeActive ? '-1' : leftSwipedIds.length}
 					</P>
 				</View>
-				<View className='border-solid border border-r-0 border-green-500 rounded-l-full bg-green-500/4'>
-					<P className='p-2 pl-4 pr-3 text-green-500 text-lg ml-2 mr-1'>
-						{rightSwipedIds.length}
+				<View className='border-solid border border-r-0 border-green-500/80 rounded-l-full bg-green-500/4'>
+					<P className='p-2 pl-4 pr-3 text-green-500/80 text-lg ml-2 mr-1'>
+						{swipeActive ? '+1' : rightSwipedIds.length}
 					</P>
 				</View>
 			</View>
@@ -86,10 +87,13 @@ const DeckDetail = () => {
 					ref={ref}
 					data={deckContent?.cards || []}
 					renderCard={renderCard}
+					disableTopSwipe={true}
 					OverlayLabelRight={() => OverlayLabelRight}
 					OverlayLabelLeft={() => OverlayLabelLeft}
 					onSwipeLeft={index => handleSwipe(index, 'left')}
 					onSwipeRight={index => handleSwipe(index, 'right')}
+					onSwipeStart={() => setSwipeActive(true)}
+					onSwipeEnd={() => setSwipeActive(false)}
 				/>
 			</GestureHandlerRootView>
 		</SafeAreaView>

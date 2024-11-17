@@ -47,11 +47,11 @@ const DeckCard: React.FC<DeckCardProps> = ({
 								<TouchableOpacity
 									key={deckMetadata.id}
 									onPress={handleToggleFavorite}
+									className='p-1'
 								>
 									<AntDesign
 										name={deckMetadata.isFavorite ? 'star' : 'staro'}
 										size={20}
-										color='black'
 									/>
 								</TouchableOpacity>
 							</View>

@@ -63,7 +63,7 @@ const SignIn = () => {
 							onPress={() => setIsSignedIn(true)}
 						>
 							<View className='flex flex-row items-center'>
-								<AntDesign name='google' size={24} color='bg-primary' />
+								<AntDesign name='google' size={24} />
 								<Large className='text-primary'> Log in with Google</Large>
 							</View>
 						</Button>

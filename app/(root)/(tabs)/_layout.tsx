@@ -66,12 +66,6 @@ export default function Layout() {
 					tabBarIcon: ({ focused }) => {
 						return (
 							<NavBarIconWrapper focused={focused}>
-								{/* <Avatar alt='user avatar'>
-									<AvatarImage source={{ uri: '' }} />
-									<AvatarFallback>
-										<Text>SN</Text>
-									</AvatarFallback>
-								</Avatar> */}
 								<AntDesign
 									name='user'
 									size={34}

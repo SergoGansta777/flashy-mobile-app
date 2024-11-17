@@ -61,7 +61,7 @@ const SignUp = () => {
 
 					<Button variant='outline' size='lg'>
 						<View className='flex flex-row items-center'>
-							<AntDesign name='google' size={24} color='bg-primary' />
+							<AntDesign name='google' size={24} />
 							<Large className='text-primary'> Sign up with Google</Large>
 						</View>
 					</Button>
