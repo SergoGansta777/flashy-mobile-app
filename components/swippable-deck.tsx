@@ -74,6 +74,9 @@ const SwippableDeck: React.FC<SwippableDeckProps> = ({
           OverlayLabelLeft={() => OverlayLabelLeft}
           onSwipeLeft={(index) => handleSwipe(index, "left")}
           onSwipeRight={(index) => handleSwipe(index, "right")}
+          onSwipedAll={() =>
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
+          }
         />
       </GestureHandlerRootView>
       <SwipeInstructions />
