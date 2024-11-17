@@ -4,10 +4,12 @@ import ProgressBar from '@/components/progress-bar'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card'
 import { P } from '@/components/ui/typography'
 import { cardDeck } from '@/constants'
+import { FlashCard } from '@/types'
 import { useLocalSearchParams } from 'expo-router'
 import React, { useCallback, useMemo, useRef, useState } from 'react'
 import { SafeAreaView, View } from 'react-native'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { runOnJS } from 'react-native-reanimated'
 import { Swiper, type SwiperCardRefType } from 'rn-swiper-list'
 
 const DeckDetail = () => {
@@ -23,7 +25,7 @@ const DeckDetail = () => {
 	const totalSwiped = rightSwipedIds.length + leftSwipedIds.length
 
 	const renderCard = useCallback(
-		(item: any) => <FlippableCard item={item} />,
+		(card: FlashCard) => <FlippableCard card={card} />,
 		[]
 	)
 
@@ -51,11 +53,13 @@ const DeckDetail = () => {
 
 	const handleSwipe = useCallback(
 		(index: number, direction: 'left' | 'right') => {
-			if (direction === 'left') {
-				setLeftSwipedIds(prev => [...prev, index])
-			} else {
-				setRightSwipedIds(prev => [...prev, index])
-			}
+			runOnJS(() => {
+				if (direction === 'left') {
+					setLeftSwipedIds(prev => [...prev, index])
+				} else {
+					setRightSwipedIds(prev => [...prev, index])
+				}
+			})()
 		},
 		[]
 	)
@@ -80,7 +84,7 @@ const DeckDetail = () => {
 			<GestureHandlerRootView className='w-full h-full flex items-center justify-center'>
 				<Swiper
 					ref={ref}
-					data={deckContent?.cards}
+					data={deckContent?.cards || []}
 					renderCard={renderCard}
 					OverlayLabelRight={() => OverlayLabelRight}
 					OverlayLabelLeft={() => OverlayLabelLeft}

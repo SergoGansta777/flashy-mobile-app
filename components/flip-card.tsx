@@ -1,8 +1,9 @@
+import { FlashCard } from '@/types'
 import type React from 'react'
 import { Pressable } from 'react-native'
 import Animated, {
-	interpolate,
 	useAnimatedStyle,
+	useDerivedValue,
 	useSharedValue,
 	withTiming,
 } from 'react-native-reanimated'
@@ -10,21 +11,22 @@ import { Card, CardContent, CardFooter, CardHeader } from './ui/card'
 import { H1, Small } from './ui/typography'
 
 type FlippableCardProps = {
-	item: { answer: string; term: string }
+	card: FlashCard
 }
 
-const FlippableCard: React.FC<FlippableCardProps> = ({ item }) => {
+const FlippableCard: React.FC<FlippableCardProps> = ({ card }) => {
 	const isFlipped = useSharedValue(false)
 
-	// Function to toggle the flipped state
 	const handlePress = () => {
 		isFlipped.value = !isFlipped.value
 	}
 
-	// Animated styles for the front and back sides of the card
+	const spinValue = useDerivedValue(() =>
+		withTiming(isFlipped.value ? 180 : 0, { duration: 500 })
+	)
+
 	const frontCardStyle = useAnimatedStyle(() => {
-		const spinValue = interpolate(Number(isFlipped.value), [0, 1], [0, 180])
-		const rotateY = withTiming(`${spinValue}deg`, { duration: 500 })
+		const rotateY = `${spinValue.value}deg`
 		return {
 			transform: [{ rotateY }],
 			backfaceVisibility: 'hidden',
@@ -32,8 +34,7 @@ const FlippableCard: React.FC<FlippableCardProps> = ({ item }) => {
 	})
 
 	const backCardStyle = useAnimatedStyle(() => {
-		const spinValue = interpolate(Number(isFlipped.value), [0, 1], [180, 360])
-		const rotateY = withTiming(`${spinValue}deg`, { duration: 500 })
+		const rotateY = `${spinValue.value + 180}deg`
 		return {
 			transform: [{ rotateY }],
 			backfaceVisibility: 'hidden',
@@ -58,7 +59,7 @@ const FlippableCard: React.FC<FlippableCardProps> = ({ item }) => {
 					</CardHeader>
 					<CardContent className='flex flex-col items-center justify-center my-auto'>
 						<H1 className='flex font-medium text-4xl flex-col items-center justify-center'>
-							{item.term}
+							{card.term}
 						</H1>
 					</CardContent>
 					<CardFooter />
@@ -73,7 +74,7 @@ const FlippableCard: React.FC<FlippableCardProps> = ({ item }) => {
 					</CardHeader>
 					<CardContent className='flex flex-col items-center justify-center my-auto'>
 						<H1 className='flex font-medium text-3xl flex-col items-center justify-center'>
-							{item.answer}
+							{card.answer}
 						</H1>
 					</CardContent>
 					<CardFooter />
