@@ -56,8 +56,8 @@ const CompletedDeck: React.FC<CompletedDeckProps> = ({
         <View className="w-2/5">
           <PieChart
             donut
-            radius={50}
-            innerRadius={30}
+            radius={52}
+            innerRadius={36}
             showGradient
             centerLabelComponent={() => (
               <Lead className="text-center align-middle">
