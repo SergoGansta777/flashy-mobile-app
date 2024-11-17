@@ -24,11 +24,11 @@ const TopBar = ({
       />
     </Button>
     {totalCards === 0 ? (
-      <P className="text-center align-bottom font-semibold text-muted-foreground">
+      <P className="pt-2 text-center align-bottom font-semibold text-muted-foreground">
         It's empty
       </P>
     ) : (
-      <P className="text-center align-bottom font-semibold text-muted-foreground">
+      <P className="pt-2 text-center align-bottom font-semibold text-muted-foreground">
         {totalSwiped} / {totalCards}
       </P>
     )}
