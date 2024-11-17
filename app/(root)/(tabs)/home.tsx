@@ -17,7 +17,7 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView className="h-full">
+    <SafeAreaView className="h-full bg-background">
       <View className="my-2 px-10">
         <H1>{appName}</H1>
       </View>

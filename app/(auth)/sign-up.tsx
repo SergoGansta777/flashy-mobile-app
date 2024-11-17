@@ -16,7 +16,7 @@ const SignUp = () => {
   });
 
   return (
-    <ScrollView className="flex-1">
+    <ScrollView className="flex-1 bg-background">
       <View className="flex-1">
         <View className="relative h-[250px] w-full">
           <Image source={images.logupHeader} className="z-0 h-[250px] w-full" />

@@ -15,7 +15,7 @@ const Welcome = () => {
     [activeIndex],
   );
   return (
-    <SafeAreaView className="flex h-full items-center justify-between">
+    <SafeAreaView className="flex h-full items-center justify-between bg-background">
       <TouchableOpacity
         onPress={() => {
           router.replace("/(auth)/sign-up");

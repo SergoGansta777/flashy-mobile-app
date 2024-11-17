@@ -19,7 +19,7 @@ const SignIn = () => {
   if (isSignedIn) return <Redirect href="/(root)/(tabs)/home" />;
 
   return (
-    <ScrollView className="h-full flex-1">
+    <ScrollView className="h-full flex-1 bg-background">
       <View className="h-full flex-1">
         <View className="relative h-[250px] w-full">
           <Image source={images.loginHeader} className="z-0 h-[250px] w-full" />

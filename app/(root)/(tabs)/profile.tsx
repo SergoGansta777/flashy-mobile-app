@@ -5,7 +5,7 @@ import { SafeAreaView, Text, View } from "react-native";
 
 const Profile = () => {
   return (
-    <SafeAreaView className="flex flex-col items-center justify-start">
+    <SafeAreaView className="flex flex-col items-center justify-start bg-background">
       <View className="flex items-center">
         <Avatar alt="user avatar">
           <AvatarImage source={{ uri: "" }} />
