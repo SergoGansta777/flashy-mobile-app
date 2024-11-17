@@ -1,3 +1,4 @@
+import CompletedDeck from '@/components/completed-deck'
 import TopBar from '@/components/deck-card-top-bar'
 import ProgressBar from '@/components/progress-bar'
 import SwipeCounterBar from '@/components/swipe-counter-bar'
@@ -5,7 +6,7 @@ import SwippableDeck from '@/components/swippable-deck'
 import { cardDeck } from '@/constants'
 import { useLocalSearchParams } from 'expo-router'
 import React, { useState } from 'react'
-import { SafeAreaView, Text, View } from 'react-native'
+import { SafeAreaView } from 'react-native'
 
 const DeckDetail = () => {
 	const { id } = useLocalSearchParams()
@@ -19,12 +20,12 @@ const DeckDetail = () => {
 	const totalSwiped = rightSwipedIds.length + leftSwipedIds.length
 
 	return (
-		<SafeAreaView className='h-full w-full px-4 flex flex-col items-center'>
+		<SafeAreaView className='px-4 flex flex-1 flex-col items-center'>
 			<TopBar totalSwiped={totalSwiped} totalCards={totalCards} />
-			<ProgressBar value={totalSwiped} total={totalCards} />
 
 			{totalSwiped !== totalCards ? (
 				<>
+					<ProgressBar value={totalSwiped} total={totalCards} />
 					<SwipeCounterBar
 						leftCounter={leftSwipedIds.length}
 						rightCounter={rightSwipedIds.length}
@@ -40,9 +41,11 @@ const DeckDetail = () => {
 					/>
 				</>
 			) : (
-				<View className='flex items-center justify-center h-full'>
-					<Text>Hello</Text>
-				</View>
+				<CompletedDeck
+					known={rightSwipedIds.length}
+					stillLearning={leftSwipedIds.length}
+					total={totalCards}
+				/>
 			)}
 		</SafeAreaView>
 	)
