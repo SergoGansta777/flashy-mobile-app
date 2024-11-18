@@ -1,7 +1,7 @@
 import DeckCard from "@/components/deck-card";
 import TopBar from "@/components/home-top-bar";
 import { appName, initialCardDecks } from "@/constants";
-import { CardDeckMetadata } from "@/types";
+import type { CardDeckMetadata } from "@/types";
 import * as Haptics from "expo-haptics";
 import React, { useState } from "react";
 import { FlatList, SafeAreaView } from "react-native";

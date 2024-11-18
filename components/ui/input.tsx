@@ -12,6 +12,7 @@ import {
 } from "react-native";
 
 type InputProps = TextInputProps & {
+  // biome-ignore lint/suspicious/noExplicitAny:
   icon?: any;
 };
 

@@ -54,6 +54,7 @@ const DropdownMenuSubTrigger = React.forwardRef<
         )}
         {...props}
       >
+        {/* biome-ignore lint/complexity/noUselessFragments: <explanation> */}
         <>{children}</>
         <Icon size={18} className="ml-auto text-foreground" />
       </DropdownMenuPrimitive.SubTrigger>
@@ -171,6 +172,7 @@ const DropdownMenuCheckboxItem = React.forwardRef<
         <Check size={14} strokeWidth={3} className="text-foreground" />
       </DropdownMenuPrimitive.ItemIndicator>
     </View>
+    {/* biome-ignore lint/complexity/noUselessFragments: <explanation> */}
     <>{children}</>
   </DropdownMenuPrimitive.CheckboxItem>
 ));
@@ -195,6 +197,7 @@ const DropdownMenuRadioItem = React.forwardRef<
         <View className="h-2 w-2 rounded-full bg-foreground" />
       </DropdownMenuPrimitive.ItemIndicator>
     </View>
+    {/* biome-ignore lint/complexity/noUselessFragments: <explanation> */}
     <>{children}</>
   </DropdownMenuPrimitive.RadioItem>
 ));
