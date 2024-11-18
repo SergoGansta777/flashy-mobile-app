@@ -6,9 +6,9 @@ import {
   KeyboardAvoidingView,
   Platform,
   TextInput,
+  type TextInputProps,
   TouchableWithoutFeedback,
   View,
-  type TextInputProps,
 } from "react-native";
 
 type InputProps = TextInputProps & {
@@ -29,7 +29,7 @@ const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
                   name={icon}
                   size={24}
                   className="ml-4"
-                  color="gray"
+                  color="#64738B"
                 />
               )}
 

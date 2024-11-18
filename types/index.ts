@@ -17,3 +17,8 @@ export type CardDeckContent = {
   deckId: number;
   cards: FlashCard[];
 };
+
+export type SortOption<T> = {
+  label: string;
+  sortFunction: (a: T, b: T) => number;
+};
