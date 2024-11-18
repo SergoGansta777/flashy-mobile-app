@@ -25,12 +25,12 @@ const Profile = () => {
   return (
     <SafeAreaView className="relative flex h-full w-full flex-col items-center bg-background">
       {/* Settings Icon */}
-      <View className={`absolute right-0 top-0 mt-16 ${sectionPadding}`}>
-        <Fontisto name="player-settings" size={24} color="black" />
+      <View className={`ml-auto mt-2 ${sectionPadding}`}>
+        <Fontisto name="player-settings" size={22} color="black" />
       </View>
 
       {/* User Profile */}
-      <View className="mt-16 flex items-center">
+      <View className="mt-8 flex items-center">
         <View className="flex h-24 w-24 items-center justify-center rounded-full bg-secondary">
           {avatarUrl ? (
             <img src={avatarUrl} alt="avatar" className="rounded-full" />
