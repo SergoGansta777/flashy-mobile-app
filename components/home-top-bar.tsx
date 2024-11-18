@@ -76,13 +76,13 @@ const TopBar = <T,>({
       </View>
 
       {/* Search Input and Sort Dropdown */}
-      <View className="mt-2 flex w-full flex-row items-center justify-between">
+      <View className="mt-2 flex w-full flex-row items-center gap-4">
         <Input
           icon="search1"
           placeholder="Decks, terms, definitions"
-          className="w-3/4"
-          value={searchQuery} // Bind value to the state
-          onChangeText={handleSearchChange} // Handle search query change
+          className="w-[75%]"
+          value={searchQuery}
+          onChangeText={handleSearchChange}
         />
 
         {/* Dropdown Menu for Sorting */}
@@ -91,7 +91,7 @@ const TopBar = <T,>({
             <Button
               variant="ghost"
               size="sm"
-              className="flex flex-row items-center px-0"
+              className="flex flex-row items-center px-2"
             >
               <Octicons
                 name={`${sortDirection === "asc" ? "sort-asc" : "sort-desc"}`}
