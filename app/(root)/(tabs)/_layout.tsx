@@ -43,7 +43,7 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="new-card"
+        name="new-deck"
         options={{
           title: "New",
           headerShown: false,

@@ -1,7 +1,7 @@
 import TopBar from "@/components/deck-card-top-bar";
 import EmptyDeck from "@/components/empty-deck";
 import LearnCards from "@/components/learn-cards";
-import { cardDeck } from "@/constants";
+import { initialCardDecks } from "@/constants";
 import { useLocalSearchParams } from "expo-router";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native";
@@ -9,7 +9,7 @@ import { SafeAreaView } from "react-native";
 const DeckDetail = () => {
   const { id } = useLocalSearchParams();
   const deckId = Number(id);
-  const deckContent = cardDeck.find((item) => item.deckId === deckId);
+  const deckContent = initialCardDecks.find((item) => item.id === deckId);
 
   const [rightSwipedIds, setRightSwipedIds] = useState<number[]>([]);
   const [leftSwipedIds, setLeftSwipedIds] = useState<number[]>([]);

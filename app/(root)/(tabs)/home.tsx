@@ -1,14 +1,13 @@
 import DeckCard from "@/components/deck-card";
 import TopBar from "@/components/home-top-bar";
 import { appName, initialCardDecks } from "@/constants";
-import type { CardDeckMetadata } from "@/types";
+import type { CardDeck } from "@/types";
 import * as Haptics from "expo-haptics";
 import React, { useState } from "react";
 import { FlatList, SafeAreaView } from "react-native";
 
 const Home = () => {
-  const [cardDecks, setCardDecks] =
-    useState<CardDeckMetadata[]>(initialCardDecks);
+  const [cardDecks, setCardDecks] = useState<CardDeck[]>(initialCardDecks);
 
   const handleToggleFavorite = (id: number) => {
     setCardDecks((prev) =>
@@ -22,23 +21,22 @@ const Home = () => {
   const sortOptions = [
     {
       label: "Created at",
-      sortFunction: (a: CardDeckMetadata, b: CardDeckMetadata) =>
+      sortFunction: (a: CardDeck, b: CardDeck) =>
         new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     },
     {
       label: "Favorite",
-      sortFunction: (a: CardDeckMetadata, b: CardDeckMetadata) =>
+      sortFunction: (a: CardDeck, b: CardDeck) =>
         Number(b.isFavorite) - Number(a.isFavorite),
     },
     {
       label: "Terms",
-      sortFunction: (a: CardDeckMetadata, b: CardDeckMetadata) =>
-        b.cardsCount - a.cardsCount,
+      sortFunction: (a: CardDeck, b: CardDeck) =>
+        b.cards.length - a.cards.length,
     },
     {
       label: "Name",
-      sortFunction: (a: CardDeckMetadata, b: CardDeckMetadata) =>
-        a.name.localeCompare(b.name),
+      sortFunction: (a: CardDeck, b: CardDeck) => a.name.localeCompare(b.name),
     },
   ];
 
@@ -63,7 +61,7 @@ const Home = () => {
         className="mb-18 overflow-hidden rounded-t-2xl"
         renderItem={({ item }) => (
           <DeckCard
-            deckMetadata={item}
+            deck={item}
             handleToggleFavorite={() => handleToggleFavorite(item.id)}
           />
         )}

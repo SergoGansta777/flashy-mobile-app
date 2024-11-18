@@ -1,21 +1,16 @@
-export type CardDeckMetadata = {
+export type CardDeck = {
   id: number;
-  cardsCount: number;
   userId: number;
   name: string;
   createdAt: Date;
   repeatedAt: Date;
   isFavorite: boolean;
+  cards: FlashCard[];
 };
 
 export type FlashCard = {
   term: string;
   answer: string;
-};
-
-export type CardDeckContent = {
-  deckId: number;
-  cards: FlashCard[];
 };
 
 export type SortOption<T> = {

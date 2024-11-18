@@ -1,4 +1,4 @@
-import type { CardDeckMetadata } from "@/types";
+import type { CardDeck } from "@/types";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Link } from "expo-router";
 import type React from "react";
@@ -14,14 +14,11 @@ import {
 import { H4, Small } from "./ui/typography";
 
 type DeckCardProps = {
-  deckMetadata: CardDeckMetadata;
+  deck: CardDeck;
   handleToggleFavorite: () => void;
 };
 
-const DeckCard: React.FC<DeckCardProps> = ({
-  deckMetadata,
-  handleToggleFavorite,
-}) => {
+const DeckCard: React.FC<DeckCardProps> = ({ deck, handleToggleFavorite }) => {
   const insets = useSafeAreaInsets();
   const contentInsets = {
     top: insets.top,
@@ -36,32 +33,27 @@ const DeckCard: React.FC<DeckCardProps> = ({
         asChild
         href={{
           pathname: "/deck/[id]",
-          params: { id: deckMetadata.id },
+          params: { id: deck.id },
         }}
       >
         <ContextMenuTrigger>
           <Card className="mx-6 mt-3">
             <CardHeader>
               <View className="flex flex-row items-start justify-between">
-                <H4 className="font-medium">{deckMetadata.name}</H4>
-                <TouchableOpacity
-                  key={deckMetadata.id}
-                  onPress={handleToggleFavorite}
-                >
+                <H4 className="font-medium">{deck.name}</H4>
+                <TouchableOpacity key={deck.id} onPress={handleToggleFavorite}>
                   <AntDesign
-                    name={deckMetadata.isFavorite ? "star" : "staro"}
+                    name={deck.isFavorite ? "star" : "staro"}
                     size={22}
                   />
                 </TouchableOpacity>
               </View>
 
-              <CardDescription>
-                Terms: {deckMetadata.cardsCount}
-              </CardDescription>
+              <CardDescription>Terms: {deck.cards.length}</CardDescription>
             </CardHeader>
             <CardContent>
               <Small className="text-muted-foreground">
-                Created at {deckMetadata.createdAt.toLocaleDateString()}
+                Created at {deck.createdAt.toLocaleDateString()}
               </Small>
             </CardContent>
           </Card>
