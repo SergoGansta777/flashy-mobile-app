@@ -1,20 +1,26 @@
 import DeckCard from "@/components/deck-card";
 import TopBar from "@/components/home-top-bar";
-import { appName, initialCardDecks } from "@/constants";
+import { appName } from "@/constants";
+import { useDeckStore } from "@/store";
 import type { CardDeck } from "@/types";
 import * as Haptics from "expo-haptics";
-import React, { useState } from "react";
+import React from "react";
 import { FlatList, SafeAreaView } from "react-native";
 
 const Home = () => {
-  const [cardDecks, setCardDecks] = useState<CardDeck[]>(initialCardDecks);
+  const decks = useDeckStore((state) => state.decks);
+  const addDeck = useDeckStore((state) => state.addDeck);
+  const deleteDeck = useDeckStore((state) => state.deleteDeck);
+  const toggleFavorite = useDeckStore((state) => state.toggleFavorite);
 
-  const handleToggleFavorite = (id: number) => {
-    setCardDecks((prev) =>
-      prev.map((deck) =>
-        deck.id === id ? { ...deck, isFavorite: !deck.isFavorite } : deck,
-      ),
-    );
+  const [cardDecks, setCardDecks] = React.useState(decks);
+
+  React.useEffect(() => {
+    setCardDecks(decks);
+  }, [decks]);
+
+  const handleToggleFavorite = (deckId: number) => {
+    toggleFavorite(deckId);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   };
 
@@ -41,8 +47,8 @@ const Home = () => {
   ];
 
   const filterItems = (query: string) => {
-    if (!query) return initialCardDecks;
-    return initialCardDecks.filter((item) =>
+    if (!query) return decks;
+    return decks.filter((item) =>
       item.name.toLowerCase().includes(query.toLowerCase()),
     );
   };
