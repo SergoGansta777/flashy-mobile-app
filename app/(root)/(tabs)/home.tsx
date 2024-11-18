@@ -1,7 +1,7 @@
 import DeckCard from "@/components/deck-card";
 import TopBar from "@/components/home-top-bar";
 import { appName, initialCardDecks } from "@/constants";
-import type { CardDeckMetadata } from "@/types";
+import { CardDeckMetadata } from "@/types";
 import * as Haptics from "expo-haptics";
 import React, { useState } from "react";
 import { FlatList, SafeAreaView } from "react-native";
@@ -42,6 +42,13 @@ const Home = () => {
     },
   ];
 
+  const filterItems = (query: string) => {
+    if (!query) return initialCardDecks;
+    return initialCardDecks.filter((item) =>
+      item.name.toLowerCase().includes(query.toLowerCase()),
+    );
+  };
+
   return (
     <SafeAreaView className="h-full w-full bg-background">
       <TopBar
@@ -49,6 +56,7 @@ const Home = () => {
         items={cardDecks}
         setItems={setCardDecks}
         sortOptions={sortOptions}
+        filterItems={filterItems}
       />
       <FlatList
         data={cardDecks}
