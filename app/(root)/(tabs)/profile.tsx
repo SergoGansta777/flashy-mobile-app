@@ -4,7 +4,7 @@ import {
   CardDescription,
   CardHeader,
 } from "@/components/ui/card";
-import { BlockQuote, H4, Large, P } from "@/components/ui/typography";
+import { BlockQuote, H4, Large, Lead, P } from "@/components/ui/typography";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import React from "react";
 import { SafeAreaView, View } from "react-native";
@@ -20,7 +20,7 @@ const Profile = () => {
 
   // Reusable styles
   const sectionPadding = "px-10";
-  const cardPadding = "-mt-6 mb-4 pl-7";
+  const cardPadding = "-mt-6 mb-4 pl-6";
 
   return (
     <SafeAreaView className="relative flex h-full w-full flex-col items-center bg-background">
@@ -55,7 +55,7 @@ const Profile = () => {
           <CardDescription className={cardPadding}>
             Some statistics
           </CardDescription>
-          <CardContent className="mx-auto">
+          <CardContent>
             <P>Reviewed - 17</P>
             <P>Remembered - 10</P>
             <P>New - 14</P>
@@ -68,7 +68,7 @@ const Profile = () => {
             <H4>Today</H4>
           </CardHeader>
           <CardDescription className={cardPadding}>Learn time</CardDescription>
-          <CardContent className="mx-auto">
+          <CardContent>
             <Large className="mt-4 font-normal">50 min</Large>
           </CardContent>
         </Card>
@@ -83,10 +83,10 @@ const Profile = () => {
           <CardDescription className={cardPadding}>
             Track your top actions here
           </CardDescription>
-          <CardContent className="mx-auto mt-10">
+          <CardContent className="mt-10">
             {isNoneAchievements ? (
               <>
-                <H4 className="text-center">No achievements yet! 📚✨</H4>
+                <Lead>No achievements yet! 📚✨</Lead>
                 <BlockQuote>
                   "Keep practicing with your flashcards to unlock new
                   achievements. Learning is a journey—start earning rewards
