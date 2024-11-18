@@ -20,7 +20,7 @@ type TopBarProps<T> = {
   items: T[];
   setItems: (items: T[]) => void;
   sortOptions: SortOption<T>[];
-  filterItems: (query: string) => T[]; // Add a filter function
+  filterItems: (query: string) => T[];
 };
 
 const TopBar = <T,>({

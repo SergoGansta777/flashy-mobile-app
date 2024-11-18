@@ -11,7 +11,7 @@ import {
   ContextMenuItem,
   ContextMenuTrigger,
 } from "./ui/context-menu";
-import { H4, Small } from "./ui/typography";
+import { H2, Small } from "./ui/typography";
 
 type DeckCardProps = {
   deck: CardDeck;
@@ -40,7 +40,9 @@ const DeckCard: React.FC<DeckCardProps> = ({ deck, handleToggleFavorite }) => {
           <Card className="mx-6 mt-3">
             <CardHeader>
               <View className="flex flex-row items-start justify-between">
-                <H4 className="font-medium">{deck.name}</H4>
+                <H2 className="border-b-0 pb-1.5 font-medium tracking-wide">
+                  {deck.name}
+                </H2>
                 <TouchableOpacity key={deck.id} onPress={handleToggleFavorite}>
                   <AntDesign
                     name={deck.isFavorite ? "star" : "staro"}
