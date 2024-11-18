@@ -59,10 +59,7 @@ function Indicator({
   if (Platform.OS === "web") {
     return (
       <View
-        className={cn(
-          "h-full w-full flex-1 bg-primary web:transition-all",
-          className,
-        )}
+        className={cn("h-full w-full flex-1 bg-primary", className)}
         style={{ transform: `translateX(-${100 - (value ?? 0)}%)` }}
       >
         <ProgressPrimitive.Indicator

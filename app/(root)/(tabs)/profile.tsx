@@ -42,11 +42,9 @@ const Profile = () => {
         </H4>
       </View>
 
-      {/* Statistics Section */}
       <View
         className={`mt-6 flex w-full flex-row items-center justify-center gap-4 ${sectionPadding}`}
       >
-        {/* Weekly Stats Card */}
         <Card className="w-3/5">
           <CardHeader>
             <H4>On this week</H4>
@@ -61,7 +59,6 @@ const Profile = () => {
           </CardContent>
         </Card>
 
-        {/* Daily Stats Card */}
         <Card className="h-full w-2/5">
           <CardHeader>
             <H4>Today</H4>
@@ -73,7 +70,6 @@ const Profile = () => {
         </Card>
       </View>
 
-      {/* Achievements Section */}
       <View className="h-80 w-full px-8 pt-4">
         <Card className="h-full">
           <CardHeader>
