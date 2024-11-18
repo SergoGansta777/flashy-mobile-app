@@ -3,7 +3,7 @@ export type CardDeck = {
   userId: number;
   name: string;
   createdAt: Date;
-  repeatedAt: Date;
+  repeatedAt?: Date;
   isFavorite: boolean;
   cards: FlashCard[];
 };

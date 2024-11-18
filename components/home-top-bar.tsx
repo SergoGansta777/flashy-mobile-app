@@ -31,7 +31,7 @@ const TopBar = <T,>({
 }: TopBarProps<T>) => {
   const [sortOption, setSortOption] = useState(sortOptions[0].label);
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
-  const [searchQuery, setSearchQuery] = useState<string>(""); // State to store search query
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const insets = useSafeAreaInsets();
 
   const handleSortChange = (option: SortOption<T>) => {
@@ -94,7 +94,7 @@ const TopBar = <T,>({
               className="flex flex-row items-center px-2"
             >
               <Octicons
-                name={`${sortDirection === "asc" ? "sort-asc" : "sort-desc"}`}
+                name={`${sortDirection === "desc" ? "sort-asc" : "sort-desc"}`}
                 size={22}
                 color="#64738B"
               />
