@@ -77,18 +77,28 @@ const CompletedDeck: React.FC<CompletedDeckProps> = ({
       </View>
 
       {/* Congratulatory Message or Review Button */}
-      {stillLearning === 0 ? (
+      {stillLearning === 0 && known === total ? (
         <View className="mt-24 w-3/4">
           <P className="text-center text-4xl font-semibold">Congratulations!</P>
           <Lead className="mt-1 text-center">You remember them all.</Lead>
         </View>
       ) : (
-        <Button className="absolute bottom-40 w-full" size="lg">
-          <Large className="font-medium text-primary-foreground">
-            Keep reviewing {stillLearning}{" "}
-            {stillLearning === 1 ? "term" : "terms"}
-          </Large>
-        </Button>
+        <>
+          {stillLearning === total && (
+            <View className="mt-20 w-3/4">
+              <P className="text-center text-4xl font-semibold">Keep Going!</P>
+              <Lead className="mt-1 text-center">
+                Each attempt brings you closer!
+              </Lead>
+            </View>
+          )}
+          <Button className="absolute bottom-40 w-full" size="lg">
+            <Large className="font-medium text-primary-foreground">
+              Keep reviewing {stillLearning}{" "}
+              {stillLearning === 1 ? "term" : "terms"}
+            </Large>
+          </Button>
+        </>
       )}
 
       {/* Restart Button */}
