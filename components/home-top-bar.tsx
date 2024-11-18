@@ -76,11 +76,11 @@ const TopBar = <T,>({
       </View>
 
       {/* Search Input and Sort Dropdown */}
-      <View className="mt-2 flex w-full flex-row items-center gap-4">
+      <View className="-ml-4 mt-2 flex w-full flex-row items-center gap-4">
         <Input
           icon="search1"
           placeholder="Decks, terms, definitions"
-          className="w-[75%]"
+          className="w-4/5"
           value={searchQuery}
           onChangeText={handleSearchChange}
         />
