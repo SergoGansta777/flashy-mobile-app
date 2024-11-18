@@ -30,7 +30,7 @@ const Profile = () => {
       </View>
 
       {/* User Profile */}
-      <View className="mt-8 flex items-center">
+      <View className="mt-16 flex items-center">
         <View className="flex h-24 w-24 items-center justify-center rounded-full bg-secondary">
           {avatarUrl ? (
             <img src={avatarUrl} alt="avatar" className="rounded-full" />
@@ -38,7 +38,7 @@ const Profile = () => {
             <Large className="text-3xl">SN</Large>
           )}
         </View>
-        <H4 className="mt-6">
+        <H4 className="mb-4 mt-6">
           {name} {lastName}
         </H4>
       </View>
