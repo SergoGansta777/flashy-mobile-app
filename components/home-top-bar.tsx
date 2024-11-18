@@ -1,6 +1,7 @@
 import type { SortOption } from "@/types";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Octicons from "@expo/vector-icons/Octicons";
+import * as Haptics from "expo-haptics";
 import React, { useState } from "react";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -53,6 +54,7 @@ const TopBar = <T,>({
 
     // Update the items state with the sorted items
     setItems(sortedItems);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Rigid);
   };
 
   const handleSearchChange = (query: string) => {

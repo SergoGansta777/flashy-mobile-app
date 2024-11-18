@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { Small } from "@/components/ui/typography";
 import type { CardDeck } from "@/types";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import * as Haptics from "expo-haptics";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
@@ -25,6 +26,7 @@ const NewDeck = () => {
       ...prev,
       cards: [...prev.cards, { term: "", answer: "" }],
     }));
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
   };
 
   const handleUpdateCard = (
