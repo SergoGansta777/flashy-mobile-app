@@ -6,6 +6,7 @@ import { createJSONStorage, devtools, persist } from "zustand/middleware";
 
 type DeckStore = {
   decks: CardDeck[];
+  currentDeckId: number | null;
   addDeck: (deck: CardDeck) => void;
   deleteDeck: (deckId: number) => void;
   updateDeck: (deckId: number, updatedDeck: Partial<CardDeck>) => void;
@@ -17,6 +18,7 @@ type DeckStore = {
     updatedCard: Partial<FlashCard>,
   ) => void;
   deleteCard: (deckId: number, cardIndex: number) => void;
+  setCurrentDeck: (deckId: number) => void;
 };
 
 export const useDeckStore = create<DeckStore>()(
@@ -24,17 +26,28 @@ export const useDeckStore = create<DeckStore>()(
     persist(
       (set, get) => ({
         decks: initialCardDecks,
+        currentDeckId: null,
 
         addDeck: (deck: CardDeck) => {
           set((state) => ({
             decks: [...state.decks, deck],
+            currentDeckId: deck.id,
           }));
         },
 
         deleteDeck: (deckId: number) => {
-          set((state) => ({
-            decks: state.decks.filter((deck) => deck.id !== deckId),
-          }));
+          set((state) => {
+            const newDecks = state.decks.filter((deck) => deck.id !== deckId);
+            return {
+              decks: newDecks,
+              currentDeckId:
+                state.currentDeckId === deckId
+                  ? newDecks.length > 0
+                    ? newDecks[0].id
+                    : null
+                  : state.currentDeckId,
+            };
+          });
         },
 
         updateDeck: (deckId: number, updatedDeck: Partial<CardDeck>) => {
@@ -95,6 +108,13 @@ export const useDeckStore = create<DeckStore>()(
                 : deck,
             ),
           }));
+        },
+
+        setCurrentDeck: (deckId: number) => {
+          const deckExists = get().decks.some((deck) => deck.id === deckId);
+          if (deckExists) {
+            set({ currentDeckId: deckId });
+          }
         },
       }),
       {

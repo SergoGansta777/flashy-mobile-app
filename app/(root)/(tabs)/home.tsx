@@ -1,7 +1,7 @@
 import DeckCard from "@/components/deck-card";
 import TopBar from "@/components/home-top-bar";
 import { appName } from "@/constants";
-import { useDeckStore } from "@/store";
+import { useDeckStore } from "@/store/deck-store";
 import type { CardDeck } from "@/types";
 import * as Haptics from "expo-haptics";
 import React from "react";
@@ -12,6 +12,7 @@ const Home = () => {
   const decks = useDeckStore((state) => state.decks);
   const deleteDeck = useDeckStore((state) => state.deleteDeck);
   const toggleFavorite = useDeckStore((state) => state.toggleFavorite);
+  const setCurrentDeck = useDeckStore((state) => state.setCurrentDeck);
 
   const [cardDecks, setCardDecks] = React.useState(decks);
 
@@ -31,6 +32,10 @@ const Home = () => {
 
   const handleEdit = (deckId: number) => {
     console.log("not implemented yet, edit action for deckId", deckId);
+  };
+
+  const handleChangeCurrentDeck = (deckId: number) => {
+    setCurrentDeck(deckId);
   };
 
   const sortOptions = [
@@ -81,6 +86,7 @@ const Home = () => {
               handleToggleFavorite={handleToggleFavorite}
               handleDelete={handleDelete}
               handleEdit={handleEdit}
+              handleChangeCurrentDeck={handleChangeCurrentDeck}
             />
           )}
           ListFooterComponent={<View className="h-24" />}

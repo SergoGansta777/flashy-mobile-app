@@ -16,6 +16,7 @@ type DeckCardProps = {
   handleToggleFavorite: (id: number) => void;
   handleDelete: (id: number) => void;
   handleEdit: (id: number) => void;
+  handleChangeCurrentDeck: (id: number) => void;
 };
 
 const DeckCard: React.FC<DeckCardProps> = ({
@@ -23,6 +24,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
   handleToggleFavorite,
   handleDelete,
   handleEdit,
+  handleChangeCurrentDeck,
 }) => {
   const swipeRef = useRef<SwipeableMethods>(null);
   const [isSwiping, setIsSwiping] = useState(false);
@@ -92,9 +94,9 @@ const DeckCard: React.FC<DeckCardProps> = ({
         activeOpacity={1}
         onPress={() => {
           if (!isSwiping) {
+            handleChangeCurrentDeck(deck.id);
             router.push({
-              pathname: "/deck/[id]",
-              params: { id: deck.id },
+              pathname: "/deck/learn",
             });
           }
         }}
