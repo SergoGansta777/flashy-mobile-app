@@ -1,6 +1,7 @@
 import TopBar from "@/components/deck-card-top-bar";
 import EmptyDeck from "@/components/empty-deck";
 import LearnCards from "@/components/learn-cards";
+import { shuffle } from "@/lib/utils";
 import { useDeckStore } from "@/store/deck-store";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native";
@@ -23,7 +24,7 @@ const DeckLearn = () => {
 
       {totalCards > 0 ? (
         <LearnCards
-          cards={deck?.cards || []}
+          cards={shuffle(deck?.cards || [])}
           totalSwiped={totalSwiped}
           totalCards={totalCards}
           known={rightSwipedIds.length}
