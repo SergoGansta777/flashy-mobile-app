@@ -6,7 +6,7 @@ import type React from "react";
 import { useRef, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Swipeable, {
-  SwipeableMethods,
+  type SwipeableMethods,
 } from "react-native-gesture-handler/ReanimatedSwipeable";
 import { Card, CardContent, CardDescription, CardHeader } from "./ui/card";
 import { H2, Small } from "./ui/typography";
