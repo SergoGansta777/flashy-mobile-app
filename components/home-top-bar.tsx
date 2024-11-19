@@ -109,7 +109,7 @@ const TopBar = <T,>({
                 onPress={() => handleSortChange(option)}
               >
                 <Small
-                  className={`${option.label === sortOption ? "font-bold" : ""}`}
+                  className={`text-md px-0.5 py-1 ${option.label === sortOption ? "font-bold" : ""}`}
                 >
                   {option.label}
                 </Small>
