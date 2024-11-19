@@ -48,7 +48,7 @@ const FlippableCard: React.FC<FlippableCardProps> = ({ card }) => {
 
   return (
     <Pressable
-      onPress={handlePress}
+      onLongPress={handlePress}
       className="flex items-center justify-center"
     >
       {/* Front Side of the Card */}
