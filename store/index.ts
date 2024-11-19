@@ -1,7 +1,8 @@
 import { initialCardDecks } from "@/constants";
 import type { CardDeck, FlashCard } from "@/types";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import { createJSONStorage, devtools, persist } from "zustand/middleware";
 
 type DeckStore = {
   decks: CardDeck[];
@@ -96,7 +97,11 @@ export const useDeckStore = create<DeckStore>()(
           }));
         },
       }),
-      { name: "deck-storage", version: 1 },
+      {
+        name: "deck-storage",
+        version: 1,
+        storage: createJSONStorage(() => AsyncStorage),
+      },
     ),
   ),
 );
