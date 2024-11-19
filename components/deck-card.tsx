@@ -22,7 +22,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
   handleEdit,
 }) => {
   const renderRightActions = () => (
-    <View className="mr-3 mt-3 flex w-32 flex-col items-center justify-center bg-none px-4">
+    <View className="my-3 mr-3 flex w-32 flex-col items-center justify-center bg-none px-4">
       <TouchableOpacity
         className="item-center mx-auto mr-8 flex h-full w-full flex-col justify-center rounded-2xl bg-primary px-3"
         onPress={() => {
@@ -42,7 +42,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
   );
 
   const renderLeftActions = () => (
-    <View className="-mr-1 ml-2 mt-3 flex w-44 flex-row items-center justify-center gap-3 bg-none px-4">
+    <View className="my-3 -mr-1 ml-2 flex w-48 flex-row items-center justify-center gap-3 bg-none px-4">
       <TouchableOpacity
         className="item-center mx-auto flex h-full w-1/2 flex-col justify-center rounded-2xl bg-secondary px-3"
         onPress={() => {
@@ -86,7 +86,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
           params: { id: deck.id },
         }}
       >
-        <Card className="mx-6 mt-3">
+        <Card className="mx-6 my-2">
           <CardHeader>
             <View className="flex flex-row items-start justify-between">
               <H2 className="border-b-0 pb-1.5 font-medium tracking-wide">

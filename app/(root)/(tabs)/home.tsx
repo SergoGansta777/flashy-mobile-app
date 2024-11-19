@@ -74,7 +74,7 @@ const Home = () => {
         />
         <FlatList
           data={cardDecks}
-          className="mb-18 overflow-hidden rounded-t-2xl"
+          className="mb-18 rounded-t-2xl"
           renderItem={({ item: deck }) => (
             <DeckCard
               deck={deck}
