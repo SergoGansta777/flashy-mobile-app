@@ -9,6 +9,7 @@ export type CardDeck = {
 };
 
 export type FlashCard = {
+  id: number;
   term: string;
   answer: string;
 };

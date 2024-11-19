@@ -26,7 +26,7 @@ const NewDeck = () => {
     userId: 23,
     name: "",
     isFavorite: false,
-    cards: [{ term: "", answer: "" }],
+    cards: [{ id: 0, term: "", answer: "" }],
     createdAt: new Date(),
     repeatedAt: new Date(),
   });
@@ -34,9 +34,17 @@ const NewDeck = () => {
   const handleAddNewCard = () => {
     setNewDeck((prev) => ({
       ...prev,
-      cards: [...prev.cards, { term: "", answer: "" }],
+      cards: [...prev.cards, { id: prev.cards.length, term: "", answer: "" }],
     }));
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+  };
+
+  const handleDeleteCard = (cardId: number) => {
+    setNewDeck((prev) => ({
+      ...prev,
+      cards: prev.cards.filter((x) => x.id !== cardId),
+    }));
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
   };
 
   const handleUpdateCard = (
@@ -93,14 +101,17 @@ const NewDeck = () => {
           <GestureHandlerRootView className="h-ful w-full">
             <FlatList
               data={newDeck.cards}
-              keyExtractor={(_, index) => index.toString()}
+              keyExtractor={(card, _) => card.id.toString()}
               className="w-full bg-background"
               renderItem={({ item: card, index }) => (
                 <Swipeable
                   ref={swipeRef}
                   renderRightActions={() => (
                     <View className="mr-4 flex h-full w-28 flex-col items-center justify-center rounded-2xl py-4">
-                      <TouchableOpacity className="mr-2 flex h-full items-center justify-center rounded-2xl bg-destructive px-6">
+                      <TouchableOpacity
+                        className="mr-2 flex h-full items-center justify-center rounded-2xl bg-destructive px-6"
+                        onPress={() => handleDeleteCard(card.id)}
+                      >
                         <AntDesign
                           name="minuscircleo"
                           size={24}

@@ -19,21 +19,21 @@ export const images = {
 
 export const onboarding = [
   {
-    id: 1,
+    id: 0,
     title: "Master Any Subject, One Card at a Time!",
     description:
       "Begin your learning journey by creating personalized flashcards and quizzes to fit your study goals.",
     image: images.onboarding1,
   },
   {
-    id: 2,
+    id: 1,
     title: "Learn Faster, Retain Better",
     description:
       "Use smart learning techniques like spaced repetition to ensure you remember what you study.",
     image: images.onboarding2,
   },
   {
-    id: 3,
+    id: 2,
     title: "Ready to Ace Your Next Exam? Let's Go!",
     description:
       "Dive into your flashcard sets, track your progress, and get ready to achieve your learning targets!",
@@ -51,16 +51,19 @@ export const initialCardDecks: CardDeck[] = [
     isFavorite: true,
     cards: [
       {
+        id: 0,
         term: "Newton’s First Law",
         answer:
           "An object in motion stays in motion unless acted upon by an external force.",
       },
       {
+        id: 1,
         term: "Photosynthesis",
         answer:
           "The process by which green plants use sunlight to synthesize foods from carbon dioxide and water.",
       },
       {
+        id: 2,
         term: "Pythagorean Theorem",
         answer:
           "In a right triangle, the square of the hypotenuse is equal to the sum of the squares of the other two sides.",
@@ -76,16 +79,19 @@ export const initialCardDecks: CardDeck[] = [
     isFavorite: true,
     cards: [
       {
+        id: 0,
         term: "Mitochondria",
         answer:
           "The powerhouse of the cell, generating most of the cell’s supply of ATP.",
       },
       {
+        id: 1,
         term: "DNA",
         answer:
           "Deoxyribonucleic acid, the molecule that carries genetic information in living organisms.",
       },
       {
+        id: 2,
         term: "Genotype",
         answer: "The genetic constitution of an individual organism.",
       },
@@ -100,16 +106,19 @@ export const initialCardDecks: CardDeck[] = [
     isFavorite: true,
     cards: [
       {
+        id: 0,
         term: "The Great Wall of China",
         answer:
           "A series of fortifications made of stone, brick, and other materials built to protect China from invasions.",
       },
       {
+        id: 1,
         term: "Renaissance",
         answer:
           "A period in European history marking the transition from the Middle Ages to modernity.",
       },
       {
+        id: 2,
         term: "Industrial Revolution",
         answer:
           "The period of rapid industrial growth that began in the late 18th century.",
@@ -125,16 +134,19 @@ export const initialCardDecks: CardDeck[] = [
     isFavorite: true,
     cards: [
       {
+        id: 0,
         term: "Algorithm",
         answer:
           "A step-by-step procedure for solving a problem or performing a task.",
       },
       {
+        id: 1,
         term: "Binary Search",
         answer:
           "An efficient algorithm for finding an item in a sorted list by repeatedly dividing the search interval in half.",
       },
       {
+        id: 2,
         term: "Recursion",
         answer:
           "A method where the solution to a problem depends on solutions to smaller instances of the same problem.",
