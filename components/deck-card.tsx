@@ -1,10 +1,13 @@
 import type { CardDeck } from "@/types";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import * as Haptics from "expo-haptics";
-import { Link } from "expo-router";
+import { router } from "expo-router";
 import type React from "react";
+import { useRef } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
+import Swipeable, {
+  SwipeableMethods,
+} from "react-native-gesture-handler/ReanimatedSwipeable";
 import { Card, CardContent, CardDescription, CardHeader } from "./ui/card";
 import { H2, Small } from "./ui/typography";
 
@@ -21,6 +24,8 @@ const DeckCard: React.FC<DeckCardProps> = ({
   handleDelete,
   handleEdit,
 }) => {
+  const swipeRef = useRef<SwipeableMethods>();
+
   const renderRightActions = () => (
     <View className="my-3 mr-3 flex w-32 flex-col items-center justify-center bg-none px-4">
       <TouchableOpacity
@@ -28,6 +33,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
         onPress={() => {
           handleToggleFavorite(deck.id);
           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+          swipeRef?.current?.close();
         }}
       >
         <AntDesign
@@ -58,6 +64,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
         onPress={() => {
           handleDelete(deck.id);
           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+          swipeRef?.current?.close();
         }}
       >
         <AntDesign
@@ -73,18 +80,21 @@ const DeckCard: React.FC<DeckCardProps> = ({
 
   return (
     <Swipeable
+      ref={swipeRef}
       renderRightActions={renderRightActions}
       renderLeftActions={renderLeftActions}
       onSwipeableOpen={() =>
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft)
       }
     >
-      <Link
-        asChild
-        href={{
-          pathname: "/deck/[id]",
-          params: { id: deck.id },
-        }}
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() =>
+          router.push({
+            pathname: "/deck/[id]",
+            params: { id: deck.id },
+          })
+        }
       >
         <Card className="mx-6 my-2">
           <CardHeader>
@@ -114,7 +124,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
             </Small>
           </CardContent>
         </Card>
-      </Link>
+      </TouchableOpacity>
     </Swipeable>
   );
 };
