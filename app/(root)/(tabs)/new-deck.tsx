@@ -59,7 +59,7 @@ const NewDeck = () => {
     });
   };
 
-  const swipeRef = useRef<SwipeableMethods>();
+  const swipeRef = useRef<SwipeableMethods>(null);
 
   return (
     <SafeAreaView className="mt-1 flex h-full w-full flex-col bg-background">

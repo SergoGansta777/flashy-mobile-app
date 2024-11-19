@@ -24,7 +24,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
   handleDelete,
   handleEdit,
 }) => {
-  const swipeRef = useRef<SwipeableMethods>();
+  const swipeRef = useRef<SwipeableMethods>(null);
   const [isSwiping, setIsSwiping] = useState(false);
 
   const renderRightActions = () => (
