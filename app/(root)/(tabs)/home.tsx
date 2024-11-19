@@ -83,7 +83,7 @@ const Home = () => {
               handleEdit={handleEdit}
             />
           )}
-          ListFooterComponent={<View className="h-24"></View>}
+          ListFooterComponent={<View className="h-24" />}
         />
       </GestureHandlerRootView>
     </SafeAreaView>

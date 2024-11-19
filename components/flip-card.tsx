@@ -12,13 +12,16 @@ import { H1, Muted, P } from "./ui/typography";
 
 type FlippableCardProps = {
   card: FlashCard;
+  isSwiping: boolean;
 };
 
-const FlippableCard: React.FC<FlippableCardProps> = ({ card }) => {
+const FlippableCard: React.FC<FlippableCardProps> = ({ card, isSwiping }) => {
   const isFlipped = useSharedValue(false);
 
   const handlePress = () => {
-    isFlipped.value = !isFlipped.value;
+    if (!isSwiping) {
+      isFlipped.value = !isFlipped.value;
+    }
   };
 
   const spinValue = useDerivedValue(() =>
@@ -48,7 +51,7 @@ const FlippableCard: React.FC<FlippableCardProps> = ({ card }) => {
 
   return (
     <Pressable
-      onLongPress={handlePress}
+      onPress={handlePress}
       className="flex items-center justify-center"
     >
       {/* Front Side of the Card */}

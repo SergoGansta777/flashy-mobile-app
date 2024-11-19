@@ -1,7 +1,7 @@
 import type { FlashCard } from "@/types";
 import * as Haptics from "expo-haptics";
 import type React from "react";
-import { useCallback, useMemo, useRef } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { runOnJS } from "react-native-reanimated";
 import { Swiper, type SwiperCardRefType } from "rn-swiper-list";
@@ -20,11 +20,12 @@ const SwippableDeck: React.FC<SwippableDeckProps> = ({
   handleSwipeToRight,
   cards,
 }) => {
-  const ref = useRef<SwiperCardRefType>();
+  const swiperRef = useRef<SwiperCardRefType>();
+  const [isSwiping, setIsSwiping] = useState(false);
 
   const renderCard = useCallback(
-    (card: FlashCard) => <FlippableCard card={card} />,
-    [],
+    (card: FlashCard) => <FlippableCard card={card} isSwiping={isSwiping} />,
+    [isSwiping],
   );
 
   const OverlayLabelRight = useMemo(
@@ -66,12 +67,14 @@ const SwippableDeck: React.FC<SwippableDeckProps> = ({
     <>
       <GestureHandlerRootView className="flex h-full w-full items-center justify-center">
         <Swiper
-          ref={ref}
+          ref={swiperRef}
           data={cards}
           renderCard={renderCard}
           disableTopSwipe={true}
           OverlayLabelRight={() => OverlayLabelRight}
           OverlayLabelLeft={() => OverlayLabelLeft}
+          onSwipeStart={() => setIsSwiping(true)}
+          onSwipeEnd={() => setIsSwiping(false)}
           onSwipeLeft={(index) => handleSwipe(index, "left")}
           onSwipeRight={(index) => handleSwipe(index, "right")}
           onSwipedAll={() =>
