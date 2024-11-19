@@ -6,6 +6,7 @@ import type { CardDeck } from "@/types";
 import * as Haptics from "expo-haptics";
 import React from "react";
 import { FlatList, SafeAreaView } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const Home = () => {
   const decks = useDeckStore((state) => state.decks);
@@ -63,25 +64,27 @@ const Home = () => {
 
   return (
     <SafeAreaView className="h-full w-full bg-background">
-      <TopBar
-        appName={appName}
-        items={cardDecks}
-        setItems={setCardDecks}
-        sortOptions={sortOptions}
-        filterItems={filterItems}
-      />
-      <FlatList
-        data={cardDecks}
-        className="mb-18 overflow-hidden rounded-t-2xl"
-        renderItem={({ item }) => (
-          <DeckCard
-            deck={item}
-            handleToggleFavorite={handleToggleFavorite}
-            handleDelete={handleDelete}
-            handleEdit={handleEdit}
-          />
-        )}
-      />
+      <GestureHandlerRootView className="h-ful w-full">
+        <TopBar
+          appName={appName}
+          items={cardDecks}
+          setItems={setCardDecks}
+          sortOptions={sortOptions}
+          filterItems={filterItems}
+        />
+        <FlatList
+          data={cardDecks}
+          className="mb-18 overflow-hidden rounded-t-2xl"
+          renderItem={({ item: deck }) => (
+            <DeckCard
+              deck={deck}
+              handleToggleFavorite={handleToggleFavorite}
+              handleDelete={handleDelete}
+              handleEdit={handleEdit}
+            />
+          )}
+        />
+      </GestureHandlerRootView>
     </SafeAreaView>
   );
 };

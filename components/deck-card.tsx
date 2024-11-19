@@ -4,14 +4,8 @@ import * as Haptics from "expo-haptics";
 import { Link } from "expo-router";
 import type React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 import { Card, CardContent, CardDescription, CardHeader } from "./ui/card";
-import {
-  ContextMenu,
-  ContextMenuContent,
-  ContextMenuItem,
-  ContextMenuTrigger,
-} from "./ui/context-menu";
 import { H2, Small } from "./ui/typography";
 
 type DeckCardProps = {
@@ -27,10 +21,64 @@ const DeckCard: React.FC<DeckCardProps> = ({
   handleDelete,
   handleEdit,
 }) => {
-  const insets = useSafeAreaInsets();
+  const renderRightActions = () => (
+    <View className="mr-3 mt-3 flex w-32 flex-col items-center justify-center bg-none px-4">
+      <TouchableOpacity
+        className="item-center mx-auto mr-8 flex h-full w-full flex-col justify-center rounded-2xl bg-primary px-3"
+        onPress={() => {
+          handleToggleFavorite(deck.id);
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+        }}
+      >
+        <AntDesign
+          name={deck.isFavorite ? "star" : "staro"}
+          size={24}
+          className="mx-auto"
+          color="white"
+        />
+        <Text className="mx-auto mt-1.5 text-primary-foreground">Favorite</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
+  const renderLeftActions = () => (
+    <View className="-mr-1 ml-2 mt-3 flex w-44 flex-row items-center justify-center gap-3 bg-none px-4">
+      <TouchableOpacity
+        className="item-center mx-auto flex h-full w-1/2 flex-col justify-center rounded-2xl bg-secondary px-3"
+        onPress={() => {
+          handleEdit(deck.id);
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+        }}
+      >
+        <AntDesign className="mx-auto" name="edit" size={24} color="#192133" />
+        <Text className="mx-auto mt-1.5 text-secondary-foreground">Edit</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        className="item-center mx-auto flex h-full w-1/2 flex-col justify-center rounded-2xl bg-destructive px-3"
+        onPress={() => {
+          handleDelete(deck.id);
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+        }}
+      >
+        <AntDesign
+          className="mx-auto"
+          name="delete"
+          size={24}
+          color="#F8F7F9"
+        />
+        <Text className="mx-auto text-destructive-foreground">Delete</Text>
+      </TouchableOpacity>
+    </View>
+  );
 
   return (
-    <ContextMenu>
+    <Swipeable
+      renderRightActions={renderRightActions}
+      renderLeftActions={renderLeftActions}
+      onSwipeableOpen={() =>
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft)
+      }
+    >
       <Link
         asChild
         href={{
@@ -38,66 +86,36 @@ const DeckCard: React.FC<DeckCardProps> = ({
           params: { id: deck.id },
         }}
       >
-        <ContextMenuTrigger
-          onLongPress={() =>
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft)
-          }
-        >
-          <Card className="mx-6 mt-3">
-            <CardHeader>
-              <View className="flex flex-row items-start justify-between">
-                <H2 className="border-b-0 pb-1.5 font-medium tracking-wide">
-                  {deck.name}
-                </H2>
-                <TouchableOpacity
-                  key={deck.id}
-                  onPress={() => handleToggleFavorite(deck.id)}
-                >
-                  <AntDesign
-                    name={deck.isFavorite ? "star" : "staro"}
-                    size={22}
-                  />
-                </TouchableOpacity>
-              </View>
+        <Card className="mx-6 mt-3">
+          <CardHeader>
+            <View className="flex flex-row items-start justify-between">
+              <H2 className="border-b-0 pb-1.5 font-medium tracking-wide">
+                {deck.name}
+              </H2>
+              <TouchableOpacity
+                key={deck.id}
+                onPress={() => handleToggleFavorite(deck.id)}
+              >
+                <AntDesign
+                  name={deck.isFavorite ? "star" : "staro"}
+                  size={22}
+                />
+              </TouchableOpacity>
+            </View>
 
-              <CardDescription>Terms: {deck.cards.length}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Small className="text-muted-foreground">
-                Created at {deck.createdAt.toLocaleDateString()}
-              </Small>
-            </CardContent>
-          </Card>
-        </ContextMenuTrigger>
+            <CardDescription>Terms: {deck.cards.length}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Small className="text-muted-foreground">
+              Created at:{" "}
+              {deck.createdAt
+                ? new Date(deck.createdAt).toLocaleDateString()
+                : "Unknown"}
+            </Small>
+          </CardContent>
+        </Card>
       </Link>
-
-      <ContextMenuContent align="end" insets={insets}>
-        <ContextMenuItem
-          inset
-          className="-pl-1"
-          onPress={() => handleEdit(deck.id)}
-        >
-          <AntDesign name="edit" size={22} />
-          <Text>Edit</Text>
-        </ContextMenuItem>
-        <ContextMenuItem
-          inset
-          className="-pl-1"
-          onPress={() => handleDelete(deck.id)}
-        >
-          <AntDesign name="delete" size={22} />
-          <Text>Delete</Text>
-        </ContextMenuItem>
-        <ContextMenuItem
-          inset
-          className="-pl-1"
-          onPress={() => handleToggleFavorite(deck.id)}
-        >
-          <AntDesign name={deck.isFavorite ? "star" : "staro"} size={22} />
-          <Text>Toggle favorite</Text>
-        </ContextMenuItem>
-      </ContextMenuContent>
-    </ContextMenu>
+    </Swipeable>
   );
 };
 
