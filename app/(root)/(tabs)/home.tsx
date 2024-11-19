@@ -5,7 +5,7 @@ import { useDeckStore } from "@/store";
 import type { CardDeck } from "@/types";
 import * as Haptics from "expo-haptics";
 import React from "react";
-import { FlatList, SafeAreaView } from "react-native";
+import { FlatList, SafeAreaView, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const Home = () => {
@@ -83,6 +83,7 @@ const Home = () => {
               handleEdit={handleEdit}
             />
           )}
+          ListFooterComponent={<View className="h-24"></View>}
         />
       </GestureHandlerRootView>
     </SafeAreaView>

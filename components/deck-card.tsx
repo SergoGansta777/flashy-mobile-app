@@ -3,7 +3,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import * as Haptics from "expo-haptics";
 import { router } from "expo-router";
 import type React from "react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import Swipeable, {
   SwipeableMethods,
@@ -25,6 +25,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
   handleEdit,
 }) => {
   const swipeRef = useRef<SwipeableMethods>();
+  const [isSwiping, setIsSwiping] = useState(false);
 
   const renderRightActions = () => (
     <View className="my-3 mr-3 flex w-32 flex-col items-center justify-center bg-none px-4">
@@ -81,18 +82,22 @@ const DeckCard: React.FC<DeckCardProps> = ({
       ref={swipeRef}
       renderRightActions={renderRightActions}
       renderLeftActions={renderLeftActions}
+      onSwipeableWillOpen={() => setIsSwiping(true)}
+      onSwipeableClose={() => setIsSwiping(false)}
       onSwipeableOpen={() =>
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft)
       }
     >
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() =>
-          router.push({
-            pathname: "/deck/[id]",
-            params: { id: deck.id },
-          })
-        }
+        onPress={() => {
+          if (!isSwiping) {
+            router.push({
+              pathname: "/deck/[id]",
+              params: { id: deck.id },
+            });
+          }
+        }}
       >
         <Card className="mx-6 my-2">
           <CardHeader>
