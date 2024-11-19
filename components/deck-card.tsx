@@ -1,5 +1,6 @@
 import type { CardDeck } from "@/types";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import * as Haptics from "expo-haptics";
 import { Link } from "expo-router";
 import type React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
@@ -15,17 +16,18 @@ import { H2, Small } from "./ui/typography";
 
 type DeckCardProps = {
   deck: CardDeck;
-  handleToggleFavorite: () => void;
+  handleToggleFavorite: (id: number) => void;
+  handleDelete: (id: number) => void;
+  handleEdit: (id: number) => void;
 };
 
-const DeckCard: React.FC<DeckCardProps> = ({ deck, handleToggleFavorite }) => {
+const DeckCard: React.FC<DeckCardProps> = ({
+  deck,
+  handleToggleFavorite,
+  handleDelete,
+  handleEdit,
+}) => {
   const insets = useSafeAreaInsets();
-  const contentInsets = {
-    top: insets.top,
-    bottom: insets.bottom,
-    left: 12,
-    right: 12,
-  };
 
   return (
     <ContextMenu>
@@ -36,14 +38,21 @@ const DeckCard: React.FC<DeckCardProps> = ({ deck, handleToggleFavorite }) => {
           params: { id: deck.id },
         }}
       >
-        <ContextMenuTrigger>
+        <ContextMenuTrigger
+          onLongPress={() =>
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft)
+          }
+        >
           <Card className="mx-6 mt-3">
             <CardHeader>
               <View className="flex flex-row items-start justify-between">
                 <H2 className="border-b-0 pb-1.5 font-medium tracking-wide">
                   {deck.name}
                 </H2>
-                <TouchableOpacity key={deck.id} onPress={handleToggleFavorite}>
+                <TouchableOpacity
+                  key={deck.id}
+                  onPress={() => handleToggleFavorite(deck.id)}
+                >
                   <AntDesign
                     name={deck.isFavorite ? "star" : "staro"}
                     size={22}
@@ -62,18 +71,29 @@ const DeckCard: React.FC<DeckCardProps> = ({ deck, handleToggleFavorite }) => {
         </ContextMenuTrigger>
       </Link>
 
-      <ContextMenuContent
-        align="start"
-        insets={contentInsets}
-        className="native:w-72 w-64"
-      >
-        <ContextMenuItem inset>
+      <ContextMenuContent align="end" insets={insets}>
+        <ContextMenuItem
+          inset
+          className="-pl-1"
+          onPress={() => handleEdit(deck.id)}
+        >
+          <AntDesign name="edit" size={22} />
           <Text>Edit</Text>
         </ContextMenuItem>
-        <ContextMenuItem inset>
+        <ContextMenuItem
+          inset
+          className="-pl-1"
+          onPress={() => handleDelete(deck.id)}
+        >
+          <AntDesign name="delete" size={22} />
           <Text>Delete</Text>
         </ContextMenuItem>
-        <ContextMenuItem inset>
+        <ContextMenuItem
+          inset
+          className="-pl-1"
+          onPress={() => handleToggleFavorite(deck.id)}
+        >
+          <AntDesign name={deck.isFavorite ? "star" : "staro"} size={22} />
           <Text>Toggle favorite</Text>
         </ContextMenuItem>
       </ContextMenuContent>

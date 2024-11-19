@@ -9,7 +9,6 @@ import { FlatList, SafeAreaView } from "react-native";
 
 const Home = () => {
   const decks = useDeckStore((state) => state.decks);
-  const addDeck = useDeckStore((state) => state.addDeck);
   const deleteDeck = useDeckStore((state) => state.deleteDeck);
   const toggleFavorite = useDeckStore((state) => state.toggleFavorite);
 
@@ -22,6 +21,15 @@ const Home = () => {
   const handleToggleFavorite = (deckId: number) => {
     toggleFavorite(deckId);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+  };
+
+  const handleDelete = (deckId: number) => {
+    deleteDeck(deckId);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+  };
+
+  const handleEdit = (deckId: number) => {
+    console.log("not implemented yet, edit action for deckId", deckId);
   };
 
   const sortOptions = [
@@ -68,7 +76,9 @@ const Home = () => {
         renderItem={({ item }) => (
           <DeckCard
             deck={item}
-            handleToggleFavorite={() => handleToggleFavorite(item.id)}
+            handleToggleFavorite={handleToggleFavorite}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
           />
         )}
       />

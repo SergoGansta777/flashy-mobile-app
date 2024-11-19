@@ -66,7 +66,7 @@ const ContextMenuSubContent = React.forwardRef<
     <ContextMenuPrimitive.SubContent
       ref={ref}
       className={cn(
-        "z-50 mt-1 min-w-[8rem] overflow-hidden rounded-md border border-border bg-popover p-1 shadow-md shadow-foreground/5 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
+        "z-50 mt-1 min-w-[7rem] overflow-hidden rounded-md border border-border bg-popover p-1 shadow-md shadow-foreground/5 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2",
         open
           ? "web:animate-in web:fade-in-0 web:zoom-in-95"
           : "web:animate-out web:fade-out-0 web:zoom-out",
@@ -109,7 +109,7 @@ const ContextMenuContent = React.forwardRef<
           <ContextMenuPrimitive.Content
             ref={ref}
             className={cn(
-              "z-50 min-w-[8rem] overflow-hidden rounded-md border border-border bg-popover p-1 shadow-md shadow-foreground/5",
+              "z-50 min-w-[6rem] overflow-hidden rounded-md border border-border bg-popover p-1 shadow-md shadow-foreground/5",
               open
                 ? "web:animate-in web:fade-in-0 web:zoom-in-95"
                 : "web:animate-out web:fade-out-0 web:zoom-out-95",
