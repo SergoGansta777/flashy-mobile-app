@@ -53,7 +53,6 @@ const DeckCard: React.FC<DeckCardProps> = ({
         className="item-center mx-auto flex h-full w-1/2 flex-col justify-center rounded-2xl bg-secondary px-3"
         onPress={() => {
           handleEdit(deck.id);
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
         }}
       >
         <AntDesign className="mx-auto" name="edit" size={24} color="#192133" />
@@ -63,7 +62,6 @@ const DeckCard: React.FC<DeckCardProps> = ({
         className="item-center mx-auto flex h-full w-1/2 flex-col justify-center rounded-2xl bg-destructive px-3"
         onPress={() => {
           handleDelete(deck.id);
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
           swipeRef?.current?.close();
         }}
       >
