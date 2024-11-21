@@ -13,3 +13,7 @@ export function shuffle<T>(array: T[]): T[] {
   }
   return shuffled;
 }
+
+export function getAvatarFallback(name: string, lastName: string) {
+  return (name.charAt(0) + lastName.charAt(0)).toUpperCase();
+}

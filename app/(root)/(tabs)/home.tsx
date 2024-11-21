@@ -1,4 +1,4 @@
-import HomeTab from "@/components/tabs/home-tab/home-tab";
+import HomeTab from "@/components/tabs/home-tab";
 import React from "react";
 
 const Home = () => {
