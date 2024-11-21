@@ -1,14 +1,14 @@
 import type { PropsWithChildren } from "react";
+import React from "react";
 import { View } from "react-native";
 
 type NavBarIconWrapperProps = PropsWithChildren & {
   focused: boolean;
 };
 
-const NavBarIconWrapper: React.FC<NavBarIconWrapperProps> = ({
-  focused,
-  children,
-}) => {
+const NavBarIconWrapper: React.FC<
+  PropsWithChildren<NavBarIconWrapperProps>
+> = ({ focused, children }) => {
   return (
     <View
       className={`flex flex-row items-center justify-center rounded-full ${

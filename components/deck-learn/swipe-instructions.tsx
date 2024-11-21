@@ -14,11 +14,8 @@ const SwipeInstructions = () => {
   const messageIndex = useSharedValue(0);
 
   const toggleMessage = useCallback(() => {
-    // Fade out the current message
     opacity.value = withTiming(0, { duration: 900 }, () => {
-      // Toggle the message index after fade-out completes
       messageIndex.value = Math.floor(Math.random() * 3);
-      // Fade in the new message
       opacity.value = withTiming(1, { duration: 900 });
     });
   }, [opacity, messageIndex]);
@@ -32,7 +29,6 @@ const SwipeInstructions = () => {
     runOnJS(setMessage)(messageIndex.value);
   }, [messageIndex.value]);
 
-  // Animated styles for opacity
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
   }));

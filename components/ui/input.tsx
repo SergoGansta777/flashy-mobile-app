@@ -12,7 +12,7 @@ import {
 } from "react-native";
 
 type InputProps = TextInputProps & {
-  // biome-ignore lint/suspicious/noExplicitAny:
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   icon?: any;
 };
 

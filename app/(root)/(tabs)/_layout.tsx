@@ -1,6 +1,7 @@
 import NavBarIconWrapper from "@/components/core/nav-bar-icon-wrapper";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Tabs } from "expo-router";
+import React from "react";
 
 export default function Layout() {
   return (

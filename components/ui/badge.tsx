@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import * as Slot from "@rn-primitives/slot";
 import type { SlottableViewProps } from "@rn-primitives/types";
 import { type VariantProps, cva } from "class-variance-authority";
+import React from "react";
 import { View } from "react-native";
 
 const badgeVariants = cva(

@@ -3,7 +3,7 @@ import { Image, View } from "react-native";
 import { H1 } from "../ui/typography";
 
 type TopHeaderImageProps = {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   imageSource: any;
   headerText: string;
 };

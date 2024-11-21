@@ -6,8 +6,8 @@ const EmptyAchievements = () => {
     <>
       <Lead>No achievements yet! 📚✨</Lead>
       <BlockQuote>
-        "Keep practicing with your flashcards to unlock new achievements.
-        Learning is a journey—start earning rewards today!"
+        &quot;Keep practicing with your flashcards to unlock new achievements.
+        Learning is a journey—start earning rewards today!&quot;
       </BlockQuote>
     </>
   );

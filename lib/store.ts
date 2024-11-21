@@ -4,10 +4,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const clearDeckStore = async () => {
   try {
-    // Clear persistent storage
     await AsyncStorage.removeItem("deck-storage");
 
-    // Reset Zustand state
     useDeckStore.setState({
       decks: initialCardDecks,
       currentDeckId: null,

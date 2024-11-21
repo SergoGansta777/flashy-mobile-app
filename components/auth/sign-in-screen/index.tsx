@@ -46,7 +46,7 @@ const SignInScreen: React.FC<SignInScreenProps> = ({
             <GoogleButton text="Log In" handlePress={handleSignInButtonPress} />
 
             <P className="text-general-200 mt-4 text-center text-lg">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link href="/sign-up">
                 <P className="text-lg text-gray-500">Sign Up</P>
               </Link>

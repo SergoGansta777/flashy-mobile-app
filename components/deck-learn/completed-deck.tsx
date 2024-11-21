@@ -53,7 +53,7 @@ const CompletedDeck: React.FC<CompletedDeckProps> = ({
       {/* Header Section */}
       <View className="flex w-full flex-row items-center justify-between">
         <H3 className="w-4/6">
-          You're doing brilliantly! Keep focusing on the touch terms.
+          You&apos;re doing brilliantly! Keep focusing on the touch terms.
         </H3>
         <Image
           className="h-24 w-24"

@@ -11,19 +11,12 @@ const DeckLearn = () => {
     (state) =>
       state.decks.find((deck) => deck.id === state.currentDeckId) || null,
   );
-  const filter = useDeckStore((state) => state.currentDeckCardFilter);
   const setFilter = useDeckStore((state) => state.setCurrentDeckCardFilter);
 
   const [rightSwipedIds, setRightSwipedIds] = useState<number[]>([]);
   const [leftSwipedIds, setLeftSwipedIds] = useState<number[]>([]);
 
-  const cards = deck?.cards.filter((card) => {
-    // if (filter && filter.length > 0) {
-    //   return filter.includes(card.id); // Only show cards matching the filter
-    // }
-    return true;
-  });
-
+  const cards = deck?.cards;
   const shuffledCards = useMemo(() => shuffle(cards || []), [cards]);
 
   const handleSetFilter = () => {

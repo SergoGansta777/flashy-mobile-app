@@ -62,6 +62,7 @@ const OnboardingSwiper: React.FC<OnboardingSwiperProps> = ({
         className="w-10/12"
         size="lg"
         onPress={() => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
           isLastSlide
             ? router.replace("/(auth)/sign-up")
             : swiperRef.current?.scrollBy(1);

@@ -1,5 +1,6 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { router } from "expo-router";
+import React from "react";
 import { View } from "react-native";
 import { Button } from "../ui/button";
 import { P } from "../ui/typography";
@@ -25,7 +26,7 @@ const TopBar = ({
     </Button>
     {totalCards === 0 ? (
       <P className="pt-2 text-center align-bottom font-semibold text-muted-foreground">
-        It's empty
+        It&apos;s empty
       </P>
     ) : (
       <P className="pt-2 text-center align-bottom font-semibold text-muted-foreground">

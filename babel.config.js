@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 module.exports = (api) => {
   api.cache(true);
   return {
