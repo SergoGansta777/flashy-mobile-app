@@ -1,3 +1,9 @@
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+} from "@/components/ui/card";
 import type { CardDeck } from "@/types";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import * as Haptics from "expo-haptics";
@@ -8,8 +14,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import Swipeable, {
   type SwipeableMethods,
 } from "react-native-gesture-handler/ReanimatedSwipeable";
-import { Card, CardContent, CardDescription, CardHeader } from "./ui/card";
-import { H2, Small } from "./ui/typography";
+import { H2, Small } from "../../ui/typography";
 
 type DeckCardProps = {
   deck: CardDeck;

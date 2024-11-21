@@ -5,7 +5,7 @@ import * as Haptics from "expo-haptics";
 import React from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import DeckCard from "../../deck-card";
+import DeckCard from "./deck-card";
 import TopBar from "./top-bar";
 
 const HomeTab = () => {

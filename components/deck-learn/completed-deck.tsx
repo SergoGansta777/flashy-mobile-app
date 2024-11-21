@@ -4,9 +4,9 @@ import type React from "react";
 import { useCallback, useMemo } from "react";
 import { Image, View } from "react-native";
 import { PieChart } from "react-native-gifted-charts";
+import { Button } from "../ui/button";
+import { H3, Large, Lead, P } from "../ui/typography";
 import StatsSection from "./stats-section";
-import { Button } from "./ui/button";
-import { H3, Large, Lead, P } from "./ui/typography";
 
 type CompletedDeckProps = {
   known: number;
@@ -81,6 +81,7 @@ const CompletedDeck: React.FC<CompletedDeckProps> = ({
             data={pieChartData}
           />
         </View>
+
         <StatsSection
           known={known}
           stillLearning={stillLearning}

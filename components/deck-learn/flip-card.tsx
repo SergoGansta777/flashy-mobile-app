@@ -7,8 +7,8 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
-import { H1, Muted, P } from "./ui/typography";
+import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
+import { H1, Muted, P } from "../ui/typography";
 
 type FlippableCardProps = {
   card: FlashCard;

@@ -31,6 +31,7 @@ const LearnCards: React.FC<LearnCardsProps> = ({
       {totalSwiped !== totalCards ? (
         <>
           <ProgressBar value={totalSwiped} total={totalCards} />
+
           <SwipeCounterBar leftCounter={stillLearning} rightCounter={known} />
           <SwippableDeck
             cards={cards}

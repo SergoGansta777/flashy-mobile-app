@@ -1,8 +1,8 @@
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { router } from "expo-router";
 import { View } from "react-native";
-import { Button } from "./ui/button";
-import { P } from "./ui/typography";
+import { Button } from "../ui/button";
+import { P } from "../ui/typography";
 
 const TopBar = ({
   totalSwiped,
