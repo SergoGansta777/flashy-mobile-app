@@ -1,8 +1,7 @@
-import type { SortOption } from "@/types";
+import type { CardDeck, SortDirection, SortOption } from "@/types";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Octicons from "@expo/vector-icons/Octicons";
-import * as Haptics from "expo-haptics";
-import React, { useState } from "react";
+import React from "react";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button } from "../../ui/button";
@@ -17,51 +16,24 @@ import { H1, Small } from "../../ui/typography";
 
 type TopBarProps<T> = {
   appName: string;
-  items: T[];
-  setItems: (items: T[]) => void;
+  currentSortOptionLabel: string;
   sortOptions: SortOption<T>[];
-  filterItems: (query: string) => T[];
+  searchQuery: string;
+  handleSearchChange: (query: string) => void;
+  sortDirection: SortDirection;
+  handleSortChange: (sortOption: any) => void;
 };
 
-const TopBar = <T,>({
+const TopBar: React.FC<TopBarProps<CardDeck>> = ({
   appName,
-  items,
-  setItems,
+  currentSortOptionLabel,
+  searchQuery,
+  handleSearchChange,
+  sortDirection,
+  handleSortChange,
   sortOptions,
-  filterItems,
-}: TopBarProps<T>) => {
-  const [sortOption, setSortOption] = useState(sortOptions[0].label);
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
-  const [searchQuery, setSearchQuery] = useState<string>("");
+}) => {
   const insets = useSafeAreaInsets();
-
-  const handleSortChange = (option: SortOption<T>) => {
-    // Toggle the direction if the same sort option is clicked
-    if (option.label === sortOption) {
-      setSortDirection((prev) => (prev === "asc" ? "desc" : "asc"));
-    } else {
-      setSortOption(option.label);
-      setSortDirection("asc"); // Reset to "asc" when changing sort option
-    }
-
-    // Sort items based on the selected option
-    const sortedItems = [...items].sort(option.sortFunction);
-
-    // Reverse the order based on the selected direction
-    if (sortDirection === "desc") {
-      sortedItems.reverse();
-    }
-
-    // Update the items state with the sorted items
-    setItems(sortedItems);
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Rigid);
-  };
-
-  const handleSearchChange = (query: string) => {
-    setSearchQuery(query);
-    const filteredItems = filterItems(query);
-    setItems(filteredItems);
-  };
 
   return (
     <View className="my-2 h-auto w-full rounded-b-full px-10">
@@ -109,7 +81,7 @@ const TopBar = <T,>({
                 onPress={() => handleSortChange(option)}
               >
                 <Small
-                  className={`text-md px-0.5 py-1 ${option.label === sortOption ? "font-bold" : ""}`}
+                  className={`text-md px-0.5 py-1 ${option.label === currentSortOptionLabel ? "font-bold" : ""}`}
                 >
                   {option.label}
                 </Small>

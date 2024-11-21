@@ -1,3 +1,4 @@
+import { getEmptyDeck } from "@/lib/utils";
 import { useDeckStore } from "@/store/deck-store";
 import { CardDeck } from "@/types";
 import * as Haptics from "expo-haptics";
@@ -15,22 +16,19 @@ import RenameDeck from "./rename-deck";
 import TopBar from "./top-bar";
 
 const NewDeckTab = () => {
-  const [newDeck, setNewDeck] = useState<CardDeck>({
-    id: 100,
-    userId: 23,
-    name: "",
-    isFavorite: false,
-    cards: [{ id: 0, term: "", definition: "" }],
-    createdAt: new Date(),
-    repeatedAt: new Date(),
-  });
+  const [newDeck, setNewDeck] = useState<CardDeck>(getEmptyDeck());
 
   const saveDeck = useDeckStore((state) => state.addDeck);
 
   const handleSaveDeck = () => {
     saveDeck(newDeck);
+    setNewDeck(getEmptyDeck());
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     router.replace("/(root)/(tabs)/home");
+  };
+
+  const handleResetNewDeck = () => {
+    setNewDeck(getEmptyDeck());
   };
 
   const handleAddNewCard = () => {

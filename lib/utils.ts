@@ -17,3 +17,15 @@ export function shuffle<T>(array: T[]): T[] {
 export function getAvatarFallback(name: string, lastName: string) {
   return (name.charAt(0) + lastName.charAt(0)).toUpperCase();
 }
+
+export function getEmptyDeck() {
+  return {
+    id: 100,
+    userId: 23,
+    name: "",
+    isFavorite: false,
+    cards: [{ id: 0, term: "", definition: "" }],
+    createdAt: new Date(),
+    repeatedAt: new Date(),
+  };
+}

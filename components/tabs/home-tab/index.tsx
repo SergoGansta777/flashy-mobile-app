@@ -1,28 +1,46 @@
 import { appName } from "@/constants";
 import { deckSortOptions } from "@/lib/sort";
 import { useDeckStore } from "@/store/deck-store";
+import { CardDeck, SortDirection, SortOption } from "@/types";
 import * as Haptics from "expo-haptics";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import DeckCard from "./deck-card";
 import TopBar from "./top-bar";
 
 const HomeTab = () => {
-  const decks = useDeckStore((state) => state.decks);
-  const deleteDeck = useDeckStore((state) => state.deleteDeck);
-  const toggleFavorite = useDeckStore((state) => state.toggleFavorite);
-  const setCurrentDeck = useDeckStore((state) => state.setCurrentDeck);
+  const { decks, deleteDeck, toggleFavorite, setCurrentDeck } = useDeckStore();
 
-  const [cardDecks, setCardDecks] = React.useState(decks);
+  const [cardDecks, setCardDecks] = useState<CardDeck[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [sortOption, setSortOption] = useState<string>(
+    deckSortOptions[0].label,
+  );
+  const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
 
-  React.useEffect(() => {
-    setCardDecks(decks);
-  }, []);
+  const sortAndSetDecks = (items: CardDeck[], query = searchQuery) => {
+    const filteredItems = filterItems(query, items);
+    const sortOptionConfig = deckSortOptions.find(
+      (option) => option.label === sortOption,
+    );
 
-  React.useEffect(() => {
-    setCardDecks(decks);
-  }, [decks]);
+    if (sortOptionConfig) {
+      const sortedItems = [...filteredItems].sort(
+        sortOptionConfig.sortFunction,
+      );
+      if (sortDirection === "desc") {
+        sortedItems.reverse();
+      }
+      setCardDecks(sortedItems);
+    } else {
+      setCardDecks(filteredItems);
+    }
+  };
+
+  useEffect(() => {
+    sortAndSetDecks(decks);
+  }, [decks, sortOption, sortDirection]);
 
   const handleToggleFavorite = (deckId: number) => {
     toggleFavorite(deckId);
@@ -35,34 +53,52 @@ const HomeTab = () => {
   };
 
   const handleEdit = (deckId: number) => {
-    console.log("not implemented yet, edit action for deckId", deckId);
+    console.log("Edit action not implemented for deckId:", deckId);
   };
 
   const handleChangeCurrentDeck = (deckId: number) => {
     setCurrentDeck(deckId);
   };
 
-  const filterItems = (query: string) => {
-    if (!query) return decks;
-    return decks.filter((item) =>
-      item.name.toLowerCase().includes(query.toLowerCase()),
-    );
+  const handleSearchChange = (query: string) => {
+    setSearchQuery(query);
+    sortAndSetDecks(decks, query);
+  };
+
+  const handleSortChange = (option: SortOption<CardDeck>) => {
+    const newDirection =
+      option.label === sortOption
+        ? sortDirection === "asc"
+          ? "desc"
+          : "asc"
+        : "asc";
+
+    setSortOption(option.label);
+    setSortDirection(newDirection);
+  };
+
+  const filterItems = (query: string, items = decks) => {
+    if (!query.trim()) return items;
+    const lowerQuery = query.toLowerCase();
+    return items.filter((deck) => deck.name.toLowerCase().includes(lowerQuery));
   };
 
   return (
     <SafeAreaView className="h-full w-full bg-background">
-      <GestureHandlerRootView className="h-ful w-full">
+      <GestureHandlerRootView className="h-full w-full">
         <TopBar
           appName={appName}
-          items={cardDecks}
-          setItems={setCardDecks}
+          searchQuery={searchQuery}
+          handleSearchChange={handleSearchChange}
+          currentSortOptionLabel={sortOption}
+          sortDirection={sortDirection}
+          handleSortChange={handleSortChange}
           sortOptions={deckSortOptions}
-          filterItems={filterItems}
         />
         <FlatList
           data={cardDecks}
           className="mb-18 rounded-t-2xl"
-          keyExtractor={(item, _) => item.id.toString()}
+          keyExtractor={(item) => item.id.toString()}
           renderItem={({ item: deck }) => (
             <DeckCard
               deck={deck}

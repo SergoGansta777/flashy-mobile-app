@@ -37,3 +37,5 @@ export type SignUpFormType = {
   email: string;
   password: string;
 };
+
+export type SortDirection = "asc" | "desc";
