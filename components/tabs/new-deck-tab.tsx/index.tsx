@@ -1,3 +1,4 @@
+import ActionButton from "@/components/core/action-button";
 import { getEmptyDeck } from "@/lib/utils";
 import { useDeckStore } from "@/store/deck-store";
 import { CardDeck } from "@/types";
@@ -11,7 +12,6 @@ import Swipeable, {
 } from "react-native-gesture-handler/ReanimatedSwipeable";
 import AddNewTerm from "./add-new-term";
 import NewTermCard from "./new-term-card";
-import NewTermRightSwipeAction from "./new-term-right-swap-action";
 import RenameDeck from "./rename-deck";
 import TopBar from "./top-bar";
 
@@ -29,6 +29,8 @@ const NewDeckTab = () => {
 
   const handleResetNewDeck = () => {
     setNewDeck(getEmptyDeck());
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Rigid);
+    router.replace("/(root)/(tabs)/home");
   };
 
   const handleAddNewCard = () => {
@@ -66,7 +68,10 @@ const NewDeckTab = () => {
 
   return (
     <SafeAreaView className="mt-1 flex h-full w-full flex-col bg-background">
-      <TopBar saveDeck={handleSaveDeck} />
+      <TopBar
+        handleSaveDeck={handleSaveDeck}
+        handleResetNewDeck={handleResetNewDeck}
+      />
 
       <View className="mt-3 h-full w-full">
         <RenameDeck
@@ -85,9 +90,17 @@ const NewDeckTab = () => {
                 <Swipeable
                   ref={swipeRef}
                   renderRightActions={() => (
-                    <NewTermRightSwipeAction
-                      handleDelete={() => handleDeleteCard(card.id)}
-                    />
+                    <View className="my-3 mr-3 flex w-32 flex-row items-center justify-center bg-none px-4 py-1">
+                      <ActionButton
+                        onPress={() => handleDeleteCard(card.id)}
+                        label="Delete"
+                        bgColor="bg-destructive"
+                        textColor="text-destructive-foreground"
+                        width="w-full"
+                        iconColor="#F9FAFC"
+                        icon="minuscircleo"
+                      />
+                    </View>
                   )}
                   onSwipeableOpen={() =>
                     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft)

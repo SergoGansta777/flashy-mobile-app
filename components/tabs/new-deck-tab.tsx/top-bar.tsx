@@ -1,21 +1,24 @@
 import { Button } from "@/components/ui/button";
 import { Small } from "@/components/ui/typography";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { router } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 
 type TopBarProps = {
-  saveDeck: () => void;
+  handleSaveDeck: () => void;
+  handleResetNewDeck: () => void;
 };
 
-const TopBar: React.FC<TopBarProps> = ({ saveDeck }) => {
+const TopBar: React.FC<TopBarProps> = ({
+  handleSaveDeck,
+  handleResetNewDeck,
+}) => {
   return (
     <View className="mb-1 flex h-14 w-full flex-row items-center justify-between">
       <Button
         variant="ghost"
         className="flex flex-row items-center justify-center"
-        onPress={() => router.back()}
+        onPress={handleResetNewDeck}
       >
         <AntDesign name="close" className="-mt-0.5" size={24} />
       </Button>
@@ -27,7 +30,7 @@ const TopBar: React.FC<TopBarProps> = ({ saveDeck }) => {
       <Button
         variant="ghost"
         className="flex flex-row items-center justify-center"
-        onPress={() => saveDeck()}
+        onPress={handleSaveDeck}
       >
         <AntDesign name="check" className="-mt-0.5" size={24} />
       </Button>
