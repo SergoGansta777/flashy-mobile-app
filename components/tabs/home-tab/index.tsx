@@ -18,6 +18,10 @@ const HomeTab = () => {
 
   React.useEffect(() => {
     setCardDecks(decks);
+  }, []);
+
+  React.useEffect(() => {
+    setCardDecks(decks);
   }, [decks]);
 
   const handleToggleFavorite = (deckId: number) => {
