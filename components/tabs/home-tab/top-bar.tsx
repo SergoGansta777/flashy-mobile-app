@@ -5,15 +5,15 @@ import * as Haptics from "expo-haptics";
 import React, { useState } from "react";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Button } from "./ui/button";
+import { Button } from "../../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { Input } from "./ui/input";
-import { H1, Small } from "./ui/typography";
+} from "../../ui/dropdown-menu";
+import { Input } from "../../ui/input";
+import { H1, Small } from "../../ui/typography";
 
 type TopBarProps<T> = {
   appName: string;
