@@ -18,3 +18,11 @@ export type SortOption<T> = {
   label: string;
   sortFunction: (a: T, b: T) => number;
 };
+
+export type OnboardingContent = {
+  id: number;
+  title: string;
+  description: string;
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  image: any;
+};

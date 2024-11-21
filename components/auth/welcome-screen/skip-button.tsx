@@ -1,0 +1,19 @@
+import { router } from "expo-router";
+import React from "react";
+import { TouchableOpacity } from "react-native";
+import { P } from "../../ui/typography";
+
+const SkipButtonBar = () => {
+  return (
+    <TouchableOpacity
+      onPress={() => {
+        router.replace("/(auth)/sign-up");
+      }}
+      className="flex w-11/12 items-end justify-end p-5"
+    >
+      <P className="text-primary">Skip</P>
+    </TouchableOpacity>
+  );
+};
+
+export default SkipButtonBar;
