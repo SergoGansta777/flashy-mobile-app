@@ -16,7 +16,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import type { CardDeck } from "@/types";
+import type { DeckDb } from "@/types";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import * as Haptics from "expo-haptics";
 import { router } from "expo-router";
@@ -28,11 +28,11 @@ import Swipeable, {
 import { H2, Small } from "../../ui/typography";
 
 type DeckCardProps = {
-  deck: CardDeck;
-  handleToggleFavorite: (id: number) => void;
-  handleDelete: (id: number) => void;
-  handleEdit: (id: number) => void;
-  handleChangeCurrentDeck: (id: number) => void;
+  deck: DeckDb;
+  handleToggleFavorite: (id: string) => void;
+  handleDelete: (id: string) => void;
+  handleEdit: (id: string) => void;
+  handleChangeCurrentDeck: (id: string) => void;
 };
 
 const DeckCard: React.FC<DeckCardProps> = ({
@@ -71,7 +71,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
       <View className="my-3 mr-3 flex w-32 flex-row items-center justify-center bg-none px-4">
         <ActionButton
           onPress={() => handleAction("favorite")}
-          icon={deck.isFavorite ? "star" : "staro"}
+          icon={deck.is_favorite ? "star" : "staro"}
           label="Favorite"
           width="w-full"
           bgColor="bg-primary"
@@ -80,7 +80,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
         />
       </View>
     ),
-    [handleAction, deck.isFavorite],
+    [handleAction, deck.is_favorite],
   );
 
   const renderLeftActions = useCallback(
@@ -158,7 +158,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
               </H2>
               <TouchableOpacity onPress={() => handleToggleFavorite(deck.id)}>
                 <AntDesign
-                  name={deck.isFavorite ? "star" : "staro"}
+                  name={deck.is_favorite ? "star" : "staro"}
                   size={22}
                 />
               </TouchableOpacity>
@@ -168,8 +168,8 @@ const DeckCard: React.FC<DeckCardProps> = ({
           <CardContent>
             <Small className="text-muted-foreground">
               Created at:{" "}
-              {deck.createdAt
-                ? new Date(deck.createdAt).toLocaleDateString()
+              {deck.created_at
+                ? new Date(deck.created_at).toLocaleDateString()
                 : "Unknown"}
             </Small>
           </CardContent>

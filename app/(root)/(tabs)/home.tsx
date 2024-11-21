@@ -9,6 +9,16 @@ const Home = () => {
     clearDeckStore();
   }
 
+  // React.useEffect(() => {
+  //   const getTodos = async () => {
+  //     const { data } = await supabase.schema("public").from("deck").select();
+
+  //     console.log("data", data);
+  //   };
+
+  //   getTodos();
+  // }, []);
+
   return <HomeTab />;
 };
 
