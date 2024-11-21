@@ -1,16 +1,27 @@
 import ActionButton from "@/components/core/action-button";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
 } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import type { CardDeck } from "@/types";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import * as Haptics from "expo-haptics";
 import { router } from "expo-router";
 import React, { useCallback, useRef, useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import Swipeable, {
   type SwipeableMethods,
 } from "react-native-gesture-handler/ReanimatedSwipeable";
@@ -84,15 +95,37 @@ const DeckCard: React.FC<DeckCardProps> = ({
           textColor="text-secondary-foreground"
           iconColor="#192133"
         />
-        <ActionButton
-          onPress={() => handleAction("delete")}
-          icon="delete"
-          label="Delete"
-          width="w-1/2"
-          bgColor="bg-destructive"
-          textColor="text-destructive-foreground"
-          iconColor="#F8F7F9"
-        />
+        <Dialog className="w-1/2">
+          <DialogTrigger asChild>
+            <ActionButton
+              icon="delete"
+              label="Delete"
+              width="w-full"
+              bgColor="bg-destructive"
+              textColor="text-destructive-foreground"
+              iconColor="#F8F7F9"
+            />
+          </DialogTrigger>
+          <DialogContent className="mx-2">
+            <DialogHeader>
+              <DialogTitle>Delete Deck</DialogTitle>
+              <DialogDescription>
+                Are you sure? This action is permanent and will delete all terms
+                and data.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button
+                  variant="destructive"
+                  onPress={() => handleAction("delete")}
+                >
+                  <Text className="text-destructive-foreground">OK</Text>
+                </Button>
+              </DialogClose>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </View>
     ),
     [handleAction],

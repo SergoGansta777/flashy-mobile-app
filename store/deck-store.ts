@@ -125,7 +125,7 @@ export const useDeckStore = create<DeckStore>()(
       }),
       {
         name: "deck-storage",
-        version: 2,
+        version: 1,
         storage: createJSONStorage(() => AsyncStorage),
       },
     ),

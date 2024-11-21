@@ -3,7 +3,7 @@ import React from "react";
 import { Text, TouchableOpacity } from "react-native";
 
 type ActionButtonProps = {
-  onPress: () => void;
+  onPress?: () => void;
   label: string;
   bgColor: string;
   textColor: string;
