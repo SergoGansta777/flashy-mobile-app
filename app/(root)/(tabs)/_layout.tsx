@@ -1,4 +1,4 @@
-import NavBarIconWrapper from "@/components/nav-bar-icon-wrapper";
+import NavBarIconWrapper from "@/components/core/nav-bar-icon-wrapper";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Tabs } from "expo-router";
 

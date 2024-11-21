@@ -77,7 +77,7 @@ const FlippableCard: React.FC<FlippableCardProps> = ({ card, isSwiping }) => {
           </CardHeader>
           <CardContent className="my-auto flex flex-col items-center justify-center">
             <P className="flex w-11/12 flex-col items-center justify-center text-3xl font-medium">
-              {card.answer}
+              {card.definition}
             </P>
           </CardContent>
           <CardFooter />

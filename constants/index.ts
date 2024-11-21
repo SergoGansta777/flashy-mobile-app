@@ -53,19 +53,19 @@ export const initialCardDecks: CardDeck[] = [
       {
         id: 0,
         term: "Newton’s First Law",
-        answer:
+        definition:
           "An object in motion stays in motion unless acted upon by an external force.",
       },
       {
         id: 1,
         term: "Photosynthesis",
-        answer:
+        definition:
           "The process by which green plants use sunlight to synthesize foods from carbon dioxide and water.",
       },
       {
         id: 2,
         term: "Pythagorean Theorem",
-        answer:
+        definition:
           "In a right triangle, the square of the hypotenuse is equal to the sum of the squares of the other two sides.",
       },
     ],
@@ -81,19 +81,19 @@ export const initialCardDecks: CardDeck[] = [
       {
         id: 0,
         term: "Mitochondria",
-        answer:
+        definition:
           "The powerhouse of the cell, generating most of the cell’s supply of ATP.",
       },
       {
         id: 1,
         term: "DNA",
-        answer:
+        definition:
           "Deoxyribonucleic acid, the molecule that carries genetic information in living organisms.",
       },
       {
         id: 2,
         term: "Genotype",
-        answer: "The genetic constitution of an individual organism.",
+        definition: "The genetic constitution of an individual organism.",
       },
     ],
   },
@@ -108,19 +108,19 @@ export const initialCardDecks: CardDeck[] = [
       {
         id: 0,
         term: "The Great Wall of China",
-        answer:
+        definition:
           "A series of fortifications made of stone, brick, and other materials built to protect China from invasions.",
       },
       {
         id: 1,
         term: "Renaissance",
-        answer:
+        definition:
           "A period in European history marking the transition from the Middle Ages to modernity.",
       },
       {
         id: 2,
         term: "Industrial Revolution",
-        answer:
+        definition:
           "The period of rapid industrial growth that began in the late 18th century.",
       },
     ],
@@ -136,19 +136,19 @@ export const initialCardDecks: CardDeck[] = [
       {
         id: 0,
         term: "Algorithm",
-        answer:
+        definition:
           "A step-by-step procedure for solving a problem or performing a task.",
       },
       {
         id: 1,
         term: "Binary Search",
-        answer:
+        definition:
           "An efficient algorithm for finding an item in a sorted list by repeatedly dividing the search interval in half.",
       },
       {
         id: 2,
         term: "Recursion",
-        answer:
+        definition:
           "A method where the solution to a problem depends on solutions to smaller instances of the same problem.",
       },
     ],

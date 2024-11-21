@@ -11,7 +11,7 @@ export type CardDeck = {
 export type FlashCard = {
   id: number;
   term: string;
-  answer: string;
+  definition: string;
 };
 
 export type SortOption<T> = {
