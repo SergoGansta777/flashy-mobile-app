@@ -26,3 +26,14 @@ export type OnboardingContent = {
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   image: any;
 };
+
+export type SignInFormType = {
+  email: string;
+  password: string;
+};
+
+export type SignUpFormType = {
+  name: string;
+  email: string;
+  password: string;
+};

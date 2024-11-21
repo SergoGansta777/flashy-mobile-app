@@ -1,14 +1,15 @@
+import GoogleButton from "@/components/core/google-button";
+import OrBlockSeparator from "@/components/core/or-block-separator";
 import TopHeaderImage from "@/components/core/top-header-image";
-import FormField from "@/components/form-field";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { Large, P } from "@/components/ui/typography";
 import { images } from "@/constants";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import type { SignInFormType } from "@/types";
 import { Link } from "expo-router";
 import type React from "react";
 import { useState } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
+import SignInForm from "./sign-in-form";
 
 type SignInScreenProps = {
   handleSignInButtonPress: () => void;
@@ -17,8 +18,7 @@ type SignInScreenProps = {
 const SignInScreen: React.FC<SignInScreenProps> = ({
   handleSignInButtonPress,
 }) => {
-  const [form, setForm] = useState({
-    name: "",
+  const [form, setForm] = useState<SignInFormType>({
     email: "",
     password: "",
   });
@@ -32,44 +32,18 @@ const SignInScreen: React.FC<SignInScreenProps> = ({
 
       <View className="h-full flex-1">
         <View className="mt-2 flex flex-col p-5">
-          <View className="flex flex-col gap-3">
-            <FormField
-              label="Email"
-              value={form.email}
-              placeholder="Enter email"
-              icon="mail"
-              onChangeText={(value) => setForm({ ...form, email: value })}
-            />
-            <FormField
-              label="Password"
-              value={form.password}
-              placeholder="Enter password"
-              icon="lock"
-              onChangeText={(value) => setForm({ ...form, password: value })}
-            />
-          </View>
+          <SignInForm form={form} setForm={setForm} />
 
           <View className="mt-40 flex flex-col gap-5">
             <Button size="lg">
               <Large className="text-primary-foreground">Log In</Large>
             </Button>
 
-            <View className="my-1 flex flex-row items-center justify-center gap-x-3">
-              <Separator />
-              <Text className="text-lg">Or</Text>
-              <Separator />
+            <View className="mx-auto my-1 flex w-10/12 flex-row items-center justify-center gap-x-3">
+              <OrBlockSeparator />
             </View>
 
-            <Button
-              variant="outline"
-              size="lg"
-              onPress={handleSignInButtonPress}
-            >
-              <View className="flex flex-row items-center">
-                <AntDesign name="google" size={24} />
-                <Large className="text-primary"> Log in with Google</Large>
-              </View>
-            </Button>
+            <GoogleButton text="Log In" handlePress={handleSignInButtonPress} />
 
             <P className="text-general-200 mt-4 text-center text-lg">
               Don't have an account?{" "}
