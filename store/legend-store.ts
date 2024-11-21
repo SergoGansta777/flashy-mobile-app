@@ -1,63 +1,99 @@
-import { supabase } from "@/lib/supabase";
-import { observable } from "@legendapp/state";
-import { observablePersistAsyncStorage } from "@legendapp/state/persist-plugins/async-storage";
-import { configureSynced } from "@legendapp/state/sync";
-import { syncedSupabase } from "@legendapp/state/sync-plugins/supabase";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { v4 as uuidv4 } from "uuid";
+import { initialCardDecks } from "@/constants";
+import { CardDeck } from "@/types";
+import { observable, observe } from "@legendapp/state";
 
-const generateId = () => uuidv4();
-
-const customSynced = configureSynced(syncedSupabase, {
-  persist: {
-    plugin: observablePersistAsyncStorage({
-      AsyncStorage,
-    }),
-  },
-  generateId,
-  supabase,
-  changesSince: "last-sync",
-  fieldCreatedAt: "created_at",
-  fieldUpdatedAt: "updated_at",
-  fieldDeleted: "deleted",
+// Initialize the observable state
+const state$ = observable({
+  decks: initialCardDecks, // initialize with your initial card decks
+  currentDeckId: null,
+  currentDeckCardFilter: null,
 });
 
-export const decks$ = observable(
-  customSynced({
-    supabase,
-    collection: "deck",
-    select: (from) =>
-      from.select(
-        `id, name, created_at, cards:flash_card(id, term, definition)`,
-      ),
-    persist: {
-      name: "decks-local-test-31",
-      retrySync: true, // Persist pending changes and retry
-    },
-    retry: {
-      infinite: true, // Retry changes with exponential backoff
-    },
-  }),
-);
-
-export const toggleFavorite = (deckId: string) => {
-  console.log(deckId);
-  decks$[deckId].set((prev) => ({
-    ...prev, // Spread the previous state to keep other properties
-    is_favorite: !prev.is_favorite, // Toggle the 'is_favorite' field
-  }));
+const addDeck = (deck: CardDeck) => {
+  state$.decks.set((decks) => [...decks, deck]);
+  state$.currentDeckId.set(deck.id); // Set the current deck after adding it
 };
 
-export const cards$ = observable(
-  customSynced({
-    supabase,
-    collection: "flash_card",
-    persist: {
-      name: "cards-local",
-      retrySync: true, // Persist pending changes and retry
-    },
-    retry: {
-      infinite: true, // Retry changes with exponential backoff
-    },
-  }),
-);
+const deleteDeck = (deckId: number) => {
+  state$.decks.set((decks) => {
+    const newDecks = decks.filter((deck) => deck.id !== deckId);
+    if (newDecks.length > 0 && state$.currentDeckId.get() === deckId) {
+      state$.currentDeckId.set(newDecks[0].id); // Set the new current deck
+    } else {
+      state$.currentDeckId.set(null);
+    }
+    return newDecks;
+  });
+};
+
+const updateDeck = (deckId: number, updatedDeck: Partial<CardDeck>) => {
+  state$.decks.set((decks) =>
+    decks.map((deck) =>
+      deck.id === deckId ? { ...deck, ...updatedDeck } : deck,
+    ),
+  );
+};
+
+const toggleFavorite = (deckId: number) => {
+  state$.decks.set((decks) =>
+    decks.map((deck) =>
+      deck.id === deckId ? { ...deck, isFavorite: !deck.isFavorite } : deck,
+    ),
+  );
+};
+
+const addCard = (deckId: number, card: FlashCard) => {
+  state$.decks.set((decks) =>
+    decks.map((deck) =>
+      deck.id === deckId ? { ...deck, cards: [...deck.cards, card] } : deck,
+    ),
+  );
+};
+
+const updateCard = (
+  deckId: number,
+  cardIndex: number,
+  updatedCard: Partial<FlashCard>,
+) => {
+  state$.decks.set((decks) =>
+    decks.map((deck) =>
+      deck.id === deckId
+        ? {
+            ...deck,
+            cards: deck.cards.map((card, index) =>
+              index === cardIndex ? { ...card, ...updatedCard } : card,
+            ),
+          }
+        : deck,
+    ),
+  );
+};
+
+const deleteCard = (deckId: number, cardIndex: number) => {
+  state$.decks.set((decks) =>
+    decks.map((deck) =>
+      deck.id === deckId
+        ? {
+            ...deck,
+            cards: deck.cards.filter((_, index) => index !== cardIndex),
+          }
+        : deck,
+    ),
+  );
+};
+
+const setCurrentDeck = (deckId: number) => {
+  const deckExists = state$.decks.get().some((deck) => deck.id === deckId);
+  if (deckExists) {
+    state$.currentDeckId.set(deckId);
+  }
+};
+
+const setCurrentDeckCardFilter = (ids: number[] | null) => {
+  state$.currentDeckCardFilter.set(ids);
+};
+
+// Observers for your store can now be easily set up using `observe`
+observe(() => {
+  console.log("Current Deck:", state$.currentDeckId.get());
+});

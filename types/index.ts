@@ -39,24 +39,3 @@ export type SignUpFormType = {
 };
 
 export type SortDirection = "asc" | "desc";
-
-export type FlashCardDb = {
-  id: string;
-  term: string;
-  definition: string;
-  deck_id: string;
-  created_at: Date;
-  updated_at: Date;
-  deleted: boolean;
-};
-
-export type DeckDb = {
-  id: string;
-  name: string;
-  is_favorite: boolean;
-  card_count: number;
-  cards: { string: FlashCardDb }[];
-  created_at: Date;
-  updated_at: Date;
-  deleted: boolean;
-};
