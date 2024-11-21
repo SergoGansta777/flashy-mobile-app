@@ -1,7 +1,7 @@
 import type React from "react";
 import { View } from "react-native";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 
 type FormFieldProps = {
   label: string;

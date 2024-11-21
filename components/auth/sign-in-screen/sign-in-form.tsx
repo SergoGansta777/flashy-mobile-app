@@ -1,4 +1,4 @@
-import FormField from "@/components/form-field";
+import FormField from "@/components/core/form-field";
 import type { SignInFormType } from "@/types";
 import type React from "react";
 import { View } from "react-native";
