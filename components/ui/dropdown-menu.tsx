@@ -1,8 +1,8 @@
+import { Check } from "@/assets/icons/Check";
+import { ChevronDown } from "@/assets/icons/ChevronDown";
+import { ChevronRight } from "@/assets/icons/ChevronRight";
+import { ChevronUp } from "@/assets/icons/ChevronUp";
 import { TextClassContext } from "@/components/ui/text";
-import { Check } from "@/lib/icons/Check";
-import { ChevronDown } from "@/lib/icons/ChevronDown";
-import { ChevronRight } from "@/lib/icons/ChevronRight";
-import { ChevronUp } from "@/lib/icons/ChevronUp";
 import { cn } from "@/lib/utils";
 import * as DropdownMenuPrimitive from "@rn-primitives/dropdown-menu";
 import * as React from "react";
