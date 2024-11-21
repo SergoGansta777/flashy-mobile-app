@@ -8,7 +8,7 @@ import {
 import type { CardDeck } from "@/types";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import * as Haptics from "expo-haptics";
-import { useRouter } from "expo-router";
+import { router } from "expo-router";
 import React, { useCallback, useRef, useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 import Swipeable, {
@@ -33,7 +33,6 @@ const DeckCard: React.FC<DeckCardProps> = ({
 }) => {
   const swipeRef = useRef<SwipeableMethods>(null);
   const [isSwiping, setIsSwiping] = useState(false);
-  const router = useRouter();
 
   const handleAction = useCallback(
     (action: string) => {
@@ -104,7 +103,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
       handleChangeCurrentDeck(deck.id);
       router.push({ pathname: "/deck/learn" });
     }
-  }, [isSwiping, deck.id, handleChangeCurrentDeck, router]);
+  }, [isSwiping, deck.id, handleChangeCurrentDeck]);
 
   return (
     <Swipeable
