@@ -1,9 +1,11 @@
-import type { CardDeck, SortDirection, SortOption } from "@/types";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Octicons from "@expo/vector-icons/Octicons";
 import React from "react";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+
+import type { CardDeck, SortDirection, SortOption } from "@/types";
+
 import { Button } from "../../ui/button";
 import {
   DropdownMenu,
@@ -21,23 +23,23 @@ type TopBarProps<T> = {
   searchQuery: string;
   handleSearchChange: (query: string) => void;
   sortDirection: SortDirection;
-  handleSortChange: (sortOption: any) => void;
+  handleSortChange: (sortOption: SortOption<T>) => void;
 };
 
 const TopBar: React.FC<TopBarProps<CardDeck>> = ({
   appName,
   currentSortOptionLabel,
+  sortOptions,
   searchQuery,
   handleSearchChange,
   sortDirection,
   handleSortChange,
-  sortOptions,
 }) => {
   const insets = useSafeAreaInsets();
 
   return (
     <View className="my-2 h-auto w-full rounded-b-full px-10">
-      {/* Top Bar with App Name and Notification Icon */}
+      {/* Top Bar Header: App Name and Notification Icon */}
       <View className="flex flex-row items-center justify-between">
         <H1>{appName}</H1>
         <Button
@@ -49,8 +51,9 @@ const TopBar: React.FC<TopBarProps<CardDeck>> = ({
         </Button>
       </View>
 
-      {/* Search Input and Sort Dropdown */}
+      {/* Search and Sort Section */}
       <View className="-ml-4 mt-2 flex w-full flex-row items-center gap-4">
+        {/* Search Input */}
         <Input
           icon="search1"
           placeholder="Decks, terms, definitions"
@@ -59,7 +62,7 @@ const TopBar: React.FC<TopBarProps<CardDeck>> = ({
           onChangeText={handleSearchChange}
         />
 
-        {/* Dropdown Menu for Sorting */}
+        {/* Sort Dropdown Menu */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
@@ -68,12 +71,13 @@ const TopBar: React.FC<TopBarProps<CardDeck>> = ({
               className="flex flex-row items-center px-2"
             >
               <Octicons
-                name={`${sortDirection === "desc" ? "sort-asc" : "sort-desc"}`}
+                name={sortDirection === "desc" ? "sort-asc" : "sort-desc"}
                 size={22}
                 color="#64738B"
               />
             </Button>
           </DropdownMenuTrigger>
+
           <DropdownMenuContent insets={insets} className="-mx-2.5">
             {sortOptions.map((option) => (
               <DropdownMenuItem
@@ -81,7 +85,9 @@ const TopBar: React.FC<TopBarProps<CardDeck>> = ({
                 onPress={() => handleSortChange(option)}
               >
                 <Small
-                  className={`text-md px-0.5 py-1 ${option.label === currentSortOptionLabel ? "font-bold" : ""}`}
+                  className={`text-md px-0.5 py-1 ${
+                    option.label === currentSortOptionLabel ? "font-bold" : ""
+                  }`}
                 >
                   {option.label}
                 </Small>

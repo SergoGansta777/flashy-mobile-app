@@ -1,7 +1,7 @@
 import { appName } from "@/constants";
 import { deckSortOptions } from "@/lib/sort";
 import { useDeckStore } from "@/store/deck-store";
-import { CardDeck, SortDirection, SortOption } from "@/types";
+import type { CardDeck, SortDirection, SortOption } from "@/types";
 import * as Haptics from "expo-haptics";
 import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
@@ -19,7 +19,7 @@ const HomeTab = () => {
   );
   const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
 
-  const sortAndSetDecks = (items: CardDeck[], query = searchQuery) => {
+  const sortAndSetDecks = (items: CardDeck[], query: string) => {
     const filteredItems = filterItems(query, items);
     const sortOptionConfig = deckSortOptions.find(
       (option) => option.label === sortOption,
@@ -39,8 +39,8 @@ const HomeTab = () => {
   };
 
   useEffect(() => {
-    sortAndSetDecks(decks);
-  }, [decks, sortOption, sortDirection]);
+    sortAndSetDecks(decks, searchQuery);
+  }, [decks, searchQuery]);
 
   const handleToggleFavorite = (deckId: number) => {
     toggleFavorite(deckId);
@@ -95,6 +95,7 @@ const HomeTab = () => {
           handleSortChange={handleSortChange}
           sortOptions={deckSortOptions}
         />
+
         <FlatList
           data={cardDecks}
           className="mb-18 rounded-t-2xl"
