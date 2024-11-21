@@ -5,6 +5,7 @@ import OnboardingSwiper from "./onboarding-swiper";
 import SkipButtonBar from "./skip-button";
 
 const WelcomeScreen = () => {
+  console.log("welcome rendered");
   return (
     <SafeAreaView className="flex h-full items-center justify-between bg-background">
       <SkipButtonBar />

@@ -1,6 +1,7 @@
 import { images } from "@/constants";
+import { router } from "expo-router";
 import type React from "react";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { Image, View } from "react-native";
 import { PieChart } from "react-native-gifted-charts";
 import StatsSection from "./stats-section";
@@ -11,12 +12,14 @@ type CompletedDeckProps = {
   known: number;
   stillLearning: number;
   total: number;
+  handleSetFilters: () => void;
 };
 
 const CompletedDeck: React.FC<CompletedDeckProps> = ({
   known,
   stillLearning,
   total,
+  handleSetFilters,
 }) => {
   const totalSwiped = useMemo(
     () => known + stillLearning,
@@ -35,6 +38,15 @@ const CompletedDeck: React.FC<CompletedDeckProps> = ({
     ],
     [known, stillLearning],
   );
+
+  const handleRelearnPress = useCallback(() => {
+    handleSetFilters();
+    router.replace("/(root)/deck/learn");
+  }, [handleSetFilters]);
+
+  const handleRestartPress = useCallback(() => {
+    router.replace("/(root)/deck/learn");
+  }, []);
 
   return (
     <View className="mt-16 flex h-full w-full items-center justify-start px-8">
@@ -92,7 +104,11 @@ const CompletedDeck: React.FC<CompletedDeckProps> = ({
               </Lead>
             </View>
           )}
-          <Button className="absolute bottom-40 w-full" size="lg">
+          <Button
+            className="absolute bottom-40 w-full"
+            size="lg"
+            onPress={handleRelearnPress}
+          >
             <Large className="font-medium text-primary-foreground">
               Keep reviewing {stillLearning}{" "}
               {stillLearning === 1 ? "term" : "terms"}
@@ -102,7 +118,11 @@ const CompletedDeck: React.FC<CompletedDeckProps> = ({
       )}
 
       {/* Restart Button */}
-      <Button className="absolute bottom-28 w-full" variant="ghost">
+      <Button
+        className="absolute bottom-28 w-full"
+        variant="ghost"
+        onPress={handleRestartPress}
+      >
         <Lead>Restart flashcards</Lead>
       </Button>
     </View>

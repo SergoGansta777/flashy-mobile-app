@@ -7,6 +7,7 @@ import { createJSONStorage, devtools, persist } from "zustand/middleware";
 type DeckStore = {
   decks: CardDeck[];
   currentDeckId: number | null;
+  currentDeckCardFilter: number[] | null;
   addDeck: (deck: CardDeck) => void;
   deleteDeck: (deckId: number) => void;
   updateDeck: (deckId: number, updatedDeck: Partial<CardDeck>) => void;
@@ -19,6 +20,7 @@ type DeckStore = {
   ) => void;
   deleteCard: (deckId: number, cardIndex: number) => void;
   setCurrentDeck: (deckId: number) => void;
+  setCurrentDeckCardFilter: (ids: number[] | null) => void;
 };
 
 export const useDeckStore = create<DeckStore>()(
@@ -27,6 +29,7 @@ export const useDeckStore = create<DeckStore>()(
       (set, get) => ({
         decks: initialCardDecks,
         currentDeckId: null,
+        currentDeckCardFilter: null,
 
         addDeck: (deck: CardDeck) => {
           set((state) => ({
@@ -116,10 +119,13 @@ export const useDeckStore = create<DeckStore>()(
             set({ currentDeckId: deckId });
           }
         },
+
+        setCurrentDeckCardFilter: (ids: number[] | null) =>
+          set({ currentDeckCardFilter: ids }),
       }),
       {
         name: "deck-storage",
-        version: 1,
+        version: 2,
         storage: createJSONStorage(() => AsyncStorage),
       },
     ),
