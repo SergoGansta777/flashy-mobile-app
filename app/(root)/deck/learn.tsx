@@ -1,3 +1,7 @@
-const DeckLearn = () => {};
+import DeckLearn from "@/components/deck-learn";
 
-export default DeckLearn;
+const Learn = () => {
+  return <DeckLearn />;
+};
+
+export default Learn;
