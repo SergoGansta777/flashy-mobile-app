@@ -3,9 +3,11 @@ import { clearDeckStore } from "@/lib/store";
 import React from "react";
 
 const Home = () => {
-  React.useEffect(() => {
+  const isTmpClear = false;
+
+  if (isTmpClear) {
     clearDeckStore();
-  }, []);
+  }
 
   return <HomeTab />;
 };

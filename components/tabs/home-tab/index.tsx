@@ -62,6 +62,7 @@ const HomeTab = () => {
         <FlatList
           data={cardDecks}
           className="mb-18 rounded-t-2xl"
+          keyExtractor={(item, _) => item.id.toString()}
           renderItem={({ item: deck }) => (
             <DeckCard
               deck={deck}

@@ -5,7 +5,11 @@ import { router } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 
-const TopBar = () => {
+type TopBarProps = {
+  saveDeck: () => void;
+};
+
+const TopBar: React.FC<TopBarProps> = ({ saveDeck }) => {
   return (
     <View className="mb-1 flex h-14 w-full flex-row items-center justify-between">
       <Button
@@ -23,6 +27,7 @@ const TopBar = () => {
       <Button
         variant="ghost"
         className="flex flex-row items-center justify-center"
+        onPress={() => saveDeck()}
       >
         <AntDesign name="check" className="-mt-0.5" size={24} />
       </Button>

@@ -31,7 +31,7 @@ const TopBar = <T,>({
   filterItems,
 }: TopBarProps<T>) => {
   const [sortOption, setSortOption] = useState(sortOptions[0].label);
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const insets = useSafeAreaInsets();
 

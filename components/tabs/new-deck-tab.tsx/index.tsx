@@ -1,5 +1,7 @@
+import { useDeckStore } from "@/store/deck-store";
 import { CardDeck } from "@/types";
 import * as Haptics from "expo-haptics";
+import { router } from "expo-router";
 import React, { useRef, useState } from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -23,6 +25,14 @@ const NewDeckTab = () => {
     repeatedAt: new Date(),
   });
 
+  const saveDeck = useDeckStore((state) => state.addDeck);
+
+  const handleSaveDeck = () => {
+    saveDeck(newDeck);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    router.replace("/(root)/(tabs)/home");
+  };
+
   const handleAddNewCard = () => {
     setNewDeck((prev) => ({
       ...prev,
@@ -31,7 +41,7 @@ const NewDeckTab = () => {
         { id: prev.cards.length, term: "", definition: "" },
       ],
     }));
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   };
 
   const handleDeleteCard = (cardId: number) => {
@@ -58,7 +68,7 @@ const NewDeckTab = () => {
 
   return (
     <SafeAreaView className="mt-1 flex h-full w-full flex-col bg-background">
-      <TopBar />
+      <TopBar saveDeck={handleSaveDeck} />
 
       <View className="mt-3 h-full w-full">
         <RenameDeck
@@ -72,7 +82,6 @@ const NewDeckTab = () => {
           <GestureHandlerRootView className="h-ful w-full">
             <FlatList
               data={newDeck.cards}
-              keyExtractor={(card, _) => card.id.toString()}
               className="w-full bg-background"
               renderItem={({ item: card }) => (
                 <Swipeable
