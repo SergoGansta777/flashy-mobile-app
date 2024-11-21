@@ -6,7 +6,7 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
-import { Muted } from "./ui/typography";
+import { Muted } from "../ui/typography";
 
 const SwipeInstructions = () => {
   const [message, setMessage] = useState(0);

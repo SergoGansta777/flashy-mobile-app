@@ -1,6 +1,6 @@
 import type React from "react";
 import { View } from "react-native";
-import { H4 } from "./ui/typography";
+import { H4 } from "../ui/typography";
 
 type StatItemProps = {
   label: string;

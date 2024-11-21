@@ -1,6 +1,6 @@
 import type React from "react";
 import { View } from "react-native";
-import { P } from "./ui/typography";
+import { P } from "../ui/typography";
 
 type SwipeCounterBar = {
   leftCounter: number;

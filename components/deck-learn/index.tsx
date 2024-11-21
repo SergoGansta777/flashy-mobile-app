@@ -1,6 +1,6 @@
 import { shuffle } from "@/lib/utils";
 import { useDeckStore } from "@/store/deck-store";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { SafeAreaView } from "react-native";
 import TopBar from "./deck-card-top-bar";
 import EmptyDeck from "./empty-deck";
@@ -17,24 +17,17 @@ const DeckLearn = () => {
   const [rightSwipedIds, setRightSwipedIds] = useState<number[]>([]);
   const [leftSwipedIds, setLeftSwipedIds] = useState<number[]>([]);
 
-  // Use useEffect to log the filter value when it changes
-  useEffect(() => {
-    console.log("Current Filter:", filter);
-  }, [filter]); // Runs when filter changes
-
-  // Apply the filter only if it's not empty
   const cards = deck?.cards.filter((card) => {
-    if (filter && filter.length > 0) {
-      return filter.includes(card.id); // Only show cards matching the filter
-    }
-    return true; // If no filter, show all cards
+    // if (filter && filter.length > 0) {
+    //   return filter.includes(card.id); // Only show cards matching the filter
+    // }
+    return true;
   });
 
   const shuffledCards = useMemo(() => shuffle(cards || []), [cards]);
 
   const handleSetFilter = () => {
-    console.log("Setting Filter to leftSwipedIds:", leftSwipedIds);
-    setFilter(leftSwipedIds); // Update filter with leftSwipedIds
+    setFilter(leftSwipedIds);
   };
 
   const totalCards = shuffledCards.length ?? 0;

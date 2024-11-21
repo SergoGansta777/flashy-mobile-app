@@ -1,8 +1,8 @@
 import { router } from "expo-router";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Button } from "./ui/button";
-import { BlockQuote, H3, Large, Lead } from "./ui/typography";
+import { Button } from "../ui/button";
+import { BlockQuote, H3, Large, Lead } from "../ui/typography";
 
 const EmptyDeck = () => {
   return (

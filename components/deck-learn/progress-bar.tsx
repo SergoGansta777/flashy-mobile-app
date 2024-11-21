@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { Progress } from "./ui/progress";
+import { Progress } from "../ui/progress";
 
 const ProgressBar = ({ value, total }: { value: number; total: number }) => (
   <View className="my-1 w-full">
