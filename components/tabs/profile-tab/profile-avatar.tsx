@@ -1,17 +1,19 @@
 import { H4, Large } from "@/components/ui/typography";
-import { getAvatarFallback } from "@/lib/utils";
+import { getAvatarFallback, getNameFromEmail } from "@/lib/utils";
 import React from "react";
 import { View } from "react-native";
 
 type ProfileAvatarProps = {
-  name: string;
-  lastName: string;
+  name?: string;
+  lastName?: string;
   avatarUrl?: string;
+  email?: string;
 };
 
 const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
   name,
   lastName,
+  email,
   avatarUrl,
 }) => {
   return (
@@ -21,13 +23,18 @@ const ProfileAvatar: React.FC<ProfileAvatarProps> = ({
           <img src={avatarUrl} alt="avatar" className="rounded-full" />
         ) : (
           <Large className="text-3xl">
-            {getAvatarFallback(name, lastName)}
+            {name && lastName && getAvatarFallback(name, lastName)}
+            {email && getAvatarFallback(email.charAt(0), "")}
           </Large>
         )}
       </View>
-      <H4 className="mb-4 mt-6">
-        {name} {lastName}
-      </H4>
+      {name && lastName ? (
+        <H4 className="mb-4 mt-6">
+          {name} {lastName}
+        </H4>
+      ) : (
+        <H4 className="mb-4 mt-6">{getNameFromEmail(email)}</H4>
+      )}
     </>
   );
 };

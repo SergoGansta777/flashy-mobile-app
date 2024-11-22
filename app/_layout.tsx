@@ -1,3 +1,4 @@
+import { SupabaseProvider } from "@/context/supabase-provider";
 import { PortalHost } from "@rn-primitives/portal";
 import { Stack } from "expo-router";
 import React from "react";
@@ -6,7 +7,7 @@ import "../global.css";
 
 export const RootLayout = () => {
   return (
-    <>
+    <SupabaseProvider>
       <StatusBar />
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
@@ -15,7 +16,7 @@ export const RootLayout = () => {
         <Stack.Screen name="+not-found" />
       </Stack>
       <PortalHost />
-    </>
+    </SupabaseProvider>
   );
 };
 

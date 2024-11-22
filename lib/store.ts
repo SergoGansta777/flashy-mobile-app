@@ -2,9 +2,9 @@ import { initialCardDecks } from "@/constants";
 import { useDeckStore } from "@/store/deck-store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const clearDeckStore = async () => {
+export const clearStorage = async () => {
   try {
-    await AsyncStorage.removeItem("deck-storage");
+    await AsyncStorage.clear();
 
     useDeckStore.setState({
       decks: initialCardDecks,

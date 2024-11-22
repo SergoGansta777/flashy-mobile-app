@@ -21,7 +21,7 @@ const DialogOverlayWeb = React.forwardRef<
   return (
     <DialogPrimitive.Overlay
       className={cn(
-        "absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black/80 p-2",
+        "absolute bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-gray-500/50 p-2",
         open
           ? "web:animate-in web:fade-in-0"
           : "web:animate-out web:fade-out-0",

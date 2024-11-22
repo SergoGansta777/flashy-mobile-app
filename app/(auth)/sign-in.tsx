@@ -1,17 +1,14 @@
 import SignInScreen from "@/components/auth/sign-in-screen";
+import { useSupabase } from "@/context/supabase-provider";
 import { Redirect } from "expo-router";
-import React, { useState } from "react";
+import React from "react";
 
 const SignIn = () => {
-  const [isSignedIn, setIsSignedIn] = useState(false);
+  const { user } = useSupabase();
 
-  if (isSignedIn) return <Redirect href="/(root)/(tabs)/home" />;
+  if (user) return <Redirect href="/(root)/(tabs)/home" />;
 
-  const handleSignUpButtonPress = () => {
-    setIsSignedIn(true);
-  };
-
-  return <SignInScreen handleSignInButtonPress={handleSignUpButtonPress} />;
+  return <SignInScreen />;
 };
 
 export default SignIn;

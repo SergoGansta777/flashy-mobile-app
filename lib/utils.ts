@@ -18,6 +18,10 @@ export function getAvatarFallback(name: string, lastName: string) {
   return (name.charAt(0) + lastName.charAt(0)).toUpperCase();
 }
 
+export function getNameFromEmail(email?: string) {
+  return email?.split("@")[0].toUpperCase();
+}
+
 export function getEmptyDeck() {
   return {
     id: 100,

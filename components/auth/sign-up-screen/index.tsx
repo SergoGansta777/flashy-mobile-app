@@ -1,32 +1,150 @@
+import FormField from "@/components/core/form-field";
 import GoogleButton from "@/components/core/google-button";
 import OrBlockSeparator from "@/components/core/or-block-separator";
 import TopHeaderImage from "@/components/core/top-header-image";
 import { Button } from "@/components/ui/button";
 import { Large, P } from "@/components/ui/typography";
 import { images } from "@/constants";
-import { Link } from "expo-router";
-import React, { useState } from "react";
-import { ScrollView, View } from "react-native";
-import SignUpForm from "./sign-up-form";
+import { useSupabase } from "@/context/supabase-provider";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Link, router } from "expo-router";
+import React from "react";
+import { Controller, FormProvider, useForm } from "react-hook-form";
+import { View } from "react-native";
+import * as z from "zod";
 
-const SignUpScreen = () => {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
+const userFormSchema = z
+  .object({
+    email: z.string().email("Please enter a valid email address."),
+    password: z
+      .string()
+      .min(6, "Please enter at least 6 characters.")
+      .max(64, "Please enter fewer than 64 characters.")
+      .regex(
+        /^(?=.*[a-z])/,
+        "Your password must have at least one lowercase letter.",
+      )
+      .regex(
+        /^(?=.*[A-Z])/,
+        "Your password must have at least one uppercase letter.",
+      )
+      .regex(/^(?=.*[0-9])/, "Your password must have at least one number."),
+    confirmPassword: z.string().min(8, "Please enter at least 6 characters."),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Your passwords do not match.",
+    path: ["confirmPassword"],
   });
 
+type userFormType = z.infer<typeof userFormSchema>;
+
+const SignUpScreen = () => {
+  const { signUp } = useSupabase();
+
+  const form = useForm<userFormType>({
+    resolver: zodResolver(userFormSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+  });
+
+  const onSubmit = async (data: z.infer<typeof userFormSchema>) => {
+    try {
+      await signUp(data.email, data.password);
+
+      form.reset();
+      router.replace("/(auth)/sign-in");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: Error | any) {
+      console.log(error.message);
+    }
+  };
+
   return (
-    <ScrollView className="flex-1 bg-background">
+    <View className="h-full bg-background">
       <View className="flex-1">
         <TopHeaderImage
           imageSource={images.logupHeader}
           headerText="Create Your Account"
         />
         <View className="flex flex-col gap-5 p-5">
-          <SignUpForm form={form} setForm={setForm} />
+          <View className="mb-7 flex flex-col gap-1.5">
+            <FormProvider {...form}>
+              <Controller
+                control={form.control}
+                name="email"
+                render={({
+                  field: { onChange, onBlur, value },
+                  fieldState: { error },
+                }) => {
+                  return (
+                    <FormField
+                      label="Email"
+                      value={value}
+                      placeholder="Enter email"
+                      icon="mail"
+                      onChangeText={onChange}
+                      onBlur={onBlur}
+                      errorMessage={error?.message}
+                      textContentType="email"
+                    />
+                  );
+                }}
+              />
+              <Controller
+                control={form.control}
+                name="password"
+                render={({
+                  field: { onChange, onBlur, value },
+                  fieldState: { error },
+                }) => {
+                  return (
+                    <FormField
+                      label="Password"
+                      value={value}
+                      placeholder="Enter password"
+                      icon="lock"
+                      onChangeText={onChange}
+                      onBlur={onBlur}
+                      errorMessage={error?.message}
+                      secureTextEntry={true}
+                      textContentType="newPassword"
+                    />
+                  );
+                }}
+              />
+              <Controller
+                control={form.control}
+                name="confirmPassword"
+                render={({
+                  field: { onChange, onBlur, value },
+                  fieldState: { error },
+                }) => {
+                  return (
+                    <FormField
+                      label="Confirm password"
+                      value={value}
+                      placeholder="Confirm password"
+                      icon="unlock"
+                      onChangeText={onChange}
+                      onBlur={onBlur}
+                      errorMessage={error?.message}
+                      secureTextEntry={true}
+                      textContentType="newPassword"
+                    />
+                  );
+                }}
+              />
+            </FormProvider>
+          </View>
 
-          <Button size="lg">
+          <Button
+            size="lg"
+            onPress={form.handleSubmit(onSubmit)}
+            disabled={form.formState.isSubmitting}
+          >
             <Large className="text-primary-foreground">Sign Up</Large>
           </Button>
 
@@ -44,7 +162,7 @@ const SignUpScreen = () => {
           </P>
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 
