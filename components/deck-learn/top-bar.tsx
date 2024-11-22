@@ -20,9 +20,7 @@ import { Muted, P } from "../ui/typography";
 const TopBar = ({
   totalSwiped,
   totalCards,
-  deckId,
 }: {
-  deckId?: string;
   totalSwiped: number;
   totalCards: number;
 }) => {
@@ -44,19 +42,18 @@ const TopBar = ({
       <Button variant="ghost" size="icon" onPress={() => router.back()}>
         <MoveLeft className="text-muted-foreground" size={28} />
       </Button>
-      {totalCards === 0 && (
+      {totalCards === 0 ? (
         <P className="pt-2 text-center align-bottom font-semibold text-muted-foreground">
           It&apos;s empty
         </P>
-      )}
-      {totalSwiped !== totalCards ? (
-        <Muted className="pt-2 text-center align-middle text-lg font-semibold">
-          {totalSwiped} / {totalCards}
-        </Muted>
-      ) : (
+      ) : totalSwiped === totalCards && totalCards ? (
         <P className="pt-2 text-center align-bottom font-semibold text-muted-foreground">
           Completed!
         </P>
+      ) : (
+        <Muted className="pt-2 text-center align-middle text-lg font-semibold">
+          {totalSwiped} / {totalCards}
+        </Muted>
       )}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
