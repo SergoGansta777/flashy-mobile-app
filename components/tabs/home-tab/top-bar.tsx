@@ -45,7 +45,7 @@ const TopBar: React.FC<TopBarProps<CardDeck>> = ({
       <View className="flex flex-row items-center justify-between">
         <H1 className="align-middle">{appName}</H1>
         <Button variant="ghost" size="icon" className="-mb-0.5">
-          <Bell className="text-primary" />
+          <Bell className="text-primary" fill="" />
         </Button>
       </View>
 
