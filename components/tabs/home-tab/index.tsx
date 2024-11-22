@@ -118,7 +118,7 @@ const HomeTab = () => {
         ) : (
           <View className="flex h-2/3 w-full items-center justify-center gap-1.5 px-20">
             <H3 className="mb-4 text-center">
-              It seems you haven’t created any decks yehcards to it.
+              It seems you haven’t created any decks cards to it.
             </H3>
 
             <P className="pt-1">
