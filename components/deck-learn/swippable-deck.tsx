@@ -1,3 +1,4 @@
+import { useSettingsStore } from "@/store/settings-store";
 import type { FlashCard } from "@/types";
 import * as Haptics from "expo-haptics";
 import type React from "react";
@@ -34,6 +35,7 @@ const SwippableDeck: React.FC<SwippableDeckProps> = ({
 }) => {
   const swiperRef = useRef<SwiperCardRefType>();
   const isSwiping = useSharedValue(false);
+  const { cardFlipDirection } = useSettingsStore();
 
   const OverlayLabelRight = useMemo(
     () => (
@@ -70,6 +72,7 @@ const SwippableDeck: React.FC<SwippableDeckProps> = ({
     },
     [handleSwipeToLeft, handleSwipeToRight],
   );
+
   return (
     <>
       <GestureHandlerRootView className="flex h-full w-full items-center justify-center">
@@ -79,8 +82,8 @@ const SwippableDeck: React.FC<SwippableDeckProps> = ({
           renderCard={(card) => {
             return (
               <FlipCard
-                flipVertical={false}
-                flipHorizontal
+                flipVertical={cardFlipDirection === "vertical"}
+                flipHorizontal={cardFlipDirection === "horizontal"}
                 friction={15}
                 clickable={!isSwiping.value}
               >

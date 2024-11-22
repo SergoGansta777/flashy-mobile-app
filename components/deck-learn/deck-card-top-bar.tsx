@@ -1,5 +1,9 @@
 import { Ellipsis } from "@/lib/icons/Ellipsis";
+import { FlipHorizontal } from "@/lib/icons/FlipHorizontal";
+import { FlipVertical } from "@/lib/icons/FlipVertical";
 import { MoveLeft } from "@/lib/icons/MoveLeft";
+import { Pencil } from "@/lib/icons/Pencil";
+import { useSettingsStore } from "@/store/settings-store";
 import { router } from "expo-router";
 import React from "react";
 import { View } from "react-native";
@@ -11,7 +15,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { Muted, P, Small } from "../ui/typography";
+import { Muted, P } from "../ui/typography";
 
 const TopBar = ({
   totalSwiped,
@@ -21,6 +25,13 @@ const TopBar = ({
   totalCards: number;
 }) => {
   const safeInsets = useSafeAreaInsets();
+  const { cardFlipDirection, setCardFlipDirection } = useSettingsStore();
+
+  const toggleCardFlipDirection = () => {
+    setCardFlipDirection(
+      cardFlipDirection === "horizontal" ? "vertical" : "horizontal",
+    );
+  };
 
   return (
     <View className="flex w-full flex-row items-center justify-between px-5">
@@ -48,11 +59,21 @@ const TopBar = ({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent insets={safeInsets}>
-          <DropdownMenuItem>
-            <Small>Change card flip direction</Small>
+          <DropdownMenuItem
+            className="flex flex-row items-center"
+            onPress={toggleCardFlipDirection}
+          >
+            {cardFlipDirection === "horizontal" && (
+              <FlipVertical className="text-foreground" size={20} />
+            )}
+            {cardFlipDirection === "vertical" && (
+              <FlipHorizontal className="text-foreground" size={20} />
+            )}
+            <P className="align-middle">Change flip direction</P>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Small>Edit this deck</Small>
+          <DropdownMenuItem className="flex flex-row items-center">
+            <Pencil className="text-foreground" size={20} />
+            <P className="align-middle">Edit this deck</P>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
