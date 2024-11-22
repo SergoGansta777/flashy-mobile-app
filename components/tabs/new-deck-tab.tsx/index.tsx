@@ -87,6 +87,7 @@ const NewDeckTab = () => {
           <GestureHandlerRootView className="h-ful w-full">
             <FlatList
               data={newDeck.cards}
+              automaticallyAdjustKeyboardInsets
               keyExtractor={(item) => item.id}
               className="w-full bg-background"
               renderItem={({ item: card }) => (
