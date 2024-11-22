@@ -17,6 +17,7 @@ export type FlashCard = {
 };
 
 export type SortOption<T> = {
+  id: number;
   icon: LucideIcon;
   label: string;
   sortFunction: (a: T, b: T) => number;

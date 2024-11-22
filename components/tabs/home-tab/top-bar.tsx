@@ -20,7 +20,7 @@ import { H1, Small } from "../../ui/typography";
 
 type TopBarProps<T> = {
   appName: string;
-  currentSortOptionLabel: string;
+  deckSortDirectionId: number;
   sortOptions: SortOption<T>[];
   searchQuery: string;
   handleSearchChange: (query: string) => void;
@@ -30,7 +30,7 @@ type TopBarProps<T> = {
 
 const TopBar: React.FC<TopBarProps<CardDeck>> = ({
   appName,
-  currentSortOptionLabel,
+  deckSortDirectionId,
   sortOptions,
   searchQuery,
   handleSearchChange,
@@ -90,12 +90,12 @@ const TopBar: React.FC<TopBarProps<CardDeck>> = ({
                 className="flex flex-row items-center"
               >
                 <option.icon
-                  className={`text-foreground ${option.label === currentSortOptionLabel ? "" : "opacity-80"}`}
+                  className={`text-foreground ${option.id === deckSortDirectionId ? "" : "opacity-80"}`}
                   size={20}
                 />
                 <Small
                   className={`text-md px-0.5 py-1 ${
-                    option.label === currentSortOptionLabel ? "font-bold" : ""
+                    option.id === deckSortDirectionId ? "font-bold" : ""
                   }`}
                 >
                   {option.label}

@@ -1,7 +1,8 @@
 import { appName } from "@/constants";
 import { deckSortOptions } from "@/lib/sort";
 import { useDeckStore } from "@/store/deck-store";
-import type { CardDeck, SortDirection, SortOption } from "@/types";
+import { useSettingsStore } from "@/store/settings-store";
+import type { CardDeck, SortOption } from "@/types";
 import * as Haptics from "expo-haptics";
 import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
@@ -13,13 +14,15 @@ import ZeroSearchResult from "./zero-search-results";
 
 const HomeTab = () => {
   const { decks, deleteDeck, toggleFavorite, setCurrentDeck } = useDeckStore();
+  const {
+    decksSortOptionId,
+    decksSortDirection,
+    setDecksSortOptionId,
+    setDecksSortDirection,
+  } = useSettingsStore();
 
   const [cardDecks, setCardDecks] = useState<CardDeck[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [sortOption, setSortOption] = useState<string>(
-    deckSortOptions[0].label,
-  );
-  const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
 
   const filterItems = (query: string, items = decks) => {
     if (!query.trim()) return items;
@@ -31,14 +34,14 @@ const HomeTab = () => {
     const filteredItems = filterItems(query, items);
 
     const sortOptionConfig = deckSortOptions.find(
-      (option) => option.label === sortOption,
+      (option) => option.id === decksSortOptionId,
     );
 
     if (sortOptionConfig) {
       const sortedItems = [...filteredItems].sort(
         sortOptionConfig.sortFunction,
       );
-      if (sortDirection === "desc") {
+      if (decksSortDirection === "desc") {
         sortedItems.reverse();
       }
       setCardDecks(sortedItems);
@@ -49,18 +52,18 @@ const HomeTab = () => {
 
   useEffect(() => {
     sortAndSetDecks(decks, searchQuery);
-  }, [decks, searchQuery, sortOption, sortDirection]);
+  }, [decks, searchQuery, decksSortOptionId, decksSortDirection]);
 
   const handleSortChange = (option: SortOption<CardDeck>) => {
     const newDirection =
-      option.label === sortOption
-        ? sortDirection === "asc"
+      option.id === decksSortOptionId
+        ? decksSortDirection === "asc"
           ? "desc"
           : "asc"
         : "asc";
 
-    setSortOption(option.label);
-    setSortDirection(newDirection);
+    setDecksSortOptionId(option.id);
+    setDecksSortDirection(newDirection);
   };
 
   const handleToggleFavorite = (deckId: string) => {
@@ -93,8 +96,8 @@ const HomeTab = () => {
           appName={appName}
           searchQuery={searchQuery}
           handleSearchChange={handleSearchChange}
-          currentSortOptionLabel={sortOption}
-          sortDirection={sortDirection}
+          deckSortDirectionId={decksSortOptionId}
+          sortDirection={decksSortDirection}
           handleSortChange={handleSortChange}
           sortOptions={deckSortOptions}
         />

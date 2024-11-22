@@ -8,9 +8,11 @@ type SettingsStore = {
   decksSortDirection: SortDirection;
   cardFlipDirection: CardFlipDirection;
   preferredColorTheme: ColorScheme;
+  decksSortOptionId: number;
   setDecksSortDirection: (direction: SortDirection) => void;
   setCardFlipDirection: (direction: CardFlipDirection) => void;
   setPreferredColorTheme: (theme: ColorScheme) => void;
+  setDecksSortOptionId: (id: number) => void;
 };
 
 export const useSettingsStore = create<SettingsStore>()(
@@ -20,12 +22,14 @@ export const useSettingsStore = create<SettingsStore>()(
         decksSortDirection: "asc",
         cardFlipDirection: "horizontal",
         preferredColorTheme: "system",
+        decksSortOptionId: 1,
 
         setDecksSortDirection: (direction) =>
           set({ decksSortDirection: direction }),
         setCardFlipDirection: (direction) =>
           set({ cardFlipDirection: direction }),
         setPreferredColorTheme: (theme) => set({ preferredColorTheme: theme }),
+        setDecksSortOptionId: (id) => set({ decksSortOptionId: id }),
       }),
       {
         name: "setting-storage-local",

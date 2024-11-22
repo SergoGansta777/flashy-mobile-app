@@ -6,6 +6,7 @@ import type { CardDeck } from "@/types";
 
 export const deckSortOptions = [
   {
+    id: 1,
     icon: Clock,
     label: "Created at",
     sortFunction: (a: CardDeck, b: CardDeck) =>
@@ -13,18 +14,21 @@ export const deckSortOptions = [
       new Date(a.createdAt || 0).getTime(),
   },
   {
+    id: 2,
     icon: Star,
     label: "Favorite",
     sortFunction: (a: CardDeck, b: CardDeck) =>
       Number(!!b.isFavorite) - Number(!!a.isFavorite),
   },
   {
+    id: 3,
     icon: Blocks,
     label: "Terms",
     sortFunction: (a: CardDeck, b: CardDeck) =>
       (b.cards?.length || 0) - (a.cards?.length || 0),
   },
   {
+    id: 4,
     icon: WholeWord,
     label: "Name",
     sortFunction: (a: CardDeck, b: CardDeck) =>
