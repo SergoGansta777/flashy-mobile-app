@@ -1,5 +1,6 @@
 import { shuffle } from "@/lib/utils";
 import { useDeckStore } from "@/store/deck-store";
+import { Redirect } from "expo-router";
 import React, { useMemo, useState } from "react";
 import { SafeAreaView } from "react-native";
 import EmptyDeck from "./empty-deck";
@@ -7,20 +8,23 @@ import LearnCards from "./learn-cards";
 import TopBar from "./top-bar";
 
 const DeckLearn = () => {
-  const deck = useDeckStore(
-    (state) =>
-      state.decks.find((deck) => deck.id === state.currentDeckId) || null,
+  const { getFilteredCardsForDeck, setCardFilter, cardFilter, currentDeckId } =
+    useDeckStore();
+
+  if (!currentDeckId) <Redirect href="/(root)/(tabs)/home" />;
+
+  const cards = useMemo(
+    () => getFilteredCardsForDeck(currentDeckId as string),
+    [cardFilter, currentDeckId],
   );
-  const setFilter = useDeckStore((state) => state.setCurrentDeckCardFilter);
 
   const [rightSwipedIds, setRightSwipedIds] = useState<string[]>([]);
   const [leftSwipedIds, setLeftSwipedIds] = useState<string[]>([]);
 
-  const cards = deck?.cards;
   const shuffledCards = useMemo(() => shuffle(cards || []), [cards]);
 
-  const handleSetFilter = () => {
-    setFilter(leftSwipedIds);
+  const handleLearnFurther = () => {
+    setCardFilter(leftSwipedIds);
   };
 
   const totalCards = shuffledCards.length ?? 0;
@@ -43,7 +47,7 @@ const DeckLearn = () => {
           addToKnown={(cardId: string) =>
             setRightSwipedIds((prev) => [...prev, cardId])
           }
-          handleSetFilters={handleSetFilter}
+          handleLearnFurther={handleLearnFurther}
         />
       ) : (
         <EmptyDeck />

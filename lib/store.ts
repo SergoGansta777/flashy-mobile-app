@@ -9,7 +9,7 @@ export const clearStorage = async () => {
     useDeckStore.setState({
       decks: initialCardDecks,
       currentDeckId: null,
-      currentDeckCardFilter: null,
+      cardFilter: null,
     });
 
     console.log("Deck store and storage cleared.");

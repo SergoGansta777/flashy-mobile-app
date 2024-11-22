@@ -6,7 +6,9 @@ import { createJSONStorage, devtools, persist } from "zustand/middleware";
 type DeckStore = {
   decks: CardDeck[];
   currentDeckId: string | null;
-  currentDeckCardFilter: string[] | null;
+  cardFilter: string[] | null;
+  setCardFilter: (cardIds: string[]) => void;
+  getFilteredCardsForDeck: (deckId: string) => FlashCard[];
   getDecksForUser: (userId?: string) => CardDeck[];
   addDeck: (deck: CardDeck) => void;
   deleteDeck: (deckId: string) => void;
@@ -20,7 +22,6 @@ type DeckStore = {
   ) => void;
   deleteCard: (deckId: string, cardId: string) => void;
   setCurrentDeck: (deckId: string) => void;
-  setCurrentDeckCardFilter: (ids: string[] | null) => void;
 };
 
 export const useDeckStore = create<DeckStore>()(
@@ -29,11 +30,28 @@ export const useDeckStore = create<DeckStore>()(
       (set, get) => ({
         decks: [],
         currentDeckId: null,
-        currentDeckCardFilter: null,
+        cardFilter: null,
 
         getDecksForUser: (userId?: string) => {
           const { decks } = get();
           return userId ? decks.filter((deck) => deck.userId === userId) : [];
+        },
+
+        getFilteredCardsForDeck: (deckId: string) => {
+          const { decks, cardFilter: currentDeckCardFilter } = get();
+          const deck = decks.find((d) => d.id === deckId);
+
+          if (!deck) {
+            return [];
+          }
+
+          if (!currentDeckCardFilter || currentDeckCardFilter.length === 0) {
+            return deck.cards;
+          }
+
+          return deck.cards.filter((card) =>
+            currentDeckCardFilter.includes(card.id),
+          );
         },
 
         addDeck: (deck: CardDeck) => {
@@ -122,11 +140,16 @@ export const useDeckStore = create<DeckStore>()(
           const deckExists = get().decks.some((deck) => deck.id === deckId);
           if (deckExists) {
             set({ currentDeckId: deckId });
+            set({ cardFilter: [] }); // clear card filters
           }
         },
 
         setCurrentDeckCardFilter: (ids: string[] | null) =>
-          set({ currentDeckCardFilter: ids }),
+          set({ cardFilter: ids }),
+
+        setCardFilter: (cardIds: string[]) => {
+          set({ cardFilter: cardIds });
+        },
       }),
       {
         name: "deck-storage-local",

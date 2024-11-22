@@ -13,7 +13,7 @@ type LearnCardsProps = {
   stillLearning: number;
   addToStillLearning: (cardId: string) => void;
   addToKnown: (cardId: string) => void;
-  handleSetFilters: () => void;
+  handleLearnFurther: () => void;
 };
 
 const LearnCards: React.FC<LearnCardsProps> = ({
@@ -24,7 +24,7 @@ const LearnCards: React.FC<LearnCardsProps> = ({
   stillLearning,
   addToKnown,
   addToStillLearning,
-  handleSetFilters,
+  handleLearnFurther,
 }) => {
   return (
     <>
@@ -44,7 +44,7 @@ const LearnCards: React.FC<LearnCardsProps> = ({
           known={known}
           stillLearning={stillLearning}
           total={totalCards}
-          handleSetFilters={handleSetFilters}
+          handleSetFilters={handleLearnFurther}
         />
       )}
     </>
