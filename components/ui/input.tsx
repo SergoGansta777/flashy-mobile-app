@@ -26,7 +26,7 @@ const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
             <View className="focus:border-primary-500 relative flex w-full flex-row items-center justify-start rounded-full border border-input bg-background">
               {Icon && (
                 <View className="ml-3.5 mr-0.5">
-                  <Icon className="text-foreground opacity-60" />
+                  <Icon className="text-foreground opacity-80" />
                 </View>
               )}
 

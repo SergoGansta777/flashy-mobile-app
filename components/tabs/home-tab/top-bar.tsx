@@ -70,12 +70,12 @@ const TopBar: React.FC<TopBarProps<CardDeck>> = ({
             >
               {sortDirection === "asc" ? (
                 <ArrowUpNarrowWide
-                  className="text-primary opacity-60"
+                  className="text-muted-foreground"
                   size={26}
                 />
               ) : (
                 <ArrowDownWideNarrow
-                  className="text-primary opacity-60"
+                  className="text-muted-foreground"
                   size={26}
                 />
               )}

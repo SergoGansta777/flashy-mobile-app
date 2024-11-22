@@ -17,7 +17,7 @@ export default function Layout() {
           marginHorizontal: 20,
           marginBottom: 20,
           paddingHorizontal: 14,
-          height: 78,
+          height: 88,
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
@@ -35,7 +35,7 @@ export default function Layout() {
             <NavBarIconWrapper focused={focused}>
               <House
                 className={`${focused ? "text-accent-foreground" : "text-secondary"}`}
-                size={38}
+                size={45}
               />
             </NavBarIconWrapper>
           ),
@@ -50,7 +50,7 @@ export default function Layout() {
             <NavBarIconWrapper focused={focused}>
               <BadgePlus
                 className={`${focused ? "text-accent-foreground" : "text-secondary"}`}
-                size={38}
+                size={45}
               />
             </NavBarIconWrapper>
           ),
@@ -66,7 +66,7 @@ export default function Layout() {
               <NavBarIconWrapper focused={focused}>
                 <User
                   className={`${focused ? "text-accent-foreground" : "text-secondary"}`}
-                  size={38}
+                  size={45}
                 />
               </NavBarIconWrapper>
             );

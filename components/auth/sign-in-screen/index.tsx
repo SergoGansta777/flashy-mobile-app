@@ -49,7 +49,7 @@ const SignInScreen = () => {
   };
 
   return (
-    <View className="h-full flex-1 bg-background/95">
+    <View className="h-full flex-1 bg-background">
       <TopHeaderImage
         headerText="Welcome 👋"
         imageSource={images.loginHeader}

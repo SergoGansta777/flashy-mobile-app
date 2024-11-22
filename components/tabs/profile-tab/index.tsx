@@ -23,7 +23,7 @@ const ProfileTab = () => {
   const { signOut, user } = useSupabase();
 
   return (
-    <SafeAreaView className="relative flex h-full w-full flex-col items-center bg-background/95">
+    <SafeAreaView className="relative flex h-full w-full flex-col items-center bg-background">
       <Dialog className="ml-auto">
         <DialogTrigger asChild>
           <Button className="mx-6 ml-auto px-3" variant="ghost" size="icon">

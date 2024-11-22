@@ -11,7 +11,7 @@ const NavBarIconWrapper: React.FC<
 > = ({ focused, children }) => {
   return (
     <View
-      className={`h-20 w-20 items-center justify-center rounded-full ${
+      className={`mt-1 h-20 w-20 items-center justify-center rounded-full ${
         focused ? "bg-secondary" : ""
       }`}
     >
