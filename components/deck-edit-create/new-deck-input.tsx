@@ -23,6 +23,8 @@ const NewDeckInput: React.FC<NewDeckInputProps> = ({
         className={`h-auto min-h-12 border-b-2 border-primary/70 px-1.5 pb-1.5 text-xl ${isBold ? "font-semibold" : "font-medium"} text-accent-foreground`}
         value={value}
         onChangeText={onChangeText}
+        autoCapitalize="none"
+        autoCorrect={false}
         multiline
       />
       <Text className="mt-0.5 text-sm font-normal tracking-wide text-primary">
