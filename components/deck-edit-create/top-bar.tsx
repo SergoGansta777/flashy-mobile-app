@@ -24,7 +24,7 @@ const TopBar: React.FC<TopBarProps> = ({
         className="flex flex-row items-center justify-center"
         onPress={handleResetDeck}
       >
-        <X className="text-primary" size={28} />
+        <X className="text-destructive" size={28} />
       </Button>
 
       <Small className="text-md mt-1 font-medium text-primary/80">
@@ -37,7 +37,7 @@ const TopBar: React.FC<TopBarProps> = ({
         className="flex flex-row items-center justify-center"
         onPress={handleSaveDeck}
       >
-        <Check className="text-primary" size={28} />
+        <Check className="text-green-500" size={28} />
       </Button>
     </View>
   );
