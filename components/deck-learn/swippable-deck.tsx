@@ -5,11 +5,21 @@ import { useCallback, useMemo, useRef } from "react";
 import { View } from "react-native";
 import FlipCard from "react-native-flip-card";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { runOnJS, useSharedValue } from "react-native-reanimated";
+import {
+  configureReanimatedLogger,
+  ReanimatedLogLevel,
+  runOnJS,
+  useSharedValue,
+} from "react-native-reanimated";
 import { Swiper, type SwiperCardRefType } from "rn-swiper-list";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { H1, Muted, P } from "../ui/typography";
 import SwipeInstructions from "./swipe-instructions";
+
+configureReanimatedLogger({
+  level: ReanimatedLogLevel.warn,
+  strict: false,
+});
 
 export type SwippableDeckProps = {
   handleSwipeToLeft: (cardId: string) => void;
@@ -75,12 +85,12 @@ const SwippableDeck: React.FC<SwippableDeckProps> = ({
                 clickable={!isSwiping.value}
               >
                 <View>
-                  <Card className="h-[600px] w-[350px] shadow">
+                  <Card className="h-[600px] w-[350px] px-2 shadow">
                     <CardHeader>
                       <Muted>What is that?</Muted>
                     </CardHeader>
                     <CardContent className="my-auto flex flex-col items-center justify-center">
-                      <H1 className="flex flex-col items-center justify-center text-4xl font-semibold">
+                      <H1 className="text-center text-4xl font-semibold tracking-wide">
                         {card.term}
                       </H1>
                     </CardContent>
@@ -89,12 +99,12 @@ const SwippableDeck: React.FC<SwippableDeckProps> = ({
                 </View>
 
                 <View>
-                  <Card className="h-[600px] w-[350px] shadow">
+                  <Card className="h-[600px] w-[350px] px-2 shadow">
                     <CardHeader>
                       <Muted>Correct answer is</Muted>
                     </CardHeader>
-                    <CardContent className="my-auto flex flex-col items-center justify-center">
-                      <P className="mx-auto flex w-11/12 flex-col items-center justify-center text-3xl font-medium">
+                    <CardContent className="mx-auto my-auto flex w-full flex-col items-center justify-center">
+                      <P className="w-auto text-2xl font-medium tracking-tight">
                         {card.definition}
                       </P>
                     </CardContent>
