@@ -49,7 +49,19 @@ const HomeTab = () => {
 
   useEffect(() => {
     sortAndSetDecks(decks, searchQuery);
-  }, [decks, searchQuery]);
+  }, [decks, searchQuery, sortOption, sortDirection]);
+
+  const handleSortChange = (option: SortOption<CardDeck>) => {
+    const newDirection =
+      option.label === sortOption
+        ? sortDirection === "asc"
+          ? "desc"
+          : "asc"
+        : "asc";
+
+    setSortOption(option.label);
+    setSortDirection(newDirection);
+  };
 
   const handleToggleFavorite = (deckId: string) => {
     toggleFavorite(deckId);
@@ -72,18 +84,6 @@ const HomeTab = () => {
   const handleSearchChange = (query: string) => {
     setSearchQuery(query);
     sortAndSetDecks(decks, query);
-  };
-
-  const handleSortChange = (option: SortOption<CardDeck>) => {
-    const newDirection =
-      option.label === sortOption
-        ? sortDirection === "asc"
-          ? "desc"
-          : "asc"
-        : "asc";
-
-    setSortOption(option.label);
-    setSortDirection(newDirection);
   };
 
   return (

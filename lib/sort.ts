@@ -9,22 +9,25 @@ export const deckSortOptions = [
     icon: Clock,
     label: "Created at",
     sortFunction: (a: CardDeck, b: CardDeck) =>
-      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+      new Date(b.createdAt || 0).getTime() -
+      new Date(a.createdAt || 0).getTime(),
   },
   {
     icon: Star,
     label: "Favorite",
     sortFunction: (a: CardDeck, b: CardDeck) =>
-      Number(b.isFavorite) - Number(a.isFavorite),
+      Number(!!b.isFavorite) - Number(!!a.isFavorite),
   },
   {
     icon: Blocks,
     label: "Terms",
-    sortFunction: (a: CardDeck, b: CardDeck) => b.cards.length - a.cards.length,
+    sortFunction: (a: CardDeck, b: CardDeck) =>
+      (b.cards?.length || 0) - (a.cards?.length || 0),
   },
   {
     icon: WholeWord,
     label: "Name",
-    sortFunction: (a: CardDeck, b: CardDeck) => a.name.localeCompare(b.name),
+    sortFunction: (a: CardDeck, b: CardDeck) =>
+      (a.name || "").localeCompare(b.name || ""),
   },
 ];
