@@ -1,11 +1,12 @@
 import { appName } from "@/constants";
+import { useSupabase } from "@/context/supabase-provider";
 import { deckSortOptions } from "@/lib/sort";
 import { useDeckStore } from "@/store/deck-store";
 import { useSettingsStore } from "@/store/settings-store";
 import type { CardDeck, SortOption } from "@/types";
 import * as Haptics from "expo-haptics";
-import { router } from "expo-router";
-import React, { useEffect, useState } from "react";
+import { Redirect, router } from "expo-router";
+import React, { useEffect, useMemo, useState } from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import DeckCard from "./deck-card";
@@ -14,7 +15,11 @@ import ZeroDecks from "./zero-decks";
 import ZeroSearchResult from "./zero-search-results";
 
 const HomeTab = () => {
-  const { decks, deleteDeck, toggleFavorite, setCurrentDeck } = useDeckStore();
+  const { user } = useSupabase();
+  if (!user) <Redirect href="/(auth)/sign-in" />;
+
+  const { getDecksForUser, deleteDeck, toggleFavorite, setCurrentDeck } =
+    useDeckStore();
   const {
     decksSortOptionId,
     decksSortDirection,
@@ -24,6 +29,11 @@ const HomeTab = () => {
 
   const [cardDecks, setCardDecks] = useState<CardDeck[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
+
+  const decks = useMemo(
+    () => getDecksForUser(user?.id),
+    [user?.id, getDecksForUser],
+  );
 
   const filterItems = (query: string, items = decks) => {
     if (!query.trim()) return items;

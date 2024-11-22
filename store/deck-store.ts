@@ -7,6 +7,7 @@ type DeckStore = {
   decks: CardDeck[];
   currentDeckId: string | null;
   currentDeckCardFilter: string[] | null;
+  getDecksForUser: (userId?: string) => CardDeck[];
   addDeck: (deck: CardDeck) => void;
   deleteDeck: (deckId: string) => void;
   updateDeck: (deckId: string, updatedDeck: Partial<CardDeck>) => void;
@@ -29,6 +30,11 @@ export const useDeckStore = create<DeckStore>()(
         decks: [],
         currentDeckId: null,
         currentDeckCardFilter: null,
+
+        getDecksForUser: (userId?: string) => {
+          const { decks } = get();
+          return userId ? decks.filter((deck) => deck.userId === userId) : [];
+        },
 
         addDeck: (deck: CardDeck) => {
           set((state) => ({
