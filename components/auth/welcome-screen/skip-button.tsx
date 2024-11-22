@@ -11,7 +11,7 @@ const SkipButtonBar = () => {
       }}
       className="flex w-11/12 items-end justify-end p-5"
     >
-      <P className="text-primary">Skip</P>
+      <P className="text-medium text-primary">Skip</P>
     </TouchableOpacity>
   );
 };
