@@ -1,7 +1,7 @@
-import AntDesign from "@expo/vector-icons/AntDesign";
+import { LucideIcon } from "lucide-react-native";
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
-import ColorForIconWrapper from "./color-for-icon-wrapper";
+import { TouchableOpacity } from "react-native";
+import { P } from "../ui/typography";
 
 type ActionButtonProps = {
   onPress?: () => void;
@@ -9,26 +9,30 @@ type ActionButtonProps = {
   bgColor: string;
   textColor: string;
   width: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  icon: any;
+  Icon?: LucideIcon;
+  fillIcon?: boolean;
 };
 
 const ActionButton: React.FC<ActionButtonProps> = ({
   onPress,
-  icon,
+  Icon,
   label,
   width,
   bgColor,
   textColor,
+  fillIcon = false,
 }) => (
   <TouchableOpacity
     className={`mx-auto flex h-full flex-col justify-center rounded-2xl ${bgColor} ${width} px-3`}
     onPress={onPress}
   >
-    <ColorForIconWrapper className={`mx-auto ${textColor}`}>
-      <AntDesign name={icon} size={24} />
-    </ColorForIconWrapper>
-    <Text className={`mx-auto mt-1.5 ${textColor}`}>{label}</Text>
+    {Icon && fillIcon && (
+      <Icon className={`mx-auto ${textColor}`} fill="yellow" />
+    )}
+    {Icon && !fillIcon && (
+      <Icon className={`mx-auto ${textColor}`} fill="none" />
+    )}
+    <P className={`mx-auto mt-1.5 ${textColor}`}>{label}</P>
   </TouchableOpacity>
 );
 

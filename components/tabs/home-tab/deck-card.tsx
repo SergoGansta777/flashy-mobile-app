@@ -1,5 +1,4 @@
 import ActionButton from "@/components/core/action-button";
-import ColorForIconWrapper from "@/components/core/color-for-icon-wrapper";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -17,16 +16,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Pencil } from "@/lib/icons/Pencil";
+import { Star } from "@/lib/icons/Star";
+import { Trash2 } from "@/lib/icons/Trash2";
 import type { CardDeck } from "@/types";
-import AntDesign from "@expo/vector-icons/AntDesign";
 import * as Haptics from "expo-haptics";
 import { router } from "expo-router";
 import React, { useCallback, useRef, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import Swipeable, {
   type SwipeableMethods,
 } from "react-native-gesture-handler/ReanimatedSwipeable";
-import { H2, Small } from "../../ui/typography";
+import { H2, P, Small } from "../../ui/typography";
 
 type DeckCardProps = {
   deck: CardDeck;
@@ -72,11 +73,12 @@ const DeckCard: React.FC<DeckCardProps> = ({
       <View className="my-3 mr-3 flex w-32 flex-row items-center justify-center bg-none px-4">
         <ActionButton
           onPress={() => handleAction("favorite")}
-          icon={deck.isFavorite ? "star" : "staro"}
+          Icon={Star}
           label="Favorite"
           width="w-full"
           bgColor="bg-primary"
           textColor="text-primary-foreground"
+          fillIcon={deck.isFavorite}
         />
       </View>
     ),
@@ -88,7 +90,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
       <View className="my-3 -mr-1 ml-2 flex w-48 flex-row items-center justify-center gap-3 bg-none px-4">
         <ActionButton
           onPress={() => handleAction("edit")}
-          icon="edit"
+          Icon={Pencil}
           label="Edit"
           width="w-1/2"
           bgColor="bg-secondary"
@@ -97,7 +99,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
         <Dialog className="w-1/2">
           <DialogTrigger asChild>
             <ActionButton
-              icon="delete"
+              Icon={Trash2}
               label="Delete"
               width="w-full"
               bgColor="bg-destructive"
@@ -118,7 +120,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
                   variant="destructive"
                   onPress={() => handleAction("delete")}
                 >
-                  <Text className="text-destructive-foreground">OK</Text>
+                  <P className="text-destructive-foreground">OK</P>
                 </Button>
               </DialogClose>
             </DialogFooter>
@@ -154,14 +156,17 @@ const DeckCard: React.FC<DeckCardProps> = ({
               <H2 className="border-b-0 pb-1.5 font-medium tracking-wide">
                 {deck.name}
               </H2>
-              <TouchableOpacity onPress={() => handleToggleFavorite(deck.id)}>
-                <ColorForIconWrapper className="text-accent-foreground">
-                  <AntDesign
-                    name={deck.isFavorite ? "star" : "staro"}
-                    size={22}
-                  />
-                </ColorForIconWrapper>
-              </TouchableOpacity>
+              <Button
+                size="icon"
+                variant="ghost"
+                onPress={() => handleToggleFavorite(deck.id)}
+              >
+                {deck.isFavorite ? (
+                  <Star className="text-primary" fill="yellow" />
+                ) : (
+                  <Star className="text-primary" fill="none" />
+                )}
+              </Button>
             </View>
             <CardDescription>Terms: {deck.cards.length}</CardDescription>
           </CardHeader>

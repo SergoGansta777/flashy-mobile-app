@@ -27,8 +27,9 @@ const DeckLearn = () => {
   const totalSwiped = rightSwipedIds.length + leftSwipedIds.length;
 
   return (
-    <SafeAreaView className="flex flex-1 flex-col items-center bg-background px-4">
+    <SafeAreaView className="flex flex-1 flex-col items-center bg-background/95 px-4">
       <TopBar totalSwiped={totalSwiped} totalCards={totalCards} />
+
       {totalCards > 0 ? (
         <LearnCards
           cards={shuffledCards}

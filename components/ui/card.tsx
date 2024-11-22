@@ -1,6 +1,6 @@
 import { TextClassContext } from "@/components/ui/text";
 import { cn } from "@/lib/utils";
-import type { TextRef, ViewRef } from "@rn-primitives/types";
+import { TextRef, ViewRef } from "@rn-primitives/types";
 import * as React from "react";
 import { Text, type TextProps, View, type ViewProps } from "react-native";
 
@@ -9,7 +9,7 @@ const Card = React.forwardRef<ViewRef, ViewProps>(
     <View
       ref={ref}
       className={cn(
-        "rounded-2xl border-border bg-card shadow shadow-foreground/10",
+        "rounded-xl bg-card shadow shadow-foreground/10",
         className,
       )}
       {...props}

@@ -1,9 +1,9 @@
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { Ellipsis } from "@/lib/icons/Ellipsis";
+import { MoveLeft } from "@/lib/icons/MoveLeft";
 import { router } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import ColorForIconWrapper from "../core/color-for-icon-wrapper";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
@@ -11,7 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { P, Small } from "../ui/typography";
+import { Muted, P, Small } from "../ui/typography";
 
 const TopBar = ({
   totalSwiped,
@@ -23,31 +23,28 @@ const TopBar = ({
   const safeInsets = useSafeAreaInsets();
 
   return (
-    <View className="flex w-full flex-row items-center justify-between text-muted">
-      <Button
-        variant="ghost"
-        className="flex items-center justify-center"
-        onPress={() => router.back()}
-      >
-        <ColorForIconWrapper className="text-primary opacity-50">
-          <MaterialCommunityIcons name="keyboard-backspace" size={28} />
-        </ColorForIconWrapper>
+    <View className="flex w-full flex-row items-center justify-between px-5">
+      <Button variant="ghost" size="icon" onPress={() => router.back()}>
+        <MoveLeft className="text-muted-foreground" size={28} />
       </Button>
-      {totalCards === 0 ? (
+      {totalCards === 0 && (
         <P className="pt-2 text-center align-bottom font-semibold text-muted-foreground">
           It&apos;s empty
         </P>
+      )}
+      {totalSwiped !== totalCards ? (
+        <Muted className="pt-2 text-center align-middle text-lg font-semibold">
+          {totalSwiped} / {totalCards}
+        </Muted>
       ) : (
         <P className="pt-2 text-center align-bottom font-semibold text-muted-foreground">
-          {totalSwiped} / {totalCards}
+          Completed!
         </P>
       )}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" className="flex items-center justify-center">
-            <ColorForIconWrapper className="text-primary opacity-50">
-              <MaterialCommunityIcons name="dots-horizontal" size={28} />
-            </ColorForIconWrapper>
+          <Button variant="ghost" size="icon">
+            <Ellipsis className="text-muted-foreground" size={28} />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent insets={safeInsets}>

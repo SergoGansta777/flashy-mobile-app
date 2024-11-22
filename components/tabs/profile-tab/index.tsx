@@ -1,4 +1,3 @@
-import ColorForIconWrapper from "@/components/core/color-for-icon-wrapper";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -12,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { P } from "@/components/ui/typography";
 import { useSupabase } from "@/context/supabase-provider";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import { LogOut } from "@/lib/icons/LogOut";
 import React from "react";
 import { SafeAreaView, View } from "react-native";
 import AchievementsSection from "./achievements-section";
@@ -24,13 +23,11 @@ const ProfileTab = () => {
   const { signOut, user } = useSupabase();
 
   return (
-    <SafeAreaView className="relative flex h-full w-full flex-col items-center bg-background">
+    <SafeAreaView className="relative flex h-full w-full flex-col items-center bg-background/95">
       <Dialog className="ml-auto">
         <DialogTrigger asChild>
-          <Button className="mx-6 ml-auto px-3" variant="ghost" size="lg">
-            <ColorForIconWrapper className="text-primary">
-              <AntDesign name="logout" size={22} />
-            </ColorForIconWrapper>
+          <Button className="mx-6 ml-auto px-3" variant="ghost" size="icon">
+            <LogOut className="mr-1 mt-1 text-primary" />
           </Button>
         </DialogTrigger>
         <DialogContent className="mx-10">

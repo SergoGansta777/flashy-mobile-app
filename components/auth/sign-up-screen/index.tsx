@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Large, P } from "@/components/ui/typography";
 import { images } from "@/constants";
 import { useSupabase } from "@/context/supabase-provider";
+import { Lock } from "@/lib/icons/Lock";
+import { LockKeyhole } from "@/lib/icons/LockKeychole";
+import { Mail } from "@/lib/icons/Mail";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, router } from "expo-router";
 import React from "react";
@@ -84,7 +87,7 @@ const SignUpScreen = () => {
                       label="Email"
                       value={value}
                       placeholder="Enter email"
-                      icon="mail"
+                      Icon={Mail}
                       onChangeText={onChange}
                       onBlur={onBlur}
                       errorMessage={error?.message}
@@ -105,7 +108,7 @@ const SignUpScreen = () => {
                       label="Password"
                       value={value}
                       placeholder="Enter password"
-                      icon="lock"
+                      Icon={Lock}
                       onChangeText={onChange}
                       onBlur={onBlur}
                       errorMessage={error?.message}
@@ -127,7 +130,7 @@ const SignUpScreen = () => {
                       label="Confirm password"
                       value={value}
                       placeholder="Confirm password"
-                      icon="unlock"
+                      Icon={LockKeyhole}
                       onChangeText={onChange}
                       onBlur={onBlur}
                       errorMessage={error?.message}

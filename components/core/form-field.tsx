@@ -1,3 +1,4 @@
+import { LucideIcon } from "lucide-react-native";
 import type React from "react";
 import { View } from "react-native";
 import { Input } from "../ui/input";
@@ -11,16 +12,16 @@ type FormFieldProps = {
   onChangeText?: (value: string) => void;
   onBlur?: () => void;
   errorMessage?: string;
-  icon?: string;
   secureTextEntry?: boolean;
   textContentType?: string;
+  Icon?: LucideIcon;
 };
 
 const FormField: React.FC<FormFieldProps> = ({
   label,
   placeholder,
   value,
-  icon,
+  Icon,
   onChangeText,
   onBlur,
   errorMessage,
@@ -35,7 +36,7 @@ const FormField: React.FC<FormFieldProps> = ({
         placeholder={placeholder}
         value={value}
         onChangeText={onChangeText}
-        icon={icon}
+        Icon={Icon}
         autoCorrect={false}
         autoCapitalize="none"
         onBlur={onBlur}

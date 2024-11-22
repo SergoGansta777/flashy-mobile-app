@@ -1,7 +1,7 @@
-import ColorForIconWrapper from "@/components/core/color-for-icon-wrapper";
 import { Button } from "@/components/ui/button";
 import { Small } from "@/components/ui/typography";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import { Check } from "@/lib/icons/Check";
+import { X } from "@/lib/icons/X";
 import React from "react";
 import { View } from "react-native";
 
@@ -15,15 +15,14 @@ const TopBar: React.FC<TopBarProps> = ({
   handleResetNewDeck,
 }) => {
   return (
-    <View className="mb-1 flex h-14 w-full flex-row items-center justify-between">
+    <View className="mb-1 flex h-14 w-full flex-row items-center justify-between px-5">
       <Button
         variant="ghost"
+        size="icon"
         className="flex flex-row items-center justify-center"
         onPress={handleResetNewDeck}
       >
-        <ColorForIconWrapper className="text-primary">
-          <AntDesign name="close" className="-mt-0.5" size={24} />
-        </ColorForIconWrapper>
+        <X className="text-primary" size={28} />
       </Button>
 
       <Small className="text-md mt-1 font-medium text-primary/80">
@@ -32,12 +31,11 @@ const TopBar: React.FC<TopBarProps> = ({
 
       <Button
         variant="ghost"
+        size="icon"
         className="flex flex-row items-center justify-center"
         onPress={handleSaveDeck}
       >
-        <ColorForIconWrapper className="mb-0.5 text-primary">
-          <AntDesign className="" name="check" size={24} />
-        </ColorForIconWrapper>
+        <Check className="text-primary" size={28} />
       </Button>
     </View>
   );

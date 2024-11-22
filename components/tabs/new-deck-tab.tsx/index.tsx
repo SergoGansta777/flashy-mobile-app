@@ -1,5 +1,6 @@
 import ActionButton from "@/components/core/action-button";
 import { useSupabase } from "@/context/supabase-provider";
+import { BadgeX } from "@/lib/icons/BadgeX";
 import { getEmptyDeck, getRandomUuid } from "@/lib/utils";
 import { useDeckStore } from "@/store/deck-store";
 import { CardDeck } from "@/types";
@@ -94,14 +95,14 @@ const NewDeckTab = () => {
                 <Swipeable
                   ref={swipeRef}
                   renderRightActions={() => (
-                    <View className="my-3 mr-3 flex w-32 flex-row items-center justify-center bg-none px-4 py-1">
+                    <View className="my-3 mr-3 flex w-32 flex-row items-center justify-center bg-none px-4 pb-1.5 pt-1">
                       <ActionButton
                         onPress={() => handleDeleteCard(card.id)}
                         label="Delete"
                         bgColor="bg-destructive"
                         textColor="text-destructive-foreground"
                         width="w-full"
-                        icon="minuscircleo"
+                        Icon={BadgeX}
                       />
                     </View>
                   )}

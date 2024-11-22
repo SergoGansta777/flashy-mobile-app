@@ -1,5 +1,7 @@
 import NavBarIconWrapper from "@/components/core/nav-bar-icon-wrapper";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import { BadgePlus } from "@/lib/icons/BadgePlus";
+import { House } from "@/lib/icons/House";
+import { User } from "@/lib/icons/User";
 import { Tabs } from "expo-router";
 import React from "react";
 
@@ -8,11 +10,8 @@ export default function Layout() {
     <Tabs
       initialRouteName="home"
       screenOptions={{
-        tabBarActiveTintColor: "white",
-        tabBarInactiveTintColor: "black",
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: "#333333",
           borderRadius: 50,
           overflow: "hidden",
           marginHorizontal: 20,
@@ -34,10 +33,9 @@ export default function Layout() {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <NavBarIconWrapper focused={focused}>
-              <AntDesign
-                name="home"
-                size={34}
-                color={focused ? "black" : "white"}
+              <House
+                className={`${focused ? "text-accent-foreground" : "text-secondary"}`}
+                size={38}
               />
             </NavBarIconWrapper>
           ),
@@ -50,10 +48,9 @@ export default function Layout() {
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <NavBarIconWrapper focused={focused}>
-              <AntDesign
-                name="pluscircleo"
-                size={34}
-                color={focused ? "black" : "white"}
+              <BadgePlus
+                className={`${focused ? "text-accent-foreground" : "text-secondary"}`}
+                size={38}
               />
             </NavBarIconWrapper>
           ),
@@ -67,10 +64,9 @@ export default function Layout() {
           tabBarIcon: ({ focused }) => {
             return (
               <NavBarIconWrapper focused={focused}>
-                <AntDesign
-                  name="user"
-                  size={34}
-                  color={focused ? "black" : "white"}
+                <User
+                  className={`${focused ? "text-accent-foreground" : "text-secondary"}`}
+                  size={38}
                 />
               </NavBarIconWrapper>
             );

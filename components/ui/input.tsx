@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import { LucideIcon } from "lucide-react-native";
 import * as React from "react";
 import {
   Keyboard,
@@ -10,15 +10,13 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
-import ColorForIconWrapper from "../core/color-for-icon-wrapper";
 
 type InputProps = TextInputProps & {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  icon?: any;
+  Icon?: LucideIcon;
 };
 
 const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
-  ({ className, placeholderClassName, icon, ...props }, ref) => {
+  ({ className, placeholderClassName, Icon, ...props }, ref) => {
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -26,10 +24,10 @@ const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View className="my-2 w-full">
             <View className="focus:border-primary-500 relative flex w-full flex-row items-center justify-start rounded-full border border-input bg-background">
-              {icon && (
-                <ColorForIconWrapper className="ml-4 text-foreground opacity-50">
-                  <AntDesign name={icon} size={24} />
-                </ColorForIconWrapper>
+              {Icon && (
+                <View className="ml-3.5 mr-0.5">
+                  <Icon className="text-foreground opacity-60" />
+                </View>
               )}
 
               <TextInput

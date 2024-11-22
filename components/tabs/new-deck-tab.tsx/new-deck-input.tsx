@@ -20,7 +20,7 @@ const NewDeckInput: React.FC<NewDeckInputProps> = ({
     <View>
       <TextInput
         placeholder={placeholder}
-        className={`h-auto border-b-2 px-1.5 pb-2.5 text-xl ${isBold ? "font-semibold" : "font-medium"} text-accent-foreground`}
+        className={`h-auto border-b-2 border-primary px-1.5 pb-2.5 text-xl ${isBold ? "font-semibold" : "font-medium"} text-accent-foreground`}
         value={value}
         onChangeText={onChangeText}
       />

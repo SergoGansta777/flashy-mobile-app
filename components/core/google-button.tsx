@@ -13,7 +13,7 @@ type GoogleButtonProps = {
 const GoogleButton: React.FC<GoogleButtonProps> = ({ text, handlePress }) => {
   return (
     <Button variant="outline" size="lg" onPress={handlePress}>
-      <View className="flex flex-row items-center">
+      <View className="flex flex-row items-center gap-0.5">
         <ColorForIconWrapper className="text-primary">
           <AntDesign name="google" size={24} />
         </ColorForIconWrapper>

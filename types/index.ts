@@ -1,3 +1,5 @@
+import { LucideIcon } from "lucide-react-native";
+
 export type CardDeck = {
   id: string;
   userId: string;
@@ -15,6 +17,7 @@ export type FlashCard = {
 };
 
 export type SortOption<T> = {
+  icon: LucideIcon;
   label: string;
   sortFunction: (a: T, b: T) => number;
 };

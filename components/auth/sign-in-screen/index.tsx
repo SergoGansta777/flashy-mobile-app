@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Large, Muted, P } from "@/components/ui/typography";
 import { images } from "@/constants";
 import { useSupabase } from "@/context/supabase-provider";
+import { Lock } from "@/lib/icons/Lock";
+import { Mail } from "@/lib/icons/Mail";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "expo-router";
 import type React from "react";
@@ -47,7 +49,7 @@ const SignInScreen = () => {
   };
 
   return (
-    <View className="h-full flex-1 bg-background">
+    <View className="h-full flex-1 bg-background/95">
       <TopHeaderImage
         headerText="Welcome 👋"
         imageSource={images.loginHeader}
@@ -69,7 +71,7 @@ const SignInScreen = () => {
                       label="Email"
                       value={value}
                       placeholder="Enter email"
-                      icon="mail"
+                      Icon={Mail}
                       onChangeText={onChange}
                       onBlur={onBlur}
                       errorMessage={error?.message}
@@ -90,7 +92,7 @@ const SignInScreen = () => {
                       label="Password"
                       value={value}
                       placeholder="Enter password"
-                      icon="lock"
+                      Icon={Lock}
                       onChangeText={onChange}
                       onBlur={onBlur}
                       errorMessage={error?.message}

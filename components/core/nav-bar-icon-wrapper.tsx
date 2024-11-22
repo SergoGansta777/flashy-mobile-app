@@ -11,17 +11,11 @@ const NavBarIconWrapper: React.FC<
 > = ({ focused, children }) => {
   return (
     <View
-      className={`flex flex-row items-center justify-center rounded-full ${
-        focused ? "bg-general-300" : ""
+      className={`h-20 w-20 items-center justify-center rounded-full ${
+        focused ? "bg-secondary" : ""
       }`}
     >
-      <View
-        className={`h-16 w-16 items-center justify-center rounded-full ${
-          focused ? "bg-secondary" : ""
-        }`}
-      >
-        {children}
-      </View>
+      {children}
     </View>
   );
 };
