@@ -11,8 +11,8 @@ type LearnCardsProps = {
   totalCards: number;
   known: number;
   stillLearning: number;
-  addToStillLearning: (index: number) => void;
-  addToKnown: (index: number) => void;
+  addToStillLearning: (cardId: string) => void;
+  addToKnown: (cardId: string) => void;
   handleSetFilters: () => void;
 };
 

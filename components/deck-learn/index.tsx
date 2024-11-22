@@ -13,8 +13,8 @@ const DeckLearn = () => {
   );
   const setFilter = useDeckStore((state) => state.setCurrentDeckCardFilter);
 
-  const [rightSwipedIds, setRightSwipedIds] = useState<number[]>([]);
-  const [leftSwipedIds, setLeftSwipedIds] = useState<number[]>([]);
+  const [rightSwipedIds, setRightSwipedIds] = useState<string[]>([]);
+  const [leftSwipedIds, setLeftSwipedIds] = useState<string[]>([]);
 
   const cards = deck?.cards;
   const shuffledCards = useMemo(() => shuffle(cards || []), [cards]);
@@ -36,11 +36,11 @@ const DeckLearn = () => {
           totalCards={totalCards}
           known={rightSwipedIds.length}
           stillLearning={leftSwipedIds.length}
-          addToStillLearning={(index: number) =>
-            setLeftSwipedIds((prev) => [...prev, index])
+          addToStillLearning={(cardId: string) =>
+            setLeftSwipedIds((prev) => [...prev, cardId])
           }
-          addToKnown={(index: number) =>
-            setRightSwipedIds((prev) => [...prev, index])
+          addToKnown={(cardId: string) =>
+            setRightSwipedIds((prev) => [...prev, cardId])
           }
           handleSetFilters={handleSetFilter}
         />
