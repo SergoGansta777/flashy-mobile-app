@@ -42,3 +42,7 @@ export type SignUpFormType = {
 };
 
 export type SortDirection = "asc" | "desc";
+
+export type CardFlipDirection = "horizontal" | "vertical";
+
+export type ColorScheme = "light" | "dark" | "system";
