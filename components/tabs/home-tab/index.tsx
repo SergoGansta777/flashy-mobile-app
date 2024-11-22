@@ -6,7 +6,7 @@ import { useSettingsStore } from "@/store/settings-store";
 import type { CardDeck, SortOption } from "@/types";
 import * as Haptics from "expo-haptics";
 import { Redirect, router } from "expo-router";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import DeckCard from "./deck-card";
@@ -16,7 +16,7 @@ import ZeroSearchResult from "./zero-search-results";
 
 const HomeTab = () => {
   const { user } = useSupabase();
-  if (!user) <Redirect href="/(auth)/sign-in" />;
+  if (!user) return <Redirect href="/(auth)/sign-in" />;
 
   const { getDecksForUser, deleteDeck, toggleFavorite, setCurrentDeck } =
     useDeckStore();
@@ -27,7 +27,6 @@ const HomeTab = () => {
     setDecksSortDirection,
   } = useSettingsStore();
 
-  const [cardDecks, setCardDecks] = useState<CardDeck[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   const decks = useMemo(
@@ -35,35 +34,44 @@ const HomeTab = () => {
     [user?.id, getDecksForUser],
   );
 
-  const filterItems = (query: string, items = decks) => {
-    if (!query.trim()) return items;
-    const lowerQuery = query.toLowerCase();
-    return items.filter((deck) => deck.name.toLowerCase().includes(lowerQuery));
-  };
-
-  const sortAndSetDecks = (items: CardDeck[], query: string) => {
-    const filteredItems = filterItems(query, items);
-
-    const sortOptionConfig = deckSortOptions.find(
-      (option) => option.id === decksSortOptionId,
-    );
-
-    if (sortOptionConfig) {
-      const sortedItems = [...filteredItems].sort(
-        sortOptionConfig.sortFunction,
+  const filterItems = useCallback(
+    (query: string, items = decks) => {
+      if (!query.trim()) return items;
+      const lowerQuery = query.toLowerCase();
+      return items.filter((deck) =>
+        deck.name.toLowerCase().includes(lowerQuery),
       );
-      if (decksSortDirection === "desc") {
-        sortedItems.reverse();
-      }
-      setCardDecks(sortedItems);
-    } else {
-      setCardDecks(filteredItems);
-    }
-  };
+    },
+    [decks],
+  );
 
-  useEffect(() => {
-    sortAndSetDecks(decks, searchQuery);
-  }, [decks, searchQuery, decksSortOptionId, decksSortDirection]);
+  const sortAndSetDecks = useCallback(
+    (query: string) => {
+      const filteredItems = filterItems(query);
+
+      const sortOptionConfig = deckSortOptions.find(
+        (option) => option.id === decksSortOptionId,
+      );
+
+      if (sortOptionConfig) {
+        const sortedItems = [...filteredItems].sort(
+          sortOptionConfig.sortFunction,
+        );
+        if (decksSortDirection === "desc") {
+          sortedItems.reverse();
+        }
+        return sortedItems;
+      }
+
+      return filteredItems;
+    },
+    [filterItems, decksSortOptionId, decksSortDirection],
+  );
+
+  const cardDecks = useMemo(
+    () => sortAndSetDecks(searchQuery),
+    [decks, searchQuery, sortAndSetDecks],
+  );
 
   const handleSortChange = (option: SortOption<CardDeck>) => {
     const newDirection =
@@ -98,7 +106,6 @@ const HomeTab = () => {
 
   const handleSearchChange = (query: string) => {
     setSearchQuery(query);
-    sortAndSetDecks(decks, query);
   };
 
   return (
