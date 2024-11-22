@@ -1,4 +1,5 @@
 import ActionButton from "@/components/core/action-button";
+import ColorForIconWrapper from "@/components/core/color-for-icon-wrapper";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -76,7 +77,6 @@ const DeckCard: React.FC<DeckCardProps> = ({
           width="w-full"
           bgColor="bg-primary"
           textColor="text-primary-foreground"
-          iconColor="white"
         />
       </View>
     ),
@@ -93,7 +93,6 @@ const DeckCard: React.FC<DeckCardProps> = ({
           width="w-1/2"
           bgColor="bg-secondary"
           textColor="text-secondary-foreground"
-          iconColor="#192133"
         />
         <Dialog className="w-1/2">
           <DialogTrigger asChild>
@@ -103,7 +102,6 @@ const DeckCard: React.FC<DeckCardProps> = ({
               width="w-full"
               bgColor="bg-destructive"
               textColor="text-destructive-foreground"
-              iconColor="#F8F7F9"
             />
           </DialogTrigger>
           <DialogContent className="mx-2">
@@ -157,10 +155,12 @@ const DeckCard: React.FC<DeckCardProps> = ({
                 {deck.name}
               </H2>
               <TouchableOpacity onPress={() => handleToggleFavorite(deck.id)}>
-                <AntDesign
-                  name={deck.isFavorite ? "star" : "staro"}
-                  size={22}
-                />
+                <ColorForIconWrapper className="text-accent-foreground">
+                  <AntDesign
+                    name={deck.isFavorite ? "star" : "staro"}
+                    size={22}
+                  />
+                </ColorForIconWrapper>
               </TouchableOpacity>
             </View>
             <CardDescription>Terms: {deck.cards.length}</CardDescription>

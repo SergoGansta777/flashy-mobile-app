@@ -10,6 +10,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from "react-native";
+import ColorForIconWrapper from "../core/color-for-icon-wrapper";
 
 type InputProps = TextInputProps & {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -26,12 +27,9 @@ const Input = React.forwardRef<React.ElementRef<typeof TextInput>, InputProps>(
           <View className="my-2 w-full">
             <View className="focus:border-primary-500 relative flex w-full flex-row items-center justify-start rounded-full border border-input bg-background">
               {icon && (
-                <AntDesign
-                  name={icon}
-                  size={24}
-                  className="ml-4"
-                  color="#64738B"
-                />
+                <ColorForIconWrapper className="ml-4 text-foreground opacity-50">
+                  <AntDesign name={icon} size={24} />
+                </ColorForIconWrapper>
               )}
 
               <TextInput

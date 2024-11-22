@@ -1,3 +1,4 @@
+import ColorForIconWrapper from "@/components/core/color-for-icon-wrapper";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -27,7 +28,9 @@ const ProfileTab = () => {
       <Dialog className="ml-auto">
         <DialogTrigger asChild>
           <Button className="mx-6 ml-auto px-3" variant="ghost" size="lg">
-            <AntDesign name="logout" size={22} />
+            <ColorForIconWrapper className="text-primary">
+              <AntDesign name="logout" size={22} />
+            </ColorForIconWrapper>
           </Button>
         </DialogTrigger>
         <DialogContent className="mx-10">

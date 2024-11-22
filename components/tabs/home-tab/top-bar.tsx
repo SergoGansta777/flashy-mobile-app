@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import type { CardDeck, SortDirection, SortOption } from "@/types";
 
+import ColorForIconWrapper from "@/components/core/color-for-icon-wrapper";
 import { Button } from "../../ui/button";
 import {
   DropdownMenu,
@@ -47,7 +48,9 @@ const TopBar: React.FC<TopBarProps<CardDeck>> = ({
           size="sm"
           className="flex flex-row items-center px-0"
         >
-          <Ionicons name="notifications" size={22} />
+          <ColorForIconWrapper className="text-primary">
+            <Ionicons name="notifications" size={22} />
+          </ColorForIconWrapper>
         </Button>
       </View>
 
@@ -70,11 +73,12 @@ const TopBar: React.FC<TopBarProps<CardDeck>> = ({
               size="sm"
               className="flex flex-row items-center px-2"
             >
-              <Octicons
-                name={sortDirection === "desc" ? "sort-asc" : "sort-desc"}
-                size={22}
-                color="#64738B"
-              />
+              <ColorForIconWrapper className="text-primary opacity-50">
+                <Octicons
+                  name={sortDirection === "desc" ? "sort-asc" : "sort-desc"}
+                  size={22}
+                />
+              </ColorForIconWrapper>
             </Button>
           </DropdownMenuTrigger>
 

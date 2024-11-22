@@ -1,3 +1,4 @@
+import ColorForIconWrapper from "@/components/core/color-for-icon-wrapper";
 import { Button } from "@/components/ui/button";
 import { Small } from "@/components/ui/typography";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -20,7 +21,9 @@ const TopBar: React.FC<TopBarProps> = ({
         className="flex flex-row items-center justify-center"
         onPress={handleResetNewDeck}
       >
-        <AntDesign name="close" className="-mt-0.5" size={24} />
+        <ColorForIconWrapper className="text-primary">
+          <AntDesign name="close" className="-mt-0.5" size={24} />
+        </ColorForIconWrapper>
       </Button>
 
       <Small className="text-md mt-1 font-medium text-primary/80">
@@ -32,7 +35,9 @@ const TopBar: React.FC<TopBarProps> = ({
         className="flex flex-row items-center justify-center"
         onPress={handleSaveDeck}
       >
-        <AntDesign name="check" className="-mt-0.5" size={24} />
+        <ColorForIconWrapper className="mb-0.5 text-primary">
+          <AntDesign className="" name="check" size={24} />
+        </ColorForIconWrapper>
       </Button>
     </View>
   );

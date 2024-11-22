@@ -101,7 +101,6 @@ const NewDeckTab = () => {
                         bgColor="bg-destructive"
                         textColor="text-destructive-foreground"
                         width="w-full"
-                        iconColor="#F9FAFC"
                         icon="minuscircleo"
                       />
                     </View>
