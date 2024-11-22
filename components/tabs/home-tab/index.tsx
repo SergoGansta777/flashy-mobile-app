@@ -4,6 +4,7 @@ import { useDeckStore } from "@/store/deck-store";
 import { useSettingsStore } from "@/store/settings-store";
 import type { CardDeck, SortOption } from "@/types";
 import * as Haptics from "expo-haptics";
+import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -77,7 +78,8 @@ const HomeTab = () => {
   };
 
   const handleEdit = (deckId: string) => {
-    console.log("Edit action not implemented for deckId:", deckId);
+    setCurrentDeck(deckId);
+    router.push("/(root)/deck/edit");
   };
 
   const handleChangeCurrentDeck = (deckId: string) => {

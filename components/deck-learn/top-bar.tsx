@@ -20,7 +20,9 @@ import { Muted, P } from "../ui/typography";
 const TopBar = ({
   totalSwiped,
   totalCards,
+  deckId,
 }: {
+  deckId?: string;
   totalSwiped: number;
   totalCards: number;
 }) => {
@@ -31,6 +33,10 @@ const TopBar = ({
     setCardFlipDirection(
       cardFlipDirection === "horizontal" ? "vertical" : "horizontal",
     );
+  };
+
+  const handleEdit = () => {
+    router.push("/(root)/deck/edit");
   };
 
   return (
@@ -71,7 +77,10 @@ const TopBar = ({
             )}
             <P className="align-middle">Change flip direction</P>
           </DropdownMenuItem>
-          <DropdownMenuItem className="flex flex-row items-center">
+          <DropdownMenuItem
+            className="flex flex-row items-center"
+            onPress={handleEdit}
+          >
             <Pencil className="text-foreground" size={20} />
             <P className="align-middle">Edit this deck</P>
           </DropdownMenuItem>

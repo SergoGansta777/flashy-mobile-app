@@ -2,9 +2,9 @@ import { shuffle } from "@/lib/utils";
 import { useDeckStore } from "@/store/deck-store";
 import React, { useMemo, useState } from "react";
 import { SafeAreaView } from "react-native";
-import TopBar from "./deck-card-top-bar";
 import EmptyDeck from "./empty-deck";
 import LearnCards from "./learn-cards";
+import TopBar from "./top-bar";
 
 const DeckLearn = () => {
   const deck = useDeckStore(

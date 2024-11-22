@@ -1,4 +1,4 @@
-import NewDeckTab from "@/components/tabs/new-deck-tab.tsx";
+import NewDeckTab from "@/components/deck-edit-create/CreateDeck";
 import React from "react";
 
 const NewDeck = () => {

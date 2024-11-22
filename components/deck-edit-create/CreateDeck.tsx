@@ -73,7 +73,8 @@ const NewDeckTab = () => {
     <SafeAreaView className="mt-1 flex h-full w-full flex-col bg-background">
       <TopBar
         handleSaveDeck={handleSaveDeck}
-        handleResetNewDeck={handleResetNewDeck}
+        handleResetDeck={handleResetNewDeck}
+        headerText="Create new deck of flash cards"
       />
 
       <View className="mt-3 h-full w-full">
