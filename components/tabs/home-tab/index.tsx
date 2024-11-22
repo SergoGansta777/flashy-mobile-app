@@ -1,8 +1,11 @@
+import { Button } from "@/components/ui/button";
+import { H3, Muted, P } from "@/components/ui/typography";
 import { appName } from "@/constants";
 import { deckSortOptions } from "@/lib/sort";
 import { useDeckStore } from "@/store/deck-store";
 import type { CardDeck, SortDirection, SortOption } from "@/types";
 import * as Haptics from "expo-haptics";
+import { router } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -42,21 +45,21 @@ const HomeTab = () => {
     sortAndSetDecks(decks, searchQuery);
   }, [decks, searchQuery]);
 
-  const handleToggleFavorite = (deckId: number) => {
+  const handleToggleFavorite = (deckId: string) => {
     toggleFavorite(deckId);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   };
 
-  const handleDelete = (deckId: number) => {
+  const handleDelete = (deckId: string) => {
     deleteDeck(deckId);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
   };
 
-  const handleEdit = (deckId: number) => {
+  const handleEdit = (deckId: string) => {
     console.log("Edit action not implemented for deckId:", deckId);
   };
 
-  const handleChangeCurrentDeck = (deckId: number) => {
+  const handleChangeCurrentDeck = (deckId: string) => {
     setCurrentDeck(deckId);
   };
 
@@ -96,21 +99,40 @@ const HomeTab = () => {
           sortOptions={deckSortOptions}
         />
 
-        <FlatList
-          data={cardDecks}
-          className="mb-18 rounded-t-2xl"
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item: deck }) => (
-            <DeckCard
-              deck={deck}
-              handleToggleFavorite={handleToggleFavorite}
-              handleDelete={handleDelete}
-              handleEdit={handleEdit}
-              handleChangeCurrentDeck={handleChangeCurrentDeck}
-            />
-          )}
-          ListFooterComponent={<View className="h-24" />}
-        />
+        {cardDecks.length > 0 ? (
+          <FlatList
+            data={cardDecks}
+            className="mb-18 rounded-t-2xl"
+            keyExtractor={(item) => item.id}
+            renderItem={({ item: deck }) => (
+              <DeckCard
+                deck={deck}
+                handleToggleFavorite={handleToggleFavorite}
+                handleDelete={handleDelete}
+                handleEdit={handleEdit}
+                handleChangeCurrentDeck={handleChangeCurrentDeck}
+              />
+            )}
+            ListFooterComponent={<View className="h-24" />}
+          />
+        ) : (
+          <View className="flex h-2/3 w-full items-center justify-center gap-1.5 px-20">
+            <H3 className="mb-4 text-center">
+              It seems you haven’t created any decks yehcards to it.
+            </H3>
+
+            <P className="pt-1">
+              Tap the &quot;+&quot; icon in the navigation bar to create your
+              first deck and start adding flashcards to it.
+            </P>
+            <Button
+              variant="link"
+              onPress={() => router.push("/(root)/(tabs)/new-deck")}
+            >
+              <Muted>Or simply click here to get started!</Muted>
+            </Button>
+          </View>
+        )}
       </GestureHandlerRootView>
     </SafeAreaView>
   );

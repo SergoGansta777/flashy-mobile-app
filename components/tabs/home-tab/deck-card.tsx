@@ -29,10 +29,10 @@ import { H2, Small } from "../../ui/typography";
 
 type DeckCardProps = {
   deck: CardDeck;
-  handleToggleFavorite: (id: number) => void;
-  handleDelete: (id: number) => void;
-  handleEdit: (id: number) => void;
-  handleChangeCurrentDeck: (id: number) => void;
+  handleToggleFavorite: (id: string) => void;
+  handleDelete: (id: string) => void;
+  handleEdit: (id: string) => void;
+  handleChangeCurrentDeck: (id: string) => void;
 };
 
 const DeckCard: React.FC<DeckCardProps> = ({

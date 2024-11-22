@@ -1,6 +1,6 @@
 export type CardDeck = {
-  id: number;
-  userId: number;
+  id: string;
+  userId: string;
   name: string;
   createdAt: Date;
   repeatedAt?: Date;
@@ -9,7 +9,7 @@ export type CardDeck = {
 };
 
 export type FlashCard = {
-  id: number;
+  id: string;
   term: string;
   definition: string;
 };

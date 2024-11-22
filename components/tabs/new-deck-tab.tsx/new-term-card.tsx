@@ -3,11 +3,11 @@ import React from "react";
 import NewDeckInput from "./new-deck-input";
 
 type NewTermCardProps = {
-  cardId: number;
+  cardId: string;
   term: string;
   definition: string;
   handleUpdateCard: (
-    index: number,
+    cardId: string,
     key: "term" | "definition",
     value: string,
   ) => void;

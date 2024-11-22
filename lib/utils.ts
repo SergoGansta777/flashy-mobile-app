@@ -1,4 +1,6 @@
+import { CardDeck } from "@/types";
 import { type ClassValue, clsx } from "clsx";
+import * as Crypto from "expo-crypto";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -22,14 +24,17 @@ export function getNameFromEmail(email?: string) {
   return email?.split("@")[0].toUpperCase();
 }
 
-export function getEmptyDeck() {
+export function getRandomUuid() {
+  return Crypto.randomUUID();
+}
+
+export function getEmptyDeck(userId: string): CardDeck {
   return {
-    id: 100,
-    userId: 23,
+    id: getRandomUuid(),
+    userId: userId,
     name: "",
     isFavorite: false,
-    cards: [{ id: 0, term: "", definition: "" }],
+    cards: [{ id: getRandomUuid(), term: "", definition: "" }],
     createdAt: new Date(),
-    repeatedAt: new Date(),
   };
 }

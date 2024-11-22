@@ -1,5 +1,6 @@
 import ActionButton from "@/components/core/action-button";
-import { getEmptyDeck } from "@/lib/utils";
+import { useSupabase } from "@/context/supabase-provider";
+import { getEmptyDeck, getRandomUuid } from "@/lib/utils";
 import { useDeckStore } from "@/store/deck-store";
 import { CardDeck } from "@/types";
 import * as Haptics from "expo-haptics";
@@ -16,19 +17,22 @@ import RenameDeck from "./rename-deck";
 import TopBar from "./top-bar";
 
 const NewDeckTab = () => {
-  const [newDeck, setNewDeck] = useState<CardDeck>(getEmptyDeck());
+  const { user } = useSupabase();
+  const [newDeck, setNewDeck] = useState<CardDeck>(
+    getEmptyDeck(user?.id as string),
+  );
 
   const saveDeck = useDeckStore((state) => state.addDeck);
 
   const handleSaveDeck = () => {
     saveDeck(newDeck);
-    setNewDeck(getEmptyDeck());
+    setNewDeck(getEmptyDeck(user?.id as string));
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     router.replace("/(root)/(tabs)/home");
   };
 
   const handleResetNewDeck = () => {
-    setNewDeck(getEmptyDeck());
+    setNewDeck(getEmptyDeck(user?.id as string));
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Rigid);
     router.replace("/(root)/(tabs)/home");
   };
@@ -36,15 +40,12 @@ const NewDeckTab = () => {
   const handleAddNewCard = () => {
     setNewDeck((prev) => ({
       ...prev,
-      cards: [
-        ...prev.cards,
-        { id: prev.cards.length, term: "", definition: "" },
-      ],
+      cards: [...prev.cards, { id: getRandomUuid(), term: "", definition: "" }],
     }));
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   };
 
-  const handleDeleteCard = (cardId: number) => {
+  const handleDeleteCard = (cardId: string) => {
     setNewDeck((prev) => ({
       ...prev,
       cards: prev.cards.filter((x) => x.id !== cardId),
@@ -53,13 +54,14 @@ const NewDeckTab = () => {
   };
 
   const handleUpdateCard = (
-    index: number,
+    cardId: string,
     key: "term" | "definition",
     value: string,
   ) => {
     setNewDeck((prev) => {
-      const updatedCards = [...prev.cards];
-      updatedCards[index] = { ...updatedCards[index], [key]: value };
+      const updatedCards = prev.cards.map((card) =>
+        card.id === cardId ? { ...card, [key]: value } : card,
+      );
       return { ...prev, cards: updatedCards };
     });
   };
@@ -85,6 +87,7 @@ const NewDeckTab = () => {
           <GestureHandlerRootView className="h-ful w-full">
             <FlatList
               data={newDeck.cards}
+              keyExtractor={(item) => item.id}
               className="w-full bg-background"
               renderItem={({ item: card }) => (
                 <Swipeable
