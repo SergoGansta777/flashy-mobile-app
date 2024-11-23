@@ -1,8 +1,8 @@
 import { SupabaseProvider } from "@/context/supabase-provider";
 import "@/global.css";
 
+import { useColorScheme } from "@/hooks/useColorScheme";
 import { NAV_THEME } from "@/lib/constants";
-import { useColorScheme } from "@/lib/useColorScheme";
 import { Theme, ThemeProvider } from "@react-navigation/native";
 import { PortalHost } from "@rn-primitives/portal";
 import { SplashScreen, Stack } from "expo-router";
