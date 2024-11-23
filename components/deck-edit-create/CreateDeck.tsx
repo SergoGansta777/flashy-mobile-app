@@ -28,13 +28,12 @@ const NewDeckTab = () => {
   const handleSaveDeck = () => {
     saveDeck(newDeck);
     setNewDeck(getEmptyDeck(user?.id as string));
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).then();
     router.replace("/(root)/(tabs)/home");
   };
 
   const handleResetNewDeck = () => {
     setNewDeck(getEmptyDeck(user?.id as string));
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Rigid);
     router.replace("/(root)/(tabs)/home");
   };
 
@@ -43,7 +42,6 @@ const NewDeckTab = () => {
       ...prev,
       cards: [...prev.cards, { id: getRandomUuid(), term: "", definition: "" }],
     }));
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
   };
 
   const handleDeleteCard = (cardId: string) => {
@@ -51,7 +49,7 @@ const NewDeckTab = () => {
       ...prev,
       cards: prev.cards.filter((x) => x.id !== cardId),
     }));
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).then();
   };
 
   const handleUpdateCard = (

@@ -2,7 +2,7 @@ import { ColorScheme, SortDirection } from "@/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 import { createJSONStorage, devtools, persist } from "zustand/middleware";
-import { CardFlipDirection } from "./../types/index";
+import { CardFlipDirection } from "@/types";
 
 type SettingsStore = {
   decksSortDirection: SortDirection;

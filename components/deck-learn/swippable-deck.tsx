@@ -67,7 +67,7 @@ const SwippableDeck: React.FC<SwippableDeckProps> = ({
         } else {
           handleSwipeToRight(cardId);
         }
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft);
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Soft).then();
       })();
     },
     [handleSwipeToLeft, handleSwipeToRight],

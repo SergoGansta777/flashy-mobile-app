@@ -7,8 +7,6 @@ import EmptyDeck from "./empty-deck";
 import LearnCards from "./learn-cards";
 import TopBar from "./top-bar";
 
-// TODO: Add Google OAuth
-
 const DeckLearn = () => {
   const { getFilteredCardsForDeck, setCardFilter, cardFilter, currentDeckId } =
     useDeckStore();

@@ -43,7 +43,7 @@ const useGoogleOAuth = (redirectTo: string = "flashyapp://google-auth") => {
   };
 
   useEffect(() => {
-    WebBrowser.warmUpAsync();
+    WebBrowser.warmUpAsync().then();
     return () => {
       WebBrowser.coolDownAsync().catch((err) =>
         console.error("Failed to cool down WebBrowser:", err),

@@ -52,7 +52,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
       switch (action) {
         case "favorite":
           handleToggleFavorite(deck.id);
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).then();
           break;
         case "edit":
           handleEdit(deck.id);

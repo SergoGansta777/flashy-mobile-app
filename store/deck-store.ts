@@ -144,9 +144,6 @@ export const useDeckStore = create<DeckStore>()(
           }
         },
 
-        setCurrentDeckCardFilter: (ids: string[] | null) =>
-          set({ cardFilter: ids }),
-
         setCardFilter: (cardIds: string[]) => {
           set({ cardFilter: cardIds });
         },
