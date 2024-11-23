@@ -7,7 +7,7 @@ const SkipButtonBar = () => {
   return (
     <TouchableOpacity
       onPress={() => {
-        router.replace("/(auth)/sign-up");
+        router.replace("/(auth)/sign-in");
       }}
       className="flex w-11/12 items-end justify-end p-5"
     >
