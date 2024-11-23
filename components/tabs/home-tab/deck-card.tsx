@@ -164,7 +164,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
                 {deck.isFavorite ? (
                   <Star className="text-primary" fill="yellow" />
                 ) : (
-                  <Star className="text-primary" fill="none" />
+                  <Star className="text-primary" fill="white" />
                 )}
               </Button>
             </View>
