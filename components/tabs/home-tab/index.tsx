@@ -3,7 +3,6 @@ import { useSupabase } from "@/context/supabase-provider";
 import { useDecks } from "@/hooks/useDecks";
 import { deckSortOptions } from "@/lib/sort";
 import { useSettingsStore } from "@/store/settings-store";
-import type { CardDeck, SortOption } from "@/types";
 import * as Haptics from "expo-haptics";
 import { router } from "expo-router";
 import React, { useState } from "react";
@@ -26,24 +25,20 @@ const HomeTab = () => {
 
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const { cardDecks, deleteDeck, toggleFavorite, setCurrentDeck } = useDecks(
+  const {
+    cardDecks,
+    deleteDeck,
+    toggleFavorite,
+    setCurrentDeck,
+    toggleSortDirection,
+  } = useDecks(
     user?.id,
     searchQuery,
     decksSortOptionId,
     decksSortDirection,
+    setDecksSortOptionId,
+    setDecksSortDirection,
   );
-
-  const handleSortChange = (option: SortOption<CardDeck>) => {
-    const newDirection =
-      option.id === decksSortOptionId
-        ? decksSortDirection === "asc"
-          ? "desc"
-          : "asc"
-        : "asc";
-
-    setDecksSortOptionId(option.id);
-    setDecksSortDirection(newDirection);
-  };
 
   const handleToggleFavorite = (deckId: string) => {
     toggleFavorite(deckId);
@@ -77,7 +72,7 @@ const HomeTab = () => {
           handleSearchChange={handleSearchChange}
           deckSortDirectionId={decksSortOptionId}
           sortDirection={decksSortDirection}
-          handleSortChange={handleSortChange}
+          handleSortChange={toggleSortDirection}
           sortOptions={deckSortOptions}
         />
 
