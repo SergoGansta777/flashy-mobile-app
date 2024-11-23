@@ -52,7 +52,7 @@ const SignInScreen = () => {
           onSignInWithGoogle={handleGoogleSignIn}
           isLoading={isOAuthLoading || form.formState.isSubmitting}
         />
-        <P className="text-general-200 mb-1 mt-7 text-center text-lg">
+        <P className="mb-1 mt-7 text-center text-lg text-foreground">
           Don&apos;t have an account?{" "}
           <Link href="/sign-up">
             <P className="text-lg text-secondary-foreground/70">Sign Up</P>
