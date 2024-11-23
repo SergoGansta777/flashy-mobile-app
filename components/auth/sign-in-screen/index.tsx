@@ -6,8 +6,10 @@ import { View } from "react-native";
 
 import TopHeaderImage from "@/components/core/top-header-image";
 
+import { P } from "@/components/ui/typography";
 import { images } from "@/constants";
 import { useSupabase } from "@/context/supabase-provider";
+import { Link } from "expo-router";
 import OAuthSection from "./oauth-section";
 import SignInForm, { userFormSchema, UserFormType } from "./sign-in-form";
 
@@ -96,6 +98,12 @@ const SignInScreen = () => {
           onSignInWithGoogle={onSignInWithGoogle}
           isLoading={isLoading || form.formState.isSubmitting}
         />
+        <P className="text-general-200 mb-1 mt-7 text-center text-lg">
+          Don&apos;t have an account?{" "}
+          <Link href="/sign-up">
+            <P className="text-lg text-secondary-foreground/70">Sign Up</P>
+          </Link>
+        </P>
       </View>
     </View>
   );

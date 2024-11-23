@@ -30,7 +30,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
   isLoading,
 }) => (
   <FormProvider {...form}>
-    <View className="mb-1 flex flex-col gap-2">
+    <View className="mb-5 flex flex-col gap-2">
       <Controller
         control={form.control}
         name="email"

@@ -4,21 +4,19 @@ import React from "react";
 import { View } from "react-native";
 
 type OAuthSectionProps = {
-  onSignInWithGoogle: () => void;
+  text: string;
+  onOAuth: () => void;
   isLoading: boolean;
 };
 
 const OAuthSection: React.FC<OAuthSectionProps> = ({
-  onSignInWithGoogle,
+  text,
+  onOAuth,
   isLoading,
 }) => (
   <View className="mt-5 flex flex-col gap-5">
     <OrBlockSeparator />
-    <GoogleButton
-      text="Log In"
-      handlePress={onSignInWithGoogle}
-      disabled={isLoading}
-    />
+    <GoogleButton text={text} handlePress={onOAuth} disabled={isLoading} />
   </View>
 );
 
