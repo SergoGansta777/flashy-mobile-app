@@ -1,12 +1,12 @@
 import { appName } from "@/constants";
 import { useSupabase } from "@/context/supabase-provider";
+import { useDecks } from "@/hooks/useDecks";
 import { deckSortOptions } from "@/lib/sort";
-import { useDeckStore } from "@/store/deck-store";
 import { useSettingsStore } from "@/store/settings-store";
 import type { CardDeck, SortOption } from "@/types";
 import * as Haptics from "expo-haptics";
-import { Redirect, router } from "expo-router";
-import React, { useCallback, useMemo, useState } from "react";
+import { router } from "expo-router";
+import React, { useState } from "react";
 import { FlatList, SafeAreaView, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import DeckCard from "./deck-card";
@@ -16,15 +16,7 @@ import ZeroSearchResult from "./zero-search-results";
 
 const HomeTab = () => {
   const { user } = useSupabase();
-  if (!user) return <Redirect href="/(auth)/sign-in" />;
 
-  const {
-    decks: stateDecks,
-    getDecksForUser,
-    deleteDeck,
-    toggleFavorite,
-    setCurrentDeck,
-  } = useDeckStore();
   const {
     decksSortOptionId,
     decksSortDirection,
@@ -34,48 +26,11 @@ const HomeTab = () => {
 
   const [searchQuery, setSearchQuery] = useState<string>("");
 
-  const decks = useMemo(
-    () => getDecksForUser(user?.id),
-    [user?.id, getDecksForUser, stateDecks],
-  );
-
-  const filterItems = useCallback(
-    (query: string, items = decks) => {
-      if (!query.trim()) return items;
-      const lowerQuery = query.toLowerCase();
-      return items.filter((deck) =>
-        deck.name.toLowerCase().includes(lowerQuery),
-      );
-    },
-    [decks],
-  );
-
-  const sortAndSetDecks = useCallback(
-    (query: string) => {
-      const filteredItems = filterItems(query);
-
-      const sortOptionConfig = deckSortOptions.find(
-        (option) => option.id === decksSortOptionId,
-      );
-
-      if (sortOptionConfig) {
-        const sortedItems = [...filteredItems].sort(
-          sortOptionConfig.sortFunction,
-        );
-        if (decksSortDirection === "desc") {
-          sortedItems.reverse();
-        }
-        return sortedItems;
-      }
-
-      return filteredItems;
-    },
-    [filterItems, decksSortOptionId, decksSortDirection, decks],
-  );
-
-  const cardDecks = useMemo(
-    () => sortAndSetDecks(searchQuery),
-    [decks, searchQuery, sortAndSetDecks],
+  const { cardDecks, deleteDeck, toggleFavorite, setCurrentDeck } = useDecks(
+    user?.id,
+    searchQuery,
+    decksSortOptionId,
+    decksSortDirection,
   );
 
   const handleSortChange = (option: SortOption<CardDeck>) => {
@@ -92,12 +47,12 @@ const HomeTab = () => {
 
   const handleToggleFavorite = (deckId: string) => {
     toggleFavorite(deckId);
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).then();
   };
 
   const handleDelete = (deckId: string) => {
     deleteDeck(deckId);
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).then();
   };
 
   const handleEdit = (deckId: string) => {
