@@ -32,7 +32,7 @@ const OnboardingSwiper: React.FC<OnboardingSwiperProps> = ({
         ref={swiperRef}
         loop={false}
         dot={
-          <View className="mx-1 h-[4px] w-[32px] rounded-full bg-gray-300" />
+          <View className="mx-1 h-[4px] w-[32px] rounded-full bg-secondary" />
         }
         activeDot={
           <View className="mx-1 h-[4px] w-[32px] rounded-full bg-primary" />
@@ -47,11 +47,11 @@ const OnboardingSwiper: React.FC<OnboardingSwiperProps> = ({
               resizeMode="contain"
             />
             <View className="mt-10 flex w-full flex-row items-center justify-center">
-              <H1 className="mx-10 text-center text-3xl font-bold text-primary">
+              <H1 className="mx-10 text-center text-3xl font-bold text-foreground">
                 {item.title}
               </H1>
             </View>
-            <P className="mx-10 mt-3 text-center text-slate-500">
+            <P className="mx-10 mt-3 text-center text-secondary-foreground/75">
               {item.description}
             </P>
           </View>
