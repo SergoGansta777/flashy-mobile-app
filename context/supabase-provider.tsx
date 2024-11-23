@@ -13,6 +13,11 @@ type SupabaseContextProps = {
   signUp: (email: string, password: string) => Promise<void>;
   signInWithPassword: (email: string, password: string) => Promise<void>;
   signOut: () => Promise<void>;
+  getGoogleOAuthUrl: () => Promise<string | null>;
+  setOAuthSession: (tokens: {
+    access_token: string;
+    refresh_token: string;
+  }) => Promise<void>;
 };
 
 type SupabaseProviderProps = {
@@ -26,6 +31,8 @@ export const SupabaseContext = createContext<SupabaseContextProps>({
   signUp: async () => {},
   signInWithPassword: async () => {},
   signOut: async () => {},
+  getGoogleOAuthUrl: async () => "",
+  setOAuthSession: async () => {},
 });
 
 export const useSupabase = () => useContext(SupabaseContext);
@@ -62,6 +69,32 @@ export const SupabaseProvider = ({ children }: SupabaseProviderProps) => {
     if (error) {
       throw error;
     }
+  };
+
+  const getGoogleOAuthUrl = async (): Promise<string | null> => {
+    const result = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: "flashyapp://google-auth",
+      },
+    });
+
+    return result.data.url;
+  };
+
+  const setOAuthSession = async (tokens: {
+    access_token: string;
+    refresh_token: string;
+  }) => {
+    const { data, error } = await supabase.auth.setSession({
+      access_token: tokens.access_token,
+      refresh_token: tokens.refresh_token,
+    });
+
+    if (error) throw error;
+
+    setUser(data.user);
+    setSession(data.session);
   };
 
   useEffect(() => {
@@ -107,6 +140,8 @@ export const SupabaseProvider = ({ children }: SupabaseProviderProps) => {
         signUp,
         signInWithPassword,
         signOut,
+        getGoogleOAuthUrl,
+        setOAuthSession,
       }}
     >
       {children}

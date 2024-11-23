@@ -8,11 +8,21 @@ import ColorForIconWrapper from "./color-for-icon-wrapper";
 type GoogleButtonProps = {
   text: string;
   handlePress?: () => void;
+  disabled?: boolean;
 };
 
-const GoogleButton: React.FC<GoogleButtonProps> = ({ text, handlePress }) => {
+const GoogleButton: React.FC<GoogleButtonProps> = ({
+  text,
+  handlePress,
+  disabled,
+}) => {
   return (
-    <Button variant="outline" size="lg" onPress={handlePress}>
+    <Button
+      variant="outline"
+      size="lg"
+      onPress={handlePress}
+      disabled={disabled}
+    >
       <View className="flex flex-row items-center gap-0.5">
         <ColorForIconWrapper className="text-primary">
           <AntDesign name="google" size={24} />

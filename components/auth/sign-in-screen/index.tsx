@@ -10,7 +10,8 @@ import { Lock } from "@/lib/icons/Lock";
 import { Mail } from "@/lib/icons/Mail";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link } from "expo-router";
-import type React from "react";
+import * as WebBrowser from "expo-web-browser";
+import React, { useState } from "react";
 import { Controller, FormProvider, useForm } from "react-hook-form";
 import { View } from "react-native";
 import * as z from "zod";
@@ -26,7 +27,9 @@ const userFormSchema = z.object({
 type userFormType = z.infer<typeof userFormSchema>;
 
 const SignInScreen = () => {
-  const { signInWithPassword } = useSupabase();
+  const { signInWithPassword, getGoogleOAuthUrl, setOAuthSession } =
+    useSupabase();
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<userFormType>({
     resolver: zodResolver(userFormSchema),
@@ -46,6 +49,58 @@ const SignInScreen = () => {
       alert(error.message);
       form.reset();
     }
+  };
+
+  React.useEffect(() => {
+    WebBrowser.warmUpAsync();
+
+    return () => {
+      WebBrowser.coolDownAsync();
+    };
+  }, []);
+
+  const onSignInWithGoogle = async () => {
+    setIsLoading(true);
+    try {
+      const url = await getGoogleOAuthUrl();
+      if (!url) return;
+
+      const result = await WebBrowser.openAuthSessionAsync(
+        url,
+        "flashyapp://google-auth?",
+        {
+          showInRecents: true,
+        },
+      );
+
+      if (result.type === "success") {
+        const data = extractParamsFromUrl(result.url);
+
+        if (!data.access_token || !data.refresh_token) return;
+
+        setOAuthSession({
+          access_token: data.access_token,
+          refresh_token: data.refresh_token,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const extractParamsFromUrl = (url: string) => {
+    const params = new URLSearchParams(url.split("#")[1]);
+    const data = {
+      access_token: params.get("access_token"),
+      expires_in: parseInt(params.get("expires_in") || "0"),
+      refresh_token: params.get("refresh_token"),
+      token_type: params.get("token_type"),
+      provider_token: params.get("provider_token"),
+    };
+
+    return data;
   };
 
   return (
@@ -113,7 +168,7 @@ const SignInScreen = () => {
             <Button
               size="lg"
               onPress={form.handleSubmit(onSubmit)}
-              disabled={form.formState.isSubmitting}
+              disabled={form.formState.isSubmitting || isLoading}
             >
               <Large className="text-primary-foreground">Log In</Large>
             </Button>
@@ -122,7 +177,11 @@ const SignInScreen = () => {
               <OrBlockSeparator />
             </View>
 
-            <GoogleButton text="Log In" handlePress={() => {}} />
+            <GoogleButton
+              text="Log In"
+              handlePress={onSignInWithGoogle}
+              disabled={form.formState.isSubmitting || isLoading}
+            />
 
             <P className="text-general-200 mb-1 mt-3 text-center text-lg">
               Don&apos;t have an account?{" "}
