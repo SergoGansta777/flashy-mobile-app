@@ -18,8 +18,13 @@ const HomeTab = () => {
   const { user } = useSupabase();
   if (!user) return <Redirect href="/(auth)/sign-in" />;
 
-  const { getDecksForUser, deleteDeck, toggleFavorite, setCurrentDeck } =
-    useDeckStore();
+  const {
+    decks: stateDecks,
+    getDecksForUser,
+    deleteDeck,
+    toggleFavorite,
+    setCurrentDeck,
+  } = useDeckStore();
   const {
     decksSortOptionId,
     decksSortDirection,
@@ -31,7 +36,7 @@ const HomeTab = () => {
 
   const decks = useMemo(
     () => getDecksForUser(user?.id),
-    [user?.id, getDecksForUser],
+    [user?.id, getDecksForUser, stateDecks],
   );
 
   const filterItems = useCallback(
@@ -65,7 +70,7 @@ const HomeTab = () => {
 
       return filteredItems;
     },
-    [filterItems, decksSortOptionId, decksSortDirection],
+    [filterItems, decksSortOptionId, decksSortDirection, decks],
   );
 
   const cardDecks = useMemo(
