@@ -63,8 +63,7 @@ export {
 SplashScreen.preventAutoHideAsync();
 
 export function RootLayout() {
-  const { isDarkColorScheme, setColorScheme } = useColorScheme();
-  setColorScheme("light");
+  const { isDarkColorScheme } = useColorScheme();
 
   return (
     <SupabaseProvider>

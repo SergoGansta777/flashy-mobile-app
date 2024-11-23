@@ -12,7 +12,6 @@ export default function Layout() {
       screenOptions={{
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: "#333333",
           borderRadius: 50,
           overflow: "hidden",
           marginHorizontal: 20,

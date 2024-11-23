@@ -10,7 +10,7 @@ export const NAV_THEME = {
   dark: {
     background: "hsl(0 0% 100%)", // background
     border: "none", // border
-    card: "hsl(0 0% 80%)", // card
+    card: "hsl(0 0% 78%)", // card
     notification: "hsl(0 72% 51%)", // destructive
     primary: "hsl(0 0% 98%)", // primary
     text: "hsl(0 0% 98%)", // foreground
