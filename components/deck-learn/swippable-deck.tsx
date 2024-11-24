@@ -88,7 +88,7 @@ const SwippableDeck: React.FC<SwippableDeckProps> = ({
                 clickable={!isSwiping.value}
               >
                 <View>
-                  <Card className="h-[600px] w-[350px] px-2 shadow-lg shadow-primary">
+                  <Card className="h-[600px] w-[350px] px-2 shadow shadow-primary/80">
                     <CardHeader>
                       <Muted>What is that?</Muted>
                     </CardHeader>
@@ -102,7 +102,7 @@ const SwippableDeck: React.FC<SwippableDeckProps> = ({
                 </View>
 
                 <View>
-                  <Card className="h-[600px] w-[350px] px-2 shadow shadow-primary">
+                  <Card className="h-[600px] w-[350px] px-2 shadow shadow-primary/80">
                     <CardHeader>
                       <Muted>Correct answer is</Muted>
                     </CardHeader>

@@ -153,7 +153,7 @@ const DeckCard: React.FC<DeckCardProps> = ({
         <Card className="mx-6 my-2">
           <CardHeader>
             <View className="flex flex-row items-start justify-between">
-              <H2 className="border-b-0 pb-1.5 font-medium tracking-wide">
+              <H2 className="max-w-[250px] border-b-0 pb-1.5 font-medium tracking-wide">
                 {deck.name}
               </H2>
               <Button
