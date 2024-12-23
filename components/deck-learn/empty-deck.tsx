@@ -10,14 +10,17 @@ const EmptyDeck = () => {
       <H3 className="mb-10 mt-7 w-full text-center text-3xl">
         It seems you haven&apos;t added any cards here yet.
       </H3>
+
       <BlockQuote className="w-3/4">
         Flashcards aren’t just for memorizing facts—they’re powerful tools that
         turn active recall into a habit, making learning stick longer and
         deeper.
       </BlockQuote>
+
       <Button size="lg" className="absolute bottom-24 w-full">
         <Large className="text-primary-foreground">Go to card editing</Large>
       </Button>
+
       <Button
         size="lg"
         variant="ghost"
