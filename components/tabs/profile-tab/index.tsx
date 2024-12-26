@@ -13,10 +13,11 @@ import { P } from "@/components/ui/typography";
 import { useSupabase } from "@/context/supabase-provider";
 import { LogOut } from "@/lib/icons/LogOut";
 import React from "react";
-import { SafeAreaView, View } from "react-native";
+import { View } from "react-native";
 import AchievementsSection from "./achievements-section";
 import ProfileAvatar from "./profile-avatar";
 import StatisticSection from "./statistic-section";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const ProfileTab = () => {
   const isNoneAchievements = true;

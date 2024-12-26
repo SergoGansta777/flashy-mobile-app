@@ -4,6 +4,7 @@ import CompletedDeck from "./completed-deck";
 import ProgressBar from "./progress-bar";
 import SwipeCounterBar from "./swipe-counter-bar";
 import SwippableDeck from "./swippable-deck";
+import { View } from "react-native";
 
 type LearnCardsProps = {
   cards: FlashCard[];

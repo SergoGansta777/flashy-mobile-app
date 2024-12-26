@@ -6,12 +6,13 @@ import { useSettingsStore } from "@/store/settings-store";
 import * as Haptics from "expo-haptics";
 import { router } from "expo-router";
 import React, { useState } from "react";
-import { FlatList, SafeAreaView, View } from "react-native";
+import { FlatList, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import DeckCard from "./deck-card";
 import TopBar from "./top-bar";
 import ZeroDecks from "./zero-decks";
 import ZeroSearchResult from "./zero-search-results";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const HomeTab = () => {
   const { user } = useSupabase();
@@ -64,7 +65,7 @@ const HomeTab = () => {
   };
 
   return (
-    <SafeAreaView className="h-full w-full bg-background">
+    <SafeAreaView className="flex-1 bg-background">
       <GestureHandlerRootView className="h-full w-full">
         <TopBar
           appName={appName}

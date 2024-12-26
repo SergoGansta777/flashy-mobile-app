@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { Progress } from "../ui/progress";
 
 const ProgressBar = ({ value, total }: { value: number; total: number }) => (
-  <View className="my-1 w-full">
+  <View className="my-1 w-screen">
     <Progress
       className="h-1 rounded-none bg-transparent"
       value={(value / total) * 100}

@@ -75,62 +75,68 @@ const SwippableDeck: React.FC<SwippableDeckProps> = ({
 
   return (
     <>
-      <GestureHandlerRootView className="flex h-full w-full items-center justify-center">
-        <Swiper
-          ref={swiperRef}
-          data={cards}
-          renderCard={(card) => {
-            return (
-              <FlipCard
-                flipVertical={cardFlipDirection === "vertical"}
-                flipHorizontal={cardFlipDirection === "horizontal"}
-                friction={15}
-                clickable={!isSwiping.value}
-              >
-                <View>
-                  <Card className="h-[600px] w-[350px] px-2 shadow shadow-primary/80">
-                    <CardHeader>
-                      <Muted>What is that?</Muted>
-                    </CardHeader>
-                    <CardContent className="my-auto flex flex-col items-center justify-center">
-                      <H1 className="text-center text-4xl font-semibold tracking-wide">
-                        {card.term}
-                      </H1>
-                    </CardContent>
-                    <CardFooter />
-                  </Card>
-                </View>
+      <GestureHandlerRootView>
+        <View className="flex flex-1 items-center justify-center">
+          <Swiper
+            ref={swiperRef}
+            data={cards}
+            renderCard={(card) => {
+              return (
+                <FlipCard
+                  flipVertical={cardFlipDirection === "vertical"}
+                  flipHorizontal={cardFlipDirection === "horizontal"}
+                  friction={15}
+                  clickable={!isSwiping.value}
+                >
+                  <View>
+                    <Card className="h-[600px] w-[350px] px-2 shadow shadow-primary/80">
+                      <CardHeader>
+                        <Muted>What is that?</Muted>
+                      </CardHeader>
+                      <CardContent className="my-auto flex flex-col items-center justify-center">
+                        <H1 className="text-center text-4xl font-semibold tracking-wide">
+                          {card.term}
+                        </H1>
+                      </CardContent>
+                      <CardFooter />
+                    </Card>
+                  </View>
 
-                <View>
-                  <Card className="h-[600px] w-[350px] px-2 shadow shadow-primary/80">
-                    <CardHeader>
-                      <Muted>Correct answer is</Muted>
-                    </CardHeader>
-                    <CardContent className="mx-auto my-auto flex w-full flex-col items-center justify-center">
-                      <P className="w-auto text-2xl font-medium tracking-tight">
-                        {card.definition}
-                      </P>
-                    </CardContent>
-                    <CardFooter />
-                  </Card>
-                </View>
-              </FlipCard>
-            );
-          }}
-          disableTopSwipe={true}
-          OverlayLabelRight={() => OverlayLabelRight}
-          OverlayLabelLeft={() => OverlayLabelLeft}
-          onSwipeStart={() => (isSwiping.value = true)}
-          onSwipeEnd={() => (isSwiping.value = false)}
-          onSwipeLeft={(index) => handleSwipe(cards[index].id, "left")}
-          onSwipeRight={(index) => handleSwipe(cards[index].id, "right")}
-          onSwipedAll={() =>
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
-          }
-        />
+                  <View>
+                    <Card className="h-[600px] w-[350px] px-2 shadow shadow-primary/80">
+                      <CardHeader>
+                        <Muted>Correct answer is</Muted>
+                      </CardHeader>
+                      <CardContent className="mx-auto my-auto flex w-full flex-col items-center justify-center">
+                        <P className="w-auto text-2xl font-medium tracking-tight">
+                          {card.definition}
+                        </P>
+                      </CardContent>
+                      <CardFooter />
+                    </Card>
+                  </View>
+                </FlipCard>
+              );
+            }}
+            disableTopSwipe={true}
+            OverlayLabelRight={() => OverlayLabelRight}
+            OverlayLabelLeft={() => OverlayLabelLeft}
+            onSwipeStart={() => (isSwiping.value = true)}
+            onSwipeEnd={() => (isSwiping.value = false)}
+            onSwipeLeft={(index) => handleSwipe(cards[index].id, "left")}
+            onSwipeRight={(index) => handleSwipe(cards[index].id, "right")}
+            onSwipedAll={() =>
+              Haptics.notificationAsync(
+                Haptics.NotificationFeedbackType.Success,
+              )
+            }
+          />
+        </View>
       </GestureHandlerRootView>
 
-      <SwipeInstructions />
+      <View className="mx-auto">
+        <SwipeInstructions />
+      </View>
     </>
   );
 };

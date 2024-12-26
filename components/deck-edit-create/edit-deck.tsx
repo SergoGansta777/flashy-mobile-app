@@ -6,7 +6,7 @@ import { CardDeck } from "@/types";
 import * as Haptics from "expo-haptics";
 import { Redirect, router } from "expo-router";
 import React, { useRef, useState } from "react";
-import { FlatList, SafeAreaView, View } from "react-native";
+import { FlatList, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Swipeable, {
   type SwipeableMethods,
@@ -15,6 +15,7 @@ import AddNewTerm from "./add-new-term";
 import NewTermCard from "./new-term-card";
 import RenameDeck from "./rename-deck";
 import TopBar from "./top-bar";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const EditDeck = () => {
   const existingDeck = useDeckStore(

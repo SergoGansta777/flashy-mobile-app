@@ -2,10 +2,11 @@ import { shuffle } from "@/lib/utils";
 import { useDeckStore } from "@/store/deck-store";
 import { Redirect } from "expo-router";
 import React, { useMemo, useState } from "react";
-import { SafeAreaView } from "react-native";
 import EmptyDeck from "./empty-deck";
 import LearnCards from "./learn-cards";
 import TopBar from "./top-bar";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { View } from "react-native";
 
 const DeckLearn = () => {
   const { getFilteredCardsForDeck, setCardFilter, cardFilter, currentDeckId } =
@@ -34,24 +35,26 @@ const DeckLearn = () => {
     <SafeAreaView className="flex flex-1 flex-col items-center bg-background px-4">
       <TopBar totalSwiped={totalSwiped} totalCards={totalCards} />
 
-      {totalCards > 0 ? (
-        <LearnCards
-          cards={shuffledCards}
-          totalSwiped={totalSwiped}
-          totalCards={totalCards}
-          known={rightSwipedIds.length}
-          stillLearning={leftSwipedIds.length}
-          addToStillLearning={(cardId: string) =>
-            setLeftSwipedIds((prev) => [...prev, cardId])
-          }
-          addToKnown={(cardId: string) =>
-            setRightSwipedIds((prev) => [...prev, cardId])
-          }
-          handleLearnFurther={handleLearnFurther}
-        />
-      ) : (
-        <EmptyDeck />
-      )}
+      <View className="flex-1">
+        {totalCards > 0 ? (
+          <LearnCards
+            cards={shuffledCards}
+            totalSwiped={totalSwiped}
+            totalCards={totalCards}
+            known={rightSwipedIds.length}
+            stillLearning={leftSwipedIds.length}
+            addToStillLearning={(cardId: string) =>
+              setLeftSwipedIds((prev) => [...prev, cardId])
+            }
+            addToKnown={(cardId: string) =>
+              setRightSwipedIds((prev) => [...prev, cardId])
+            }
+            handleLearnFurther={handleLearnFurther}
+          />
+        ) : (
+          <EmptyDeck />
+        )}
+      </View>
     </SafeAreaView>
   );
 };

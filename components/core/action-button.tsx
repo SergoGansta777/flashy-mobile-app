@@ -23,7 +23,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
   fillIcon = false,
 }) => (
   <TouchableOpacity
-    className={`mx-auto flex h-full flex-col justify-center rounded-2xl ${bgColor} ${width} px-3`}
+    className={`mx-auto flex h-full flex-col justify-center rounded-2xl ${bgColor} ${width} `}
     onPress={onPress}
   >
     {Icon && fillIcon && (
@@ -32,7 +32,7 @@ const ActionButton: React.FC<ActionButtonProps> = ({
     {Icon && !fillIcon && (
       <Icon className={`mx-auto ${textColor}`} fill="none" />
     )}
-    <P className={`mx-auto mt-1.5 ${textColor}`}>{label}</P>
+    <P className={`mx-auto mt-1.5 text-center ${textColor}`}>{label}</P>
   </TouchableOpacity>
 );
 
