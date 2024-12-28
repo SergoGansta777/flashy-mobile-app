@@ -7,7 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const EmptyDeck = () => {
   return (
     <SafeAreaView className="relative flex h-full w-full flex-col items-center justify-start bg-background px-8">
-      <H3 className="mb">
+      <H3 className="mb-10 mt-7 w-full text-center text-3xl">
         It seems you haven&apos;t added any cards here yet.
       </H3>
 
