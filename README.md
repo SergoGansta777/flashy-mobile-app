@@ -1,33 +1,14 @@
 # Flashy - Mobile Flashcard Learning App
 
-<!--toc:start-->
-
-- [Flashy - Mobile Flashcard Learning App](#flashy-mobile-flashcard-learning-app)
-  - [Overview](#overview)
-  - [Features](#features)
-    - [Core Functionality](#core-functionality)
-    - [User Experience](#user-experience)
-  - [Technology Stack](#technology-stack)
-    - [Frontend](#frontend)
-    - [State Management](#state-management)
-    - [Backend & Data](#backend-data)
-    - [UI Components](#ui-components)
-  - [Project Structure](#project-structure)
-  - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-  - [Development](#development)
-    - [Available Scripts](#available-scripts)
-  - [Contributing](#contributing)
-  - [License](#license)
-  - [Acknowledgements](#acknowledgements)
-  <!--toc:end-->
+<img width="946" height="538" alt="image" src="https://github.com/user-attachments/assets/672cb675-700c-4fae-b8b6-484346bf6b6c" />
 
 ## Overview
 
 Flashy is a modern, feature-rich mobile flashcard application designed to help users master any subject through effective learning techniques. Built with React Native and Expo, this app provides an intuitive interface for creating, managing, and studying flashcards with advanced features like spaced repetition learning.
 
 ## Features
+
+<img width="957" height="537" alt="image" src="https://github.com/user-attachments/assets/c6cdcaff-71af-46a3-bfbd-77775362b601" />
 
 ### Core Functionality
 
@@ -38,6 +19,8 @@ Flashy is a modern, feature-rich mobile flashcard application designed to help u
 - Offline Support : Study your flashcards even without an internet connection
 - Cross-Platform : Works seamlessly on iOS and Android devices
 
+<img width="951" height="529" alt="image" src="https://github.com/user-attachments/assets/2acde7c7-839b-482d-ae4f-7cdf115d20b9" />
+
 ### User Experience
 
 - Intuitive Navigation : Tab-based navigation with Home, Create, and Profile sections
@@ -45,6 +28,10 @@ Flashy is a modern, feature-rich mobile flashcard application designed to help u
 - Study Modes : Different learning modes to accommodate various study preferences
 - Customizable Settings : Personalize your experience with theme options and card flip directions
 - Haptic Feedback : Enhanced interaction through tactile responses
+
+<img width="939" height="533" alt="image" src="https://github.com/user-attachments/assets/001f9834-8ae6-41f6-b60a-40593b1e4165" />
+
+<img width="939" height="535" alt="image" src="https://github.com/user-attachments/assets/ebf4b4c5-6580-47b0-8138-ac369b112843" />
 
 ## Technology Stack
 
@@ -124,15 +111,14 @@ definitions
 
 ### Installation
 
-1. 1. Clone the repository
+1. Clone the repository
 
 ```
-git clone https://github.com/yourusername/
-flashy-app.git
+git clone https://github.com/SergoGansta777/flashy-mobile-app.git
 cd flashy-app
 ```
 
-2. 1. Install dependencies
+2. Install dependencies
 
 ```
 bun install
@@ -140,7 +126,7 @@ bun install
 npm install
 ```
 
-3. 1. Start the development server
+3. Start the development server
 
 ```
 bun start
@@ -148,7 +134,7 @@ bun start
 npm start
 ```
 
-4. 1. Follow the instructions in the terminal to open the app on your device or emulator
+4. Follow the instructions in the terminal to open the app on your device or emulator
 
 ## Development
 
