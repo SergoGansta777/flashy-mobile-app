@@ -2,7 +2,7 @@
 
 <img width="946" height="538" alt="image" src="https://github.com/user-attachments/assets/672cb675-700c-4fae-b8b6-484346bf6b6c" />
 
-## Table of content
+## Table of contents
 
 - [Flashy - Mobile Flashcard Learning App](#flashy---mobile-flashcard-learning-app)
   - [Table of content](#table-of-content)
