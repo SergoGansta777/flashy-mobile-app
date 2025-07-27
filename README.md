@@ -2,6 +2,28 @@
 
 <img width="946" height="538" alt="image" src="https://github.com/user-attachments/assets/672cb675-700c-4fae-b8b6-484346bf6b6c" />
 
+## Table of content
+
+- [Flashy - Mobile Flashcard Learning App](#flashy---mobile-flashcard-learning-app)
+  - [Table of content](#table-of-content)
+  - [Overview](#overview)
+  - [Features](#features)
+    - [Core Functionality](#core-functionality)
+    - [User Experience](#user-experience)
+  - [Technology Stack](#technology-stack)
+    - [Frontend](#frontend)
+    - [State Management](#state-management)
+    - [Backend \& Data](#backend--data)
+    - [UI Components](#ui-components)
+  - [Project Structure](#project-structure)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+  - [Development](#development)
+    - [Available Scripts](#available-scripts)
+  - [Contributing](#contributing)
+  - [License](#license)
+
 ## Overview
 
 Flashy is a modern, feature-rich mobile flashcard application designed to help users master any subject through effective learning techniques. Built with React Native and Expo, this app provides an intuitive interface for creating, managing, and studying flashcards with advanced features like spaced repetition learning.
